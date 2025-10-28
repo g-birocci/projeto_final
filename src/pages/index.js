@@ -104,13 +104,16 @@ export default function Index() {
         <p className="text-lg sm:text-xl mt-4 text-[#090871ff]">
           Doe seus itens, receba doações, reutilizar é viver!
         </p>
-        <Button variant="default" size="lg" className="mt-6">
+        <Button variant="default"
+        size="lg"
+        className="mt-6 bg-yellow-600 hover:bg-green-800">
           Publicar Doação
         </Button>
       </header>
 
       {/* Cards */}
-      <main className="container mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <main className="container mx-auto px-6 py-10 pb-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
         {loading ? (
           <p className="text-center text-gray-600 col-span-full">Carregando...</p>
         ) : error ? (
