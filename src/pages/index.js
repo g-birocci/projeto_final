@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import Card from "@/components/ui/Card";
 
 function IndexPage() {
   const [produtos, setProdutos] = useState([]);
@@ -41,7 +42,10 @@ function IndexPage() {
         <button className="btn btn-primary" style={{ padding: '0.75rem 2rem', fontSize: '1rem' }}>Doar</button>
       </header>
 
-      
+        <Card>
+          <h1>Oi</h1>
+        </Card>
+        ioauidae
             <Footer />
   
       
