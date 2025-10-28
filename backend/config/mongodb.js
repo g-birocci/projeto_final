@@ -1,6 +1,8 @@
 // Este é default e não deve ser mexido
 const mongoose = require('mongoose');
+const dotenv = require('dotenv')
 
+dotenv.config();
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {

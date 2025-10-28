@@ -1,0 +1,82 @@
+[
+  {
+    "firstName": "Lucas",
+    "lastName": "Silva",
+    "email": "lucas.silva01@example.com",
+    "password": "SenhaForte01!",
+    "city": "São Paulo",
+    "district": "Jardins"
+  },
+  {
+    "firstName": "Mariana",
+    "lastName": "Costa",
+    "email": "mariana.costa02@example.com",
+    "password": "SenhaForte02!",
+    "city": "Rio de Janeiro",
+    "district": "Copacabana"
+  },
+  {
+    "firstName": "Pedro",
+    "lastName": "Oliveira",
+    "email": "pedro.oliveira03@example.com",
+    "password": "SenhaForte03!",
+    "city": "Belo Horizonte",
+    "district": "Savassi"
+  },
+  {
+    "firstName": "Ana",
+    "lastName": "Martins",
+    "email": "ana.martins04@example.com",
+    "password": "SenhaForte04!",
+    "city": "Curitiba",
+    "district": "Batel"
+  },
+  {
+    "firstName": "Rafael",
+    "lastName": "Santos",
+    "email": "rafael.santos05@example.com",
+    "password": "SenhaForte05!",
+    "city": "Porto Alegre",
+    "district": "Moinhos de Vento"
+  },
+  {
+    "firstName": "Carla",
+    "lastName": "Pereira",
+    "email": "carla.pereira06@example.com",
+    "password": "SenhaForte06!",
+    "city": "Fortaleza",
+    "district": "Meireles"
+  },
+  {
+    "firstName": "Thiago",
+    "lastName": "Gomes",
+    "email": "thiago.gomes07@example.com",
+    "password": "SenhaForte07!",
+    "city": "Recife",
+    "district": "Boa Viagem"
+  },
+  {
+    "firstName": "Beatriz",
+    "lastName": "Ribeiro",
+    "email": "beatriz.ribeiro08@example.com",
+    "password": "SenhaForte08!",
+    "city": "Salvador",
+    "district": "Barra"
+  },
+  {
+    "firstName": "Felipe",
+    "lastName": "Alves",
+    "email": "felipe.alves09@example.com",
+    "password": "SenhaForte09!",
+    "city": "Brasília",
+    "district": "Asa Sul"
+  },
+  {
+    "firstName": "Juliana",
+    "lastName": "Ferreira",
+    "email": "juliana.ferreira10@example.com",
+    "password": "SenhaForte10!",
+    "city": "Manaus",
+    "district": "Centro"
+  }
+]
