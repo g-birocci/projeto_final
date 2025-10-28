@@ -3,16 +3,20 @@ const express = require('express');
 const next = require('next');
 const cors = require('cors');
 require('dotenv').config();
-const connectDB = require('./lib/mongodb');
+const connectDB = require('./backend/config/mongodb');
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const rotas = require('./backend/routes/index');
 
 // ===== INICIALIZAÇÃO DO SERVIDOR (também não se deve mexer)=====
+app.use('/api', rotas)
 
+
+// ===== NEXT.JS DEVE VIR POR ÚLTIMO =====
 app.use((req, res) => {
   return handle(req, res);
 });
