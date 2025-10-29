@@ -23,6 +23,98 @@ const getUserById = async (req, res) => {
   }
 };
 
+const userGetId = async(req, res) => {
+  try {
+
+    const { id } = res.params;
+
+    if (!id) {
+      return res.status(400).json({
+        message: 'Id não fornecido',
+        error: true,
+        data: {}
+      });
+    }
+    
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: 'Usuário não encontrado',
+        error: true,
+        data: {}
+      });
+    }
+
+    res.status(200).json({
+      message: 'Usuário encontrado com sucesso',
+      error: false,
+      data: user,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: 'Erro em buscar o usaario',
+      error: false,
+      data: {}
+    });
+  }
+};
+
+const userLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Verifica se enviou os campos
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Email e senha são obrigatórios",
+        error: true,
+        data: {},
+      });
+    }
+
+    // Procura usuário pelo email
+    const user = await User.findOne({ where: { email } }); 
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Usuário não encontrado",
+        error: true,
+        data: {},
+      });
+    }
+
+    // Verifica se a senha confere
+    if (user.password !== password) {
+      return res.status(401).json({
+        message: "Senha incorreta",
+        error: true,
+        data: {},
+      });
+    }
+
+    // Login bem-sucedido
+    res.status(200).json({
+      message: "Login realizado com sucesso",
+      error: false,
+      data: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Erro ao realizar login",
+      error: true,
+      data: {},
+    });
+  }
+};
 // Já está pronto =====================================================================
 const userCreate = async (req, res) => {
   try {
@@ -56,22 +148,6 @@ const userCreate = async (req, res) => {
   }
 };
 
-const userLogin = async (req, res) => {
-  try {
-    res.status(200).json({
-      message: "Rota funcionando",
-      error: false,
-      data: { nome: "Mario" },
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      message: "Erro",
-      error: true,
-      data: {},
-    });
-  }
-};
 
 // já está pronto ======================================================================
 
