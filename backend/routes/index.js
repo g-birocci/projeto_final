@@ -22,11 +22,11 @@ route.get('/health', async(req, res) => {
  )
 
 // ================ Rotas do Usuário ===============
-route.get('/user/:id', getUserById)
+route.get('/user/:id', getUserById) //ok
 route.post('/login', userLogin)
-route.post('/user', userCreate)
-route.put('/user/:id', userUpdate)
-route.delete('/', userDelete)
+route.post('/user', userCreate) //ok
+route.put('/user/:id', userUpdate) //ok
+route.delete('/', userDelete) //ok
 
 
 
