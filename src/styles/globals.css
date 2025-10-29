@@ -55,8 +55,9 @@
   --ecodoa-olive: #77850B;
   --ecodoa-text: #042940;
   --ecodoa-bg: #F9F9F9;
-  --ecodoa-alert: #ff0374;
+  --ecodoa-alert: #8c2a09;
   --ecodoa-light-olive: #9FC131;
+  --ecodoa-green: #d3eb83d3;
 
   /* Light Theme Mapping */
   --background: var(--ecodoa-bg);
@@ -158,6 +159,15 @@
   .animate-fadeIn {
     animation: fadeIn 0.3s ease-out forwards;
   }
+
+  .bg-ecodoa-green {
+    background-color: var(--ecodoa-green);
+  }
+
+  .text-ecodoa-green {
+    color: var(--ecodoa-green);
+  }
+
 
   /* Utility classes for EcoDoa colors */
   .text-ecodoa-primary { color: var(--ecodoa-primary); }
