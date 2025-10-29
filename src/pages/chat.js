@@ -3,6 +3,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { Input } from "@/components/ui/Pesquisa";
 import { Button } from "@/components/ui/Button";
+import Notificacoes from "@/components/ui/Notificacoes"; //importei aqui o Notificaçao apenas para ficar visivel para configurar.
+
 
 export default function ChatPage() {
   const [busca, setBusca] = useState("");
@@ -90,10 +92,19 @@ export default function ChatPage() {
     setMensagem("");
   };
 
+  const notificacoes = [
+    { titulo: "Novo like na sua doação", descricao: "João curtiu sua bicicleta", hora: "20:45", lida: false },
+    { titulo: "Nova mensagem", descricao: "Camila: Gostei muito da bicicleta!", hora: "20:30", lida: false },
+    { titulo: "Entrega marcada", descricao: "Rafael confirmou entrega amanhã", hora: "19:15", lida: true },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      <div className="fixed top-5 right-5 z-50">
+        <Notificacoes lista={notificacoes} />
+      </div>
+
 
       <main className="flex-grow pt-24 px-4 pb-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Lista de conversas */}
