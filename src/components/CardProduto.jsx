@@ -41,7 +41,7 @@ const CardProduto = ({ produto }) => {
           {produto.estado}
         </span>
         <div className="mt-4 flex gap-12"> 
-          <Button variant="default" size="sm">
+          <Button variant="default" size="sm" >
             Enviar mensagem
           </Button>
           <Button variant="default" size="sm" >
