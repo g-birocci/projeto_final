@@ -28,11 +28,7 @@ route.post('/user', userCreate) //ok
 route.put('/user/:id', userUpdate) //ok
 route.delete('/', userDelete) //ok
 
-
-
 // ================ Rotas do Item ===============
-
-
 
 // ================ Rotas do Usuário ===============
 
