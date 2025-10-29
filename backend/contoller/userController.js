@@ -23,6 +23,7 @@ const getUserById = async (req, res) => {
   }
 };
 
+// Já está pronto =====================================================================
 const userCreate = async (req, res) => {
   try {
     const { firstName, lastName, password, city, email, district } = req.body;
@@ -72,6 +73,8 @@ const userLogin = async (req, res) => {
   }
 };
 
+// já está pronto ======================================================================
+
 const userUpdate = async (req, res) => {
   try {
     // const {_id} = req.params
@@ -106,21 +109,44 @@ const userUpdate = async (req, res) => {
   }
 };
 
+// Já está feito ==============================================================================
+
 const userDelete = async (req, res) => {
-  try {
-    res.status(200).json({
-      message: "Rota funcionando",
-      error: false,
-      data: { nome: "Mario" },
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      message: "Erro",
-      error: true,
-      data: {},
-    });
-  }
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({
+                message: 'O Id é obrigatório',
+                error: true
+            });
+        }
+
+        const user = await User.findById(id);
+
+        if (!user) {
+            return res.status(404).json({
+                message: 'Usuário não encontrato',
+                error: true
+            })
+        }
+
+        // quando foi validado o Id e que realmente o user exixte vai começar o delete
+
+        await User.findByIdAndDelete(id);
+
+        return res.status(200).json({
+            message: 'Sua conta foi deletada com sucesso',
+            error: false,
+            data: {id},
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: 'Erro em deletar sua conta',
+            error: true,
+        });
+    }
 };
 
 module.exports = { userCreate, userDelete, userLogin, userUpdate, getUserById };
