@@ -93,22 +93,25 @@ export default function Index() {
       <div className="z-8 px-4 pt-20">
         <a
           href="/voltar"
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 backdrop-blur-md hover:bg-gray-100 transition-all shadow-md"
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-ecodoa-soft hover:bg-ecodoa-accent transition-all shadow-md"
         >
-          <ArrowLeft className="w-5 h-5 text-gray-800" />
+          <ArrowLeft className="w-5 h-5 text-ecodoa-text" />
         </a>
+
       </div>
 
       {/* Campo de pesquisa e botão de filtro */}
       <div className="flex flex-wrap items-center justify-center gap-4 max-w-2xl mx-auto mt-8 px-4">
         <div className="relative w-full sm:w-auto flex-1">
-          <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+          <Search className="absolute left-3 top-3 h-5 w-5 text-ecodoa-olive" />
           <Input
-            placeholder="Pesquisar item..."
-            className="pl-10 py-2 w-full"
+            placeholder="Pesquisar doações..."
+            className="pl-10 py-2 w-full --ecodoa-bg text-ecodoa-text placeholder-ecodoa-olive border border-ecodoa-accent focus:outline-none focus:ring-2 focus:ring-ecodoa-primary focus:border-ecodoa-primary"
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
           />
+
+
         </div>
         <Button
           variant="outline"
@@ -121,7 +124,7 @@ export default function Index() {
 
       </div>
 
-      {/* Hero */}
+
       <header
         className="h-[400px] bg-cover bg-center flex flex-col items-center justify-center text-white text-center px-8 py-10"
         style={{
