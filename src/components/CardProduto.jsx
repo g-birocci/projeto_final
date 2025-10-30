@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 
@@ -20,12 +20,14 @@ const CardProduto = ({ produto }) => {
         />
       </button>
 
+      <div className="relative w-full h-64 overflow-hidden rounded-t-lg bg-gray-50">
       <Image
         src={produto.imagem}
         alt={produto.nome}
         fill
         className="object-cover rounded-lg"
       />
+      </div>  
 
       <CardHeader>
         <CardTitle>{produto.nome}</CardTitle>
