@@ -28,7 +28,7 @@ const CardProduto = ({ produto }) => {
         className="object-cover rounded-lg"
       />
       </div>  
-
+                   
       <CardHeader>
         <CardTitle>{produto.nome}</CardTitle>
       </CardHeader>
