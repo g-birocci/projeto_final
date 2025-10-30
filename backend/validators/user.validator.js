@@ -1,8 +1,10 @@
 const validateReq = ({ firstName, lastName, password, email, city, district }) => {
   const requied = (field, label) =>
+  {
     !field || (typeof field === "string" && field.trim() === "")
       ? `${label} é obrigatório`
-      : null; //verefico se todos campos estão completos e se os campos está com espaço e não string ou numeros
+      : null;
+  }
 
   const errors = [
     requied(firstName, "O primeiro nome"),
@@ -22,7 +24,7 @@ const validateReq = ({ firstName, lastName, password, email, city, district }) =
   }
 
   if (password && !/[A-Z]/.test(password)) {
-    errosrs.push('A senha deve ter letras maiúscula');
+    errors.push('A senha deve ter letras maiúscula');
   }
 
   if (password && !/[0-9]/.test(password)) {

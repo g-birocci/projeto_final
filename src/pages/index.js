@@ -61,7 +61,6 @@ export default function Index() {
     <div>
       <Navbar />
 
-      {/* Botão de voltar */}
       <div className="z-8 px-4 pt-20">
         <a
           href="/voltar"
@@ -73,7 +72,6 @@ export default function Index() {
 
 
 
-      {/* Campo de pesquisa + botão de filtro */}
       <div className="flex flex-wrap items-center justify-center gap-4 max-w-2xl mx-auto mt-8 px-4">
         <div className="relative w-full sm:w-auto flex-1">
           <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
@@ -106,12 +104,12 @@ export default function Index() {
         </p>
         <Button variant="default"
         size="lg"
-        className="mt-6 bg-yellow-600 hover:bg-green-800">
+        className="mt-6 bg-[#DCE93A] text-[#0F4836]">
           Publicar Doação
         </Button>
       </header>
 
-      {/* Cards */}
+
       <main className="container mx-auto px-6 py-10 pb-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
         {loading ? (
