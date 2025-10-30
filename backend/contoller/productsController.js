@@ -358,6 +358,7 @@ const getProductsBySubcategory = async (req, res) => {
   }
 };
 
+//Não faz sentido || o Doador pode fazer isso 
 const reserveProduct = async (req, res) => {
   try {
     if (!requireAuth(req, res)) return;
