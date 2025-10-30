@@ -37,7 +37,7 @@ export default function DoarEcoDoaModal({ isOpen, onClose }) {
             </div>
 
             <h2 className="text-2xl font-bold text-green-700 mb-3">
-              Obrigado por querer apoiar o EcoDoa 🌱
+              Obrigado por querer apoiar o EcoDoa!
             </h2>
 
             <p className="text-[#1E2D2F]/80 mb-6 leading-relaxed">
@@ -47,11 +47,11 @@ export default function DoarEcoDoaModal({ isOpen, onClose }) {
 
             {/* IBAN fictício / área de doação */}
             <div className="bg-green-50 border border-green-100 rounded-xl p-4 text-left mb-6">
-              <p className="font-semibold text-green-700">💳 IBAN:</p>
+              <p className="font-semibold text-green-700">IBAN:</p>
               <p className="text-sm text-[#1E2D2F]/80 select-all">
                 PT50 0018 0003 1234 5678 9017 5
               </p>
-              <p className="mt-3 font-semibold text-green-700">📱 MBWay:</p>
+              <p className="mt-3 font-semibold text-green-700">MBWay:</p>
               <p className="text-sm text-[#1E2D2F]/80 select-all">+351 912 345 678</p>
             </div>
 

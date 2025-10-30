@@ -44,6 +44,12 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Sobreposição do mapa */
+.leaflet-container {
+  z-index: 0 !important;
+  position: relative !important;
+}
+
 :root {
   --radius: 0.625rem;
 

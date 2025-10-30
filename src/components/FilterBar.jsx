@@ -1,33 +1,39 @@
-import { Home, Utensils, BookOpen, Briefcase, HeartHandshake, Shirt } from "lucide-react";
+"use client";
+
+import { motion } from "framer-motion";
+import { Home, Utensils, Briefcase, GraduationCap, Heart, Shirt } from "lucide-react";
 
 export default function FilterBar({ filters, toggleFilter }) {
-  const filterList = [
-    { key: "shelter", label: "Albergues", icon: <Home className="w-4 h-4" /> },
-    { key: "meal", label: "Refeições", icon: <Utensils className="w-4 h-4" /> },
-    { key: "job", label: "Emprego", icon: <Briefcase className="w-4 h-4" /> },
-    { key: "course", label: "Cursos", icon: <BookOpen className="w-4 h-4" /> },
-    { key: "support", label: "Apoio Psicológico", icon: <HeartHandshake className="w-4 h-4" /> },
-    { key: "clothes", label: "Roupas", icon: <Shirt className="w-4 h-4" /> },
+  const filterOptions = [
+    { key: "shelter", label: "Alojamento", icon: Home },
+    { key: "meal", label: "Refeições", icon: Utensils },
+    { key: "job", label: "Emprego", icon: Briefcase },
+    { key: "course", label: "Cursos", icon: GraduationCap },
+    { key: "support", label: "Apoio", icon: Heart },
+    { key: "clothes", label: "Roupas", icon: Shirt },
   ];
 
   return (
-    <section className="max-w-5xl mx-auto px-6 pb-6">
-      <div className="flex flex-wrap justify-center gap-3">
-        {filterList.map((f) => (
-          <button
-            key={f.key}
-            onClick={() => toggleFilter(f.key)}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border transition ${
-              filters[f.key]
-                ? "bg-green-600 text-white border-green-600"
-                : "bg-white text-green-700 border-green-300 hover:bg-green-50"
-            }`}
-          >
-            {f.icon}
-            {f.label}
-          </button>
-        ))}
-      </div>
-    </section>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="z-10 w-full bg-[var(--ecodoa-bg)] border-y border-[var(--ecodoa-soft)]/60 shadow-sm py-4 px-6 flex flex-wrap justify-center gap-3"
+    >
+      {filterOptions.map(({ key, label, icon: Icon }) => (
+        <button
+          key={key}
+          onClick={() => toggleFilter(key)}
+          className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all duration-200 shadow-sm ${
+            filters[key]
+              ? "bg-[var(--ecodoa-primary)] text-white hover:bg-[var(--ecodoa-secondary)]"
+              : "bg-white border border-[var(--ecodoa-light-olive)] text-[var(--ecodoa-text)] hover:bg-[var(--ecodoa-green)]/40"
+          }`}
+        >
+          <Icon className="w-4 h-4" />
+          {label}
+        </button>
+      ))}
+    </motion.div>
   );
 }
