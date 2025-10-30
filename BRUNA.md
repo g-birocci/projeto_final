@@ -18,3 +18,7 @@ Se há produtos → renderiza os cards
 Se não há produtos → mostra “Nenhum item disponível”
 
 ///////////////////////////////////
+
+          style={{ color: "var(--ecodoa-alert)" }}>Minhas conversas</h1>
+          
+SINTAXE PARA CORES
