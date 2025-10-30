@@ -4,13 +4,12 @@ import Navbar from "../components/Navbar";
 import { Input } from "@/components/ui/Pesquisa";
 import { Button } from "@/components/ui/Button";
 import Notificacoes from "@/components/ui/Notificacoes"; //importei aqui o Notificaçao apenas para ficar visivel para configurar.
-
+import Image from "next/image";
 
 export default function ChatPage() {
   const [busca, setBusca] = useState("");
   const [conversaAtiva, setConversaAtiva] = useState(1); // conversa aberta por padrão
   const [mensagem, setMensagem] = useState("");
-
 
   const [conversas, setConversas] = useState([
     {
@@ -75,7 +74,6 @@ export default function ChatPage() {
     },
   ]);
 
-
   const conversaSelecionada = conversas.find((c) => c.id === conversaAtiva);
   const enviarMensagem = () => {
     if (mensagem.trim() === "") return;
@@ -93,9 +91,24 @@ export default function ChatPage() {
   };
 
   const notificacoes = [
-    { titulo: "Novo like na sua doação", descricao: "João curtiu sua bicicleta", hora: "20:45", lida: false },
-    { titulo: "Nova mensagem", descricao: "Camila: Gostei muito da bicicleta!", hora: "20:30", lida: false },
-    { titulo: "Entrega marcada", descricao: "Rafael confirmou entrega amanhã", hora: "19:15", lida: true },
+    {
+      titulo: "Novo like na sua doação",
+      descricao: "João curtiu sua bicicleta",
+      hora: "20:45",
+      lida: false,
+    },
+    {
+      titulo: "Nova mensagem",
+      descricao: "Camila: Gostei muito da bicicleta!",
+      hora: "20:30",
+      lida: false,
+    },
+    {
+      titulo: "Entrega marcada",
+      descricao: "Rafael confirmou entrega amanhã",
+      hora: "19:15",
+      lida: true,
+    },
   ];
 
   return (
@@ -105,12 +118,15 @@ export default function ChatPage() {
         <Notificacoes lista={notificacoes} />
       </div>
 
-
-      <main className="flex-grow pt-24 px-4 pb-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <main className="grow pt-24 px-4 pb-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Lista de conversas */}
         <div>
-          <h1 className="text-2xl font-bold mb-6"
-            style={{ color: "var(--ecodoa-primary)" }}>Minhas conversas</h1>
+          <h1
+            className="text-2xl font-bold mb-6"
+            style={{ color: "var(--ecodoa-primary)" }}
+          >
+            Minhas conversas
+          </h1>
           <Input
             placeholder="Pesquisar conversas..."
             value={busca}
@@ -120,7 +136,6 @@ export default function ChatPage() {
 
           <ul className="space-y-4"></ul>
 
-
           <ul className="space-y-4">
             {conversas
               .filter((c) => c.nome.toLowerCase().includes(busca.toLowerCase()))
@@ -128,18 +143,27 @@ export default function ChatPage() {
                 <li
                   key={c.id}
                   onClick={() => setConversaAtiva(c.id)}
-                  className={`cursor-pointer flex items-center justify-between bg-white rounded-lg shadow-md p-4 hover:bg-ecodoa-soft transition ${conversaAtiva === c.id ? "border-2 border-ecodoa-accent" : ""
-                    }`}
+                  className={`cursor-pointer flex items-center justify-between bg-white rounded-lg shadow-md p-4 hover:bg-ecodoa-soft transition ${
+                    conversaAtiva === c.id
+                      ? "border-2 border-ecodoa-accent"
+                      : ""
+                  }`}
                 >
                   <div className="flex items-center gap-4">
-                    <img
+                    <Image
                       src={c.foto}
                       alt={c.nome}
-                      className="w-12 h-12 rounded-full border border-ecodoa-accent"
+                      width={48}
+                      height={48}
+                      className="rounded-full border border-ecodoa-accent"
                     />
                     <div>
-                      <p className="font-semibold text-ecodoa-primary">{c.nome}</p>
-                      <p className="text-sm text-muted-foreground">{c.mensagem}</p>
+                      <p className="font-semibold text-ecodoa-primary">
+                        {c.nome}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {c.mensagem}
+                      </p>
                     </div>
                   </div>
                   <div className="flex flex-col items-end">
@@ -159,22 +183,27 @@ export default function ChatPage() {
         <div className="bg-white rounded-lg shadow-md p-6 border-2 border-ecodoa-accent flex flex-col justify-between h-full">
           <div>
             <div className="flex items-center gap-4 mb-4">
-              <img
+              <Image
                 src={conversaSelecionada.foto}
                 alt={conversaSelecionada.nome}
-                className="w-10 h-10 rounded-full object-cover"
+                width={40} // w-10 = 10 * 4 = 40px
+                height={40} // h-10 = 40px
+                className="rounded-full object-cover"
               />
-              <p className="font-semibold text-ecodoa-primary">{conversaSelecionada.nome}</p>
+              <p className="font-semibold text-ecodoa-primary">
+                {conversaSelecionada.nome}
+              </p>
             </div>
 
             <div className="space-y-3 mb-6">
               {conversaSelecionada.historico.map((msg, index) => (
                 <div
                   key={index}
-                  className={`max-w-[80%] p-3 rounded-lg ${msg.autor === "Você"
-                    ? "bg-ecodoa-accent text-ecodoa-text self-end ml-auto"
-                    : "bg-ecodoa-soft text-ecodoa-primary"
-                    } shadow`}
+                  className={`max-w-[80%] p-3 rounded-lg ${
+                    msg.autor === "Você"
+                      ? "bg-ecodoa-accent text-ecodoa-text self-end ml-auto"
+                      : "bg-ecodoa-soft text-ecodoa-primary"
+                  } shadow`}
                 >
                   <p className="text-sm">{msg.texto}</p>
                 </div>

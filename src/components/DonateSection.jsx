@@ -10,7 +10,7 @@ export default function DonateSection() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-green-600 text-white py-24 px-6 text-center">
+      <section className="relative overflow-hidden bg-[var(--ecodoa-primary)] text-white py-24 px-6 text-center">
         <motion.div
           animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -25,8 +25,8 @@ export default function DonateSection() {
             viewport={{ once: true }}
             className="flex justify-center mb-6"
           >
-            <div className="bg-white/20 p-4 rounded-full">
-              <HeartHandshake className="w-8 h-8 text-[#DBF227]" />
+            <div className="bg-[var(--ecodoa-accent)]/20 p-4 rounded-full shadow-inner">
+              <HeartHandshake className="w-8 h-8 text-[var(--ecodoa-accent)]" />
             </div>
           </motion.div>
 
@@ -45,10 +45,10 @@ export default function DonateSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-white/90 mb-10 leading-relaxed"
+            className="text-[var(--ecodoa-soft)] mb-10 leading-relaxed"
           >
             Cada contribuição mantém o projeto ativo e faz o bem continuar a circular.  
-            Apoia esta comunidade solidária e sustentável 🌱
+            Apoia esta comunidade solidária e sustentável.
           </motion.p>
 
           <motion.button
@@ -56,17 +56,15 @@ export default function DonateSection() {
             whileTap={{ scale: 0.96 }}
             onClick={() => setOpen(true)}
             className="inline-flex items-center justify-center gap-2 
-                       bg-white text-green-700 font-semibold px-10 py-4 
-                       rounded-2xl shadow-lg hover:bg-green-50 
-                       transition-all duration-200"
+                       bg-[var(--ecodoa-accent)] text-[var(--ecodoa-secondary)] font-semibold px-10 py-4 
+                       rounded-2xl shadow-md hover:bg-[var(--ecodoa-light-olive)] transition-all duration-200"
           >
-            <Sparkles className="w-5 h-5 text-green-700" />
+            <Sparkles className="w-5 h-5 text-[var(--ecodoa-secondary)]" />
             Apoiar o EcoDoa
           </motion.button>
         </div>
       </section>
 
-      {/* Modal de doação */}
       <AnimatePresence>
         {open && <DoarEcoDoaModal isOpen={open} onClose={() => setOpen(false)} />}
       </AnimatePresence>

@@ -89,7 +89,6 @@ export default function Index() {
     <div>
       <Navbar />
 
-      {/* Botão de voltar */}
       <div className="z-8 px-4 pt-20">
         <a
           href="/voltar"
@@ -149,7 +148,7 @@ export default function Index() {
         </Button>
       </header>
 
-      {/* Cards */}
+
       <main className="container mx-auto px-6 py-10 pb-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {loading ? (
           <p className="text-center text-gray-600 col-span-full">Carregando...</p>
