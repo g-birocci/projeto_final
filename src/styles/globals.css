@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -43,73 +44,102 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Sobreposição do mapa */
+.leaflet-container {
+  z-index: 0 !important;
+  position: relative !important;
+}
+
 :root {
   --radius: 0.625rem;
-  --background: #F5F5F5;;
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* EcoDoa Color Palette */
+  --ecodoa-primary: #005C53;
+  --ecodoa-secondary: #042940;
+  --ecodoa-accent: #DBF227;
+  --ecodoa-soft: #D6D58E;
+  --ecodoa-olive: #77850B;
+  --ecodoa-text: #042940;
+  --ecodoa-bg: #F9F9F9;
+  --ecodoa-alert: #8c2a09;
+  --ecodoa-light-olive: #9FC131;
+  --ecodoa-green: #d3eb83d3;
+
+  /* Light Theme Mapping */
+  --background: var(--ecodoa-bg);
+  --foreground: var(--ecodoa-text);
+  --card: #FFFFFF; /* Assuming white card background for light theme */
+  --card-foreground: var(--ecodoa-text);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--ecodoa-text);
+  --primary: var(--ecodoa-primary);
+  --primary-foreground: #FFFFFF; /* White text on primary */
+  --secondary: var(--ecodoa-soft);
+  --secondary-foreground: var(--ecodoa-text);
+  --muted: #f1f5f9; /* A light gray */
+  --muted-foreground: #64748b; /* A darker gray */
+  --accent: var(--ecodoa-accent);
+  --accent-foreground: var(--ecodoa-secondary); /* Dark text on accent */
+  --destructive: var(--ecodoa-alert);
+  --border: #e2e8f0; /* A light gray border */
+  --input: #e2e8f0;
+  --ring: var(--ecodoa-primary);
+
+  /* Chart colors - using the new palette */
+  --chart-1: var(--ecodoa-primary);
+  --chart-2: var(--ecodoa-accent);
+  --chart-3: var(--ecodoa-soft);
+  --chart-4: var(--ecodoa-olive);
+  --chart-5: var(--ecodoa-secondary);
+
+  /* Sidebar colors - using the new palette */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: var(--ecodoa-text);
+  --sidebar-primary: var(--ecodoa-primary);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: var(--ecodoa-accent);
+  --sidebar-accent-foreground: var(--ecodoa-secondary);
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: var(--ecodoa-primary);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Dark Theme Mapping */
+  --background: var(--ecodoa-secondary);
+  --foreground: var(--ecodoa-soft);
+  --card: #0A3A5A; /* A dark blue, slightly lighter than background */
+  --card-foreground: var(--ecodoa-soft);
+  --popover: #0A3A5A;
+  --popover-foreground: var(--ecodoa-soft);
+  --primary: var(--ecodoa-accent);
+  --primary-foreground: var(--ecodoa-secondary);
+  --secondary: var(--ecodoa-primary);
+  --secondary-foreground: #FFFFFF;
+  --muted: #0A3A5A;
+  --muted-foreground: #a0aec0;
+  --accent: var(--ecodoa-accent);
+  --accent-foreground: var(--ecodoa-secondary);
+  --destructive: var(--ecodoa-alert);
+  --border: #2c5282;
+  --input: #2c5282;
+  --ring: var(--ecodoa-accent);
+
+  /* Chart colors for dark theme */
+  --chart-1: var(--ecodoa-primary);
+  --chart-2: var(--ecodoa-accent);
+  --chart-3: var(--ecodoa-soft);
+  --chart-4: var(--ecodoa-olive);
+  --chart-5: #FFFFFF; /* White for contrast */
+
+  /* Sidebar colors for dark theme */
+  --sidebar: #0A3A5A;
+  --sidebar-foreground: var(--ecodoa-soft);
+  --sidebar-primary: var(--ecodoa-accent);
+  --sidebar-primary-foreground: var(--ecodoa-secondary);
+  --sidebar-accent: var(--ecodoa-accent);
+  --sidebar-accent-foreground: var(--ecodoa-secondary);
+  --sidebar-border: #2c5282;
+  --sidebar-ring: var(--ecodoa-accent);
 }
 
 @layer base {
@@ -120,3 +150,59 @@
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .bg-ecodoa-green {
+    background-color: var(--ecodoa-green);
+  }
+
+  .text-ecodoa-green {
+    color: var(--ecodoa-green);
+  }
+
+
+  /* Utility classes for EcoDoa colors */
+  .text-ecodoa-primary { color: var(--ecodoa-primary); }
+  .bg-ecodoa-primary { background-color: var(--ecodoa-primary); }
+  .text-ecodoa-secondary { color: var(--ecodoa-secondary); }
+  .bg-ecodoa-secondary { background-color: var(--ecodoa-secondary); }
+  .text-ecodoa-accent { color: var(--ecodoa-accent); }
+  .bg-ecodoa-accent { background-color: var(--ecodoa-accent); }
+  .text-ecodoa-soft { color: var(--ecodoa-soft); }
+  .bg-ecodoa-soft { background-color: var(--ecodoa-soft); }
+  .text-ecodoa-olive { color: var(--ecodoa-olive); }
+  .bg-ecodoa-olive { background-color: var(--ecodoa-olive); }
+  .text-ecodoa-text { color: var(--ecodoa-text); }
+  .bg-ecodoa-text { background-color: var(--ecodoa-text); }
+  .text-ecodoa-bg { color: var(--ecodoa-bg); }
+  .bg-ecodoa-bg { background-color: var(--ecodoa-bg); }
+  .text-ecodoa-alert { color: var(--ecodoa-alert); }
+  .bg-ecodoa-alert { background-color: var(--ecodoa-alert); }
+
+  /* Utility classes for general theme colors */
+  .text-primary { color: var(--primary); }
+  .bg-primary { background-color: var(--primary); }
+  .text-secondary { color: var(--secondary); }
+  .bg-secondary { background-color: var(--secondary); }
+  .text-accent { color: var(--accent); }
+  .bg-accent { background-color: var(--accent); }
+  .text-background { color: var(--background); }
+  .bg-background { background-color: var(--background); }
+  .text-foreground { color: var(--foreground); }
+  .bg-foreground { background-color: var(--foreground); }
+}
+
