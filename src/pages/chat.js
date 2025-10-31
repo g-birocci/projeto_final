@@ -116,12 +116,12 @@ export default function ChatPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="fixed top-5 right-5 z-50">
+      <div className="absolute top-5 right-5 z-50">
         <Notificacoes lista={notificacoes} />
       </div>
 
-      <main className="grow pt-24 px-4 pb-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Lista de conversas */}
+      {/* Layout ajustado para uma única coluna fixa (mobile) */}
+      <main className="grow pt-24 px-4 pb-32 max-w-6xl mx-auto grid grid-cols-1 gap-8">
         <div>
           <h1
             className="text-2xl font-bold mb-6"
@@ -136,8 +136,6 @@ export default function ChatPage() {
             className="mb-6 bg-ecodoa-light-olive text-ecodoa-primary placeholder-ecodoa-olive border border-ecodoa-accent focus:outline-none focus:ring-2 focus:ring-ecodoa-primary focus:border-ecodoa-primary rounded-md"
           />
 
-          <ul className="space-y-4"></ul>
-
           <ul className="space-y-4">
             {conversas
               .filter((c) => c.nome.toLowerCase().includes(busca.toLowerCase()))
@@ -145,7 +143,7 @@ export default function ChatPage() {
                 <li
                   key={c.id}
                   onClick={() => setConversaAtiva(c.id)}
-                  className={`cursor-pointer flex items-center justify-between bg-white rounded-lg shadow-md p-4 hover:bg-ecodoa-soft transition ${
+                  className={`cursor-pointer flex items-center justify-between bg-white rounded-lg shadow-md p-3 hover:bg-ecodoa-soft transition ${
                     conversaAtiva === c.id
                       ? "border-2 border-ecodoa-accent"
                       : ""
@@ -182,7 +180,8 @@ export default function ChatPage() {
         </div>
 
         {/* Conversa ativa */}
-        <div className="bg-white rounded-lg shadow-md p-6 border-2 border-ecodoa-accent flex flex-col justify-between h-full">
+        {/* Ajustado para layout mobile, removendo altura total e ajustando padding */}
+        <div className="bg-white rounded-lg shadow-md p-4 mt-6 border-2 border-ecodoa-accent flex flex-col">
           <div>
             <div className="flex items-center gap-4 mb-4">
               <Image

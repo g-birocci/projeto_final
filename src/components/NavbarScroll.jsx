@@ -8,7 +8,7 @@ import {HeartHandshake, Leaf, Info, MapPin, Home,} from "lucide-react";
 export default function NavbarScroll() {
   const [show, setShow] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
+  
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -18,7 +18,6 @@ export default function NavbarScroll() {
       const scrollY = window.scrollY;
       setShow(scrollY > 250); // aparece após rolar 250px
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("resize", checkMobile);
@@ -35,7 +34,7 @@ export default function NavbarScroll() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.4 }} /* Posicionado absolutamente no _app.js, ajustado para mobile */
           className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-[#005C53]/90 text-[#D6D58E] border border-[#9FC131]/30 shadow-md rounded-full px-5 py-3 flex justify-around items-center w-[90%] max-w-sm backdrop-blur-sm"
         >
           <NavItem href="/" icon={<Home />} label="Início" />

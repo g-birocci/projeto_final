@@ -72,13 +72,13 @@ export default function PaginaUsuario() {
     return (
         <div>
             <Navbar />
-
-            <section className="max-w-6xl mx-auto px-4 pt-24 pb-24">
+            
+            {/* Adicionado padding-bottom para garantir respiro no final da página */}
+            <section className="max-w-6xl mx-auto px-4 pt-24 pb-16">
                 <h1 className="text-3xl font-bold mb-6 text-foreground">gabebruu</h1>
-
                 {/* Itens doados */}
-                <h2 className="text-2xl font-semibold mb-4 text-foreground">Doações disponíveis</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <h2 className="text-xl font-semibold mb-4 text-foreground">Doações disponíveis</h2>
+                <div className="grid grid-cols-1 gap-6">
                     {itens.map((item) => (
                         <div key={item.id} className="relative">
                             <CardProduto produto={item} />
@@ -96,8 +96,8 @@ export default function PaginaUsuario() {
                     ))}
                 </div>
 
-                {/* Formulário de avaliação -----
-                <h2 className="text-2xl font-semibold mt-10 mb-4 text-foreground">Avaliar doador</h2>
+                {/* Formulário de avaliação */}
+                <h2 className="text-xl font-semibold mt-10 mb-4 text-foreground">Avaliar doador</h2>
                 <form onSubmit={handleSubmit} className="space-y-4 mb-8">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Seu nome</label>
@@ -156,8 +156,8 @@ export default function PaginaUsuario() {
                     </button>
                 </form>
 
-                {/* Avaliações 
-                <h2 className="text-2xl font-semibold mb-4 text-foreground">Avaliações</h2>
+                {/* Avaliações */}
+                <h2 className="text-xl font-semibold mb-4 text-foreground">Avaliações</h2>
                 <div className="space-y-6">
                     {avaliacoes.map((av) => (
                         <CardAvaliacao

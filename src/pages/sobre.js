@@ -4,22 +4,22 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import DashboardSobre from "@/components/DashboardSobre";
-import Feedbacks from "@/components/Feedbacks";
-import ChamadaDoacao from "@/components/Doar";
+import DashboardSobre from "@/components/DashboardSobre"; // Importe o componente DashboardSobre
+import Feedbacks from "@/components/Feedbacks"; // Importe o componente Feedbacks
+import ChamadaDoacao from "@/components/Doar"; // Importe o componente ChamadaDoacao
 import NavbarScroll from "@/components/NavbarScroll";
 import SidebarMenu from "@/components/SideBarMenu";
 
 export default function Sobre() {
+  // Layout ajustado para ser fixo em escala mobile, removendo classes responsivas e ajustando fontes.
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--ecodoa-bg)] via-white to-[var(--ecodoa-green)]">
+    <div className="min-h-screen bg-white text-[#1E2D2F]">
       <Navbar />
       <NavbarScroll />
-<SidebarMenu />
+      <SidebarMenu />
 
    
       <section className="relative overflow-hidden pt-32 pb-24">
-
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--ecodoa-accent)] rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[var(--ecodoa-primary)] rounded-full blur-3xl" />
@@ -30,13 +30,13 @@ export default function Sobre() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
-          >
+            className="text-4xl font-extrabold text-green-700 mb-6"
+            >
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-5xl md:text-7xl font-black text-[var(--ecodoa-primary)] mb-6 leading-tight"
+              className="text-4xl font-black text-[var(--ecodoa-primary)] mb-6 leading-tight"
             >
               Fazer o bem é contagiante
             </motion.h1>
@@ -45,7 +45,7 @@ export default function Sobre() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="text-xl text-[var(--ecodoa-secondary)]/70 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg text-[var(--ecodoa-secondary)]/70 max-w-3xl mx-auto leading-relaxed"
             >
               Acreditamos que cada gesto pode mudar o mundo.
               No <strong className="text-[var(--ecodoa-primary)]">EcoDoa</strong>, 
@@ -60,8 +60,7 @@ export default function Sobre() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="max-w-6xl mx-auto px-6 -mt-8 mb-20"
-      >
+        className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 gap-10 items-center">
         <div className="bg-white rounded-3xl shadow-2xl border border-[var(--ecodoa-soft)]/20 overflow-hidden">
           <DashboardSobre />
         </div>
@@ -73,9 +72,9 @@ export default function Sobre() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="max-w-5xl mx-auto px-6 py-24"
+        className="max-w-5xl mx-auto px-4 py-16"
       >
-        <div className="relative bg-gradient-to-br from-[var(--ecodoa-primary)] to-[var(--ecodoa-secondary)] rounded-3xl p-12 md:p-16 shadow-2xl overflow-hidden">
+        <div className="relative bg-gradient-to-br from-[var(--ecodoa-primary)] to-[var(--ecodoa-secondary)] rounded-3xl p-8 shadow-2xl overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--ecodoa-accent)]/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl" />
           
@@ -85,7 +84,7 @@ export default function Sobre() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-black text-white mb-8"
+              className="text-3xl font-black text-white mb-6"
             >
               Quem Somos
             </motion.h2>
@@ -95,7 +94,7 @@ export default function Sobre() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto"
+              className="text-base text-white/90 leading-relaxed max-w-3xl mx-auto"
             >
               O <strong className="text-[var(--ecodoa-accent)]">EcoDoa</strong> é um movimento que une pessoas dispostas a partilhar o que têm
               com quem mais precisa. Não somos só uma plataforma de doações — somos uma comunidade
@@ -112,9 +111,9 @@ export default function Sobre() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-6 py-24"
+        className="max-w-7xl mx-auto px-4 py-16"
       >
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 gap-12 items-center">
 
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -127,7 +126,7 @@ export default function Sobre() {
               Nossa Missão
             </span>
 
-            <h2 className="text-4xl md:text-5xl font-black text-[var(--ecodoa-primary)] leading-tight">
+            <h2 className="text-3xl font-black text-[var(--ecodoa-primary)] leading-tight">
               Por que Doar?
             </h2>
 
@@ -137,7 +136,7 @@ export default function Sobre() {
                 Cada doação reduz o desperdício, inspira solidariedade e faz o bem circular.
               </p>
 
-              <div className="bg-[var(--ecodoa-soft)]/20 border-l-4 border-[var(--ecodoa-accent)] p-6 rounded-r-xl">
+              <div className="bg-[var(--ecodoa-soft)]/20 border-l-4 border-[var(--ecodoa-accent)] p-4 rounded-r-xl">
                 <p className="text-[var(--ecodoa-secondary)]/90 text-lg leading-relaxed">
                   O EcoDoa atua alinhado aos{" "}
                   <strong className="text-[var(--ecodoa-primary)]">Objetivos de Desenvolvimento Sustentável (ODS)</strong> da ONU,
@@ -152,7 +151,7 @@ export default function Sobre() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 bg-[var(--ecodoa-primary)] text-white py-4 px-8 rounded-full font-bold shadow-xl hover:bg-[var(--ecodoa-secondary)] transition-all duration-300"
+              className="inline-flex items-center gap-3 bg-[var(--ecodoa-primary)] text-white py-3 px-6 rounded-full font-bold shadow-lg hover:bg-[var(--ecodoa-secondary)] transition-all duration-300"
             >
               Conhecer os ODS
               <span className="text-xl">→</span>
@@ -191,3 +190,5 @@ export default function Sobre() {
     </div>
   );
 }
+
+// commit

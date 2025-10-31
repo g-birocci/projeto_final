@@ -69,20 +69,20 @@ export default function Educacionais() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="max-w-7xl mx-auto px-6 py-24 bg-[var(--ecodoa-bg)]"
+      className="px-4 py-16 bg-[var(--ecodoa-bg)]" /* Padding ajustado */
     >
-      {/* Cabeçalho */}
-      <div className="text-center mb-14">
-        <h2 className="text-4xl font-bold text-[var(--ecodoa-primary)] mb-3">
+      {/* Cabeçalho ajustado para mobile */}
+      <div className="text-center mb-10">
+        <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-2">
           Recursos Educacionais
         </h2>
-        <p className="text-[var(--ecodoa-text)]/70 text-lg">
+        <p className="text-[var(--ecodoa-text)]/70 text-base">
           Aprende mais sobre sustentabilidade e impacto social
         </p>
       </div>
 
       {/* Cards principais */}
-      <div className="grid md:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 gap-10">
         {educationalResources.map((section, index) => (
           <motion.div
             key={index}

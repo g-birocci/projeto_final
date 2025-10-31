@@ -18,7 +18,7 @@ export default function FilterBar({ filters, toggleFilter }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="z-10 w-full bg-[var(--ecodoa-bg)] border-y border-[var(--ecodoa-soft)]/60 shadow-sm py-4 px-6 flex flex-wrap justify-center gap-3"
+      className="z-10 w-full bg-[var(--ecodoa-bg)] border-y border-[var(--ecodoa-soft)]/60 shadow-sm py-3 px-2 flex flex-wrap justify-center gap-2"
     >
       {filterOptions.map(({ key, label, icon: Icon }) => (
         <button

@@ -10,6 +10,7 @@ const navItems = [
   { href: "/ajuda", label: "Pontos de Ajuda" },
   { href: "/viver", label: "Vida Sustentável" },
   { href: "/sobre", label: "Quem Somos" },
+  { href: "/usuario", label: "Meu Perfil" }, // Adicionado item para Perfil
 ];
 
 export default function Navbar() {
@@ -28,15 +29,14 @@ export default function Navbar() {
       <button
         onClick={() => setSidebarOpen(true)}
         aria-label="Abrir menu"
-        className="fixed top-6 right-6 z-50 w-14 h-14 bg-[var(--ecodoa-accent)] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110"
-      >
+        className="absolute top-6 right-6 z-50 w-14 h-14 bg-[var(--ecodoa-accent)] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110">
         <span className="text-2xl">☰</span>
       </button>
 
-      {/* Logo Fixo no Canto Superior Esquerdo */}
+      {/* Logo relativo ao app viewport (canto superior esquerdo) */}
       <Link 
         href="/" 
-        className="fixed top-6 left-6 z-50 flex items-center gap-2 hover:opacity-90 transition-opacity"
+        className="absolute top-6 left-6 z-50 flex items-center gap-2 hover:opacity-90 transition-opacity"
       >
         <Image
           src="/img/EcoDoa.svg"
@@ -45,22 +45,22 @@ export default function Navbar() {
           height={50}
           className="drop-shadow-md"
         />
-        <span className="hidden sm:inline text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
-          EcoDoa
+        <span className="text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
+        EcoDoa
         </span>
       </Link>
 
-      {/* Overlay */}
+      {/* Overlay dentro do app viewport */}
       <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
+        className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
           sidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
         onClick={() => setSidebarOpen(false)}
       />
 
-      {/* Sidebar */}
+      {/* Sidebar ancorada ao app viewport */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 sm:w-96 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${
+        className={`absolute top-0 right-0 h-full w-80 sm:w-96 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
