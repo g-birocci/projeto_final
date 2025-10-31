@@ -8,8 +8,7 @@ export default function Perfil() {
       <Sidebar active="perfil" />
       <main className="flex-1 p-8 lg:ml-60">
         <h1 className="text-3xl font-bold text-green-700">Meu Perfil</h1>
-        <Navbar/>
-        <NavbarScroll/>
+        
       </main>
     </div>
   );

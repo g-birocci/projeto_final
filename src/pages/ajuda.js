@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
 import DonateSection from "@/components/DonateSection";
 import PartnersSection from "@/components/PartnersSection";
@@ -53,7 +52,15 @@ export default function Ajuda() {
         lat: 41.147,
         lng: -8.59,
       },
-
+      {
+        id: 3,
+        name: "Centro de Emprego de Coimbra",
+        type: "job",
+        city: "Coimbra",
+        info: "Apoio à recolocação profissional.",
+        lat: 40.2,
+        lng: -8.41,
+      },
       {
         id: 4,
         name: "Escola Popular Gaia",
@@ -121,7 +128,6 @@ export default function Ajuda() {
       </section>
       <PartnersSection />
       <DonateSection />
-      <Footer />
     </div>
   );
 }

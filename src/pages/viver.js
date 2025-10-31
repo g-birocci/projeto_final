@@ -13,14 +13,11 @@ import SidebarMenu from "@/components/SideBarMenu";
 export default function Viver() {
   return (
     <div className="min-h-screen bg-white text-[#1E2D2F] overflow-x-hidden">
-      <Navbar />
-      <NavbarScroll />
-      <SidebarMenu/>
+      <SidebarMenu />
       <Sustentavel />
       <Calculadora />
       <Dicas />
       <Educacionais />
-      <Footer />
     </div>
   );
 }

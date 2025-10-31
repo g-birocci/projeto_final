@@ -19,7 +19,6 @@ export default function Index() {
   const [modalFiltrosAberto, setModalFiltrosAberto] = useState(false);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
 
-
   // modal
   const [fotos, setFotos] = useState([]);
   const [descricao, setDescricao] = useState("");
@@ -44,7 +43,8 @@ export default function Index() {
         descricao: "Bom estado de conservação.",
         estado: "Usado",
         categoria: "Móveis",
-        imagem: "https://images.unsplash.com/photo-1663144256992-6b69263cc521?auto=format&fit=crop&q=80&w=736",
+        imagem:
+          "https://images.unsplash.com/photo-1663144256992-6b69263cc521?auto=format&fit=crop&q=80&w=736",
       },
       {
         id: 2,
@@ -52,7 +52,8 @@ export default function Index() {
         descricao: "Pouco uso, confortável, Tam: 38.",
         estado: "Usado",
         categoria: "Roupas",
-        imagem: "https://images.unsplash.com/photo-1747063458940-e89647e3a106?auto=format&fit=crop&q=80&w=1170",
+        imagem:
+          "https://images.unsplash.com/photo-1747063458940-e89647e3a106?auto=format&fit=crop&q=80&w=1170",
       },
       {
         id: 3,
@@ -60,7 +61,8 @@ export default function Index() {
         descricao: "Camisa leve e colorida para o verão.",
         estado: "Usado",
         categoria: "Roupas",
-        imagem: "https://images.unsplash.com/photo-1651888947765-2e0ec570bc9d?auto=format&fit=crop&q=80&w=687",
+        imagem:
+          "https://images.unsplash.com/photo-1651888947765-2e0ec570bc9d?auto=format&fit=crop&q=80&w=687",
       },
       {
         id: 4,
@@ -68,7 +70,8 @@ export default function Index() {
         descricao: "Já lidos, repassando para quem quer.",
         estado: "Usado",
         categoria: "Livros",
-        imagem: "https://images.unsplash.com/photo-1616852246157-f095beb2aef9?auto=format&fit=crop&q=80&w=1084",
+        imagem:
+          "https://images.unsplash.com/photo-1616852246157-f095beb2aef9?auto=format&fit=crop&q=80&w=1084",
       },
       {
         id: 5,
@@ -76,10 +79,10 @@ export default function Index() {
         descricao: "Doando pois estou de mudança.",
         estado: "Usado",
         categoria: "Eletrônicos",
-        imagem: "https://images.unsplash.com/photo-1689402059849-02c1b5a7931b?auto=format&fit=crop&q=80&w=735",
+        imagem:
+          "https://images.unsplash.com/photo-1689402059849-02c1b5a7931b?auto=format&fit=crop&q=80&w=735",
       },
     ];
-
 
     setTimeout(() => {
       setProdutos(mockProdutos);
@@ -98,7 +101,6 @@ export default function Index() {
         >
           <ArrowLeft className="w-5 h-5 text-ecodoa-text" />
         </a>
-
       </div>
 
       {/* Campo de pesquisa e botão de filtro */}
@@ -111,8 +113,6 @@ export default function Index() {
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
           />
-
-
         </div>
         <Button
           variant="outline"
@@ -122,9 +122,7 @@ export default function Index() {
         >
           Filtros
         </Button>
-
       </div>
-
 
       <header
         className="h-[400px] bg-cover bg-center flex flex-col items-center justify-center text-white text-center px-8 py-10"
@@ -150,20 +148,22 @@ export default function Index() {
         </Button>
       </header>
 
-
       <main className="container mx-auto px-6 py-10 pb-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {loading ? (
-          <p className="text-center text-gray-600 col-span-full">Carregando...</p>
+          <p className="text-center text-gray-600 col-span-full">
+            Carregando...
+          </p>
         ) : error ? (
           <p className="text-center text-red-500 col-span-full">{error}</p>
         ) : produtos.length > 0 ? (
           produtos
-            .filter((produto) =>
-              produto.nome.toLowerCase().includes(busca.toLowerCase()) &&
-              (categoriaSelecionada === "" ||
-                produto.categoria?.toLowerCase() === categoriaSelecionada.toLowerCase())
+            .filter(
+              (produto) =>
+                produto.nome.toLowerCase().includes(busca.toLowerCase()) &&
+                (categoriaSelecionada === "" ||
+                  produto.categoria?.toLowerCase() ===
+                    categoriaSelecionada.toLowerCase())
             )
-
 
             .map((produto) => (
               <CardProduto key={produto.id} produto={produto} />
@@ -198,8 +198,6 @@ export default function Index() {
           setCategoriaSelecionada={setCategoriaSelecionada}
         />
       )}
-
-      <Footer />
     </div>
   );
 }
