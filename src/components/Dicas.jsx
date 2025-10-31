@@ -14,7 +14,7 @@ export default function Dicas() {
   const dicas = [
     {
       icon: Recycle,
-      text: "Recicla sempre — o que hoje é lixo pode ser matéria-prima amanhã.",
+      text: "O que hoje é lixo pode ser matéria-prima amanhã.",
     },
     {
       icon: Droplets,

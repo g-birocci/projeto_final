@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import CardProduto from "../components/CardProduto";
 import ModalDoacao from "../components/ui/ModalDoacao";

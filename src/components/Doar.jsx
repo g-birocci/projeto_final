@@ -11,7 +11,7 @@ export default function Doar() {
       viewport={{ once: true }}
       className="py-24 flex flex-col items-center justify-center text-center bg-white"
     >
-      <h2 className="text-3xl font-bold text-green-700 mb-6">
+      <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-6">
         Pronto para fazer parte dessa corrente do bem?
       </h2>
       <p className="text-[#1E2D2F]/80 mb-10 max-w-xl">
@@ -21,9 +21,9 @@ export default function Doar() {
 
       <motion.a
         href="/doacao"
-        whileHover={{ scale: 1.08, backgroundColor: "#16a34a" }}
+        whileHover={{ scale: 1.08, backgroundColor: "#DBF227" }}
         whileTap={{ scale: 0.95 }}
-        className="bg-green-600 text-white font-semibold px-10 py-4 rounded-2xl shadow-md hover:shadow-lg transition-all"
+        className="bg-[var(--ecodoa-primary)] text-white font-semibold px-10 py-4 rounded-2xl shadow-md hover:shadow-lg transition-all"
       >
         Quero Doar
       </motion.a>

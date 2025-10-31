@@ -1,6 +1,11 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import CardProduto from "../components/CardProduto";
 import { Button } from "@/components/ui/Button";
+import CardAvaliacao from "@/components/ui/CardAvaliacao";
+
+
 
 export default function PaginaUsuario() {
   const [itens, setItens] = useState([]);

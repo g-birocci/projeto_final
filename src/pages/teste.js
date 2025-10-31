@@ -1,13 +1,14 @@
-import Sidebar from "@/components/SideBarMenu";
+// src/pages/teste.js
+import Nave from "@/components/layout/Nave";
 
-export default function Perfil() {
+export default function Teste() {
   return (
-    <div className="min-h-screen flex bg-white">
-      <Sidebar active="perfil" />
-      <main className="flex-1 p-8 lg:ml-60">
-        <h1 className="text-3xl font-bold text-green-700">Meu Perfil</h1>
-        
-      </main>
-    </div>
+    <main className="min-h-screen">
+      <Nave />
+      <section className="p-6">
+        <h1 className="text-2xl font-bold">Página Teste</h1>
+        <p>Conteúdo aqui…</p>
+      </section>
+    </main>
   );
 }

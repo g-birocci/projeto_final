@@ -4,7 +4,9 @@ import Sustentavel from "@/components/Sustentavel";
 import Calculadora from "@/components/Calculadora";
 import Dicas from "@/components/Dicas";
 import Educacionais from "@/components/Educacionais";
+import NavbarScroll from "@/components/NavbarScroll";
 import SidebarMenu from "@/components/SideBarMenu";
+
 
 export default function Viver() {
   return (

@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }) {
   return ( 
     <>
       <div className='hidden md:block'>
-        <Navbar/>
+        
       </div>
         <Component {...pageProps}/>;
       <div className='block md:hidden'>
