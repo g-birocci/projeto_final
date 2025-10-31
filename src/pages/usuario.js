@@ -167,8 +167,10 @@ export default function PaginaUsuario() {
                             comentario={av.comentario}
                         />
                     ))}
-                </div>
+                </div> 
+                 */}
             </section>
+            
 
             <Footer />
         </div>
