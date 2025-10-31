@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import CardProduto from "../components/CardProduto";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import CardProduto from "../components/CardProduto";
 import ModalDoacao from "../components/ui/ModalDoacao";
 import { Input } from "@/components/ui/Pesquisa";
 import { Button } from "@/components/ui/Button";
@@ -90,7 +90,6 @@ export default function Index() {
   return (
     <div>
       <Navbar />
-
       <div className="z-8 px-4 pt-20">
         <a
           href="/voltar"
@@ -102,9 +101,10 @@ export default function Index() {
       </div>
 
       {/* Campo de pesquisa e botão de filtro */}
-      <div className="flex flex-wrap items-center justify-center gap-4 max-w-2xl mx-auto mt-8 px-4">
-        <div className="relative w-full sm:w-auto flex-1">
-          <Search className="absolute left-3 top-3 h-5 w-5 text-ecodoa-olive" />
+      {/* Ajustado para layout de coluna única em mobile */}
+      <div className="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto mt-8 px-4">
+      <div className="relative w-full flex-1">
+      <Search className="absolute left-3 top-3 h-5 w-5 text-ecodoa-olive" />
           <Input
             placeholder="Pesquisar doações..."
             className="pl-10 py-2 w-full --ecodoa-bg text-ecodoa-text placeholder-ecodoa-olive border border-ecodoa-accent focus:outline-none focus:ring-2 focus:ring-ecodoa-primary focus:border-ecodoa-primary"
@@ -117,7 +117,7 @@ export default function Index() {
         <Button
           variant="outline"
           size="default"
-          className="w-full sm:w-auto"
+          className="w-full"
           onClick={() => setModalFiltrosAberto(true)}
         >
           Filtros
@@ -126,23 +126,24 @@ export default function Index() {
       </div>
 
 
+      {/* Header ajustado para layout mobile fixo */}
       <header
-        className="h-[400px] bg-cover bg-center flex flex-col items-center justify-center text-white text-center px-8 py-10"
+        className="h-[300px] bg-cover bg-center flex flex-col items-center justify-center text-white text-center px-4 py-8 mt-6"
         style={{
           backgroundImage:
             'url("https://via.placeholder.com/1200x400?text=Doe+o+que+n%C3%A3o+usa+mais")',
           textShadow: "0 2px 4px rgba(0,0,0,0.5)",
         }}
       >
-        <h1 className="text-3xl sm:text-5xl font-bold text-[#265c14ad] m-0">
-          Está na hora do desapego.
+        <h1 className="text-3xl font-bold text-[#265c14ad] m-0">
+        Está na hora do desapego.
         </h1>
-        <p className="text-lg sm:text-xl mt-4 text-[#090871ff]">
+        <p className="text-lg mt-4 text-[#090871ff]">
           Doe seus itens, receba doações, reutilizar é viver!
         </p>
         <Button
           variant="default"
-          size="lg"
+          size="default"
           className="mt-6 bg-yellow-600 hover:bg-green-800"
           onClick={() => setModalAberto(true)}
         >
@@ -151,7 +152,8 @@ export default function Index() {
       </header>
 
 
-      <main className="container mx-auto px-6 py-10 pb-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {/* Grid de produtos ajustado para 2 colunas para melhor aproveitamento no mobile */}
+      <main className="px-4 py-8 grid grid-cols-2 gap-4">
         {loading ? (
           <p className="text-center text-gray-600 col-span-full">Carregando...</p>
         ) : error ? (

@@ -27,18 +27,18 @@ export default function Feedbacks() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="py-24 bg-[var(--ecodoa-bg)] text-[var(--ecodoa-secondary)]"
+      className="py-16 bg-[var(--ecodoa-bg)] text-[var(--ecodoa-secondary)]"
     >
-      <div className="max-w-5xl mx-auto px-6 text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-black text-[var(--ecodoa-primary)] mb-4">
+      <div className="px-4 text-center mb-12">
+      <h2 className="text-4xl font-black text-[var(--ecodoa-primary)] mb-4">
           Vozes que Inspiram
         </h2>
-        <p className="text-lg text-[var(--ecodoa-secondary)]/80 max-w-2xl mx-auto">
+        <p className="text-base text-[var(--ecodoa-secondary)]/80 max-w-2xl mx-auto">
           Histórias reais de quem viveu o impacto da solidariedade.
         </p>
       </div>
 
-      <div className="max-w-4xl mx-auto space-y-16 px-6">
+      <div className="space-y-12 px-4">
         {feedbacks.map((f, i) => (
           <motion.div
             key={i}
@@ -48,8 +48,8 @@ export default function Feedbacks() {
             viewport={{ once: true }}
             className="relative text-left"
           >
-            <blockquote className="border-l-4 border-[var(--ecodoa-accent)] pl-6 md:pl-8">
-              <p className="text-xl md:text-2xl italic leading-relaxed text-[var(--ecodoa-secondary)]/90">
+            <blockquote className="border-l-4 border-[var(--ecodoa-accent)] pl-6">
+              <p className="text-xl italic leading-relaxed text-[var(--ecodoa-secondary)]/90">
                 “{f.texto}”
               </p>
             </blockquote>

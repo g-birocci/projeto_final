@@ -9,9 +9,9 @@ export default function Doar() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="py-24 flex flex-col items-center justify-center text-center bg-white"
+      className="py-16 flex flex-col items-center justify-center text-center bg-white px-4"
     >
-      <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-6">
+      <h2 className="text-2xl font-bold text-[var(--ecodoa-primary)] mb-4">
         Pronto para fazer parte dessa corrente do bem?
       </h2>
       <p className="text-[#1E2D2F]/80 mb-10 max-w-xl">

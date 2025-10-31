@@ -35,7 +35,7 @@ export default function DonateSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-4xl font-extrabold mb-4 tracking-tight"
+            className="text-3xl font-extrabold mb-4 tracking-tight"
           >
             Ajuda-nos a manter o EcoDoa vivo
           </motion.h2>

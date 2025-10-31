@@ -44,9 +44,9 @@ export default function Calculadora() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="max-w-5xl mx-auto px-6 py-24 bg-[var(--ecodoa-bg)]"
+      className="px-4 py-16 bg-[var(--ecodoa-bg)]"
     >
-      <h2 className="text-4xl font-bold text-[var(--ecodoa-primary)] mb-10 text-center">
+      <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-8 text-center">
         Calcula o teu Impacto
       </h2>
 
@@ -83,10 +83,10 @@ export default function Calculadora() {
         ].map((item, i) => (
           <div
             key={i}
-            className="flex flex-col sm:flex-row items-center gap-6 px-2 sm:px-6"
+            className="flex flex-col items-center gap-4 px-2"
           >
-            <div className="flex items-center gap-3 w-64">
-              <item.icon className="w-6 h-6 text-[var(--ecodoa-primary)]" />
+            <div className="flex items-center gap-2 w-full justify-center">
+              <item.icon className="w-5 h-5 text-[var(--ecodoa-primary)]" /> {/* Ícone ajustado */}
               <span className="font-medium text-[var(--ecodoa-text)]">
                 {item.label}
               </span>

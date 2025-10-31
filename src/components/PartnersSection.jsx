@@ -80,12 +80,12 @@ export default function PartnersSection() {
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-24 bg-[var(--ecodoa-bg)]">
+    <section className="px-4 py-16 bg-[var(--ecodoa-bg)]">
       <div className="mb-10 text-center">
-        <h2 className="text-4xl font-bold text-[var(--ecodoa-primary)] mb-3">
+        <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-3">
           Parceiros que Fazem a Diferença
         </h2>
-        <p className="text-[var(--ecodoa-text)]/70 text-lg">
+        <p className="text-[var(--ecodoa-text)]/70 text-base">
           Organizações que acreditam num futuro mais solidário e sustentável
         </p>
       </div>
@@ -95,23 +95,23 @@ export default function PartnersSection() {
         {/* Botão Esquerda */}
         <button
           onClick={() => handleScroll(sectionRef, "left")}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 -translate-x-2"
           aria-label="Scroll esquerda"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-5 h-5" /> {/* Ícone ajustado */}
         </button>
 
         {/* Conteúdo Scrolling */}
         <div
           ref={sectionRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 px-2"
         >
           {partners.map((partner, idx) => (
             <motion.div
               key={idx}
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="flex-none w-[380px] bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-[var(--ecodoa-light-olive)] hover:border-[var(--ecodoa-accent)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+              className="flex-none w-[300px] bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-[var(--ecodoa-light-olive)] hover:border-[var(--ecodoa-accent)] transition-all duration-300"
             >
               <div className="relative h-48 overflow-hidden">
                 <img
@@ -120,13 +120,13 @@ export default function PartnersSection() {
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
                 <div className="absolute top-4 right-4 bg-[var(--ecodoa-accent)] text-[var(--ecodoa-text)] px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-                  <MapPin className="w-4 h-4" />
+                  <MapPin className="w-3 h-3" /> {/* Ícone ajustado */}
                   {partner.city}
                 </div>
               </div>
 
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-[var(--ecodoa-primary)] mb-3">
+                <h3 className="text-lg font-bold text-[var(--ecodoa-primary)] mb-2">
                   {partner.name}
                 </h3>
 
@@ -136,7 +136,7 @@ export default function PartnersSection() {
 
                 <div className="grid grid-cols-2 gap-3 mb-4 p-3 bg-[var(--ecodoa-green)]/20 rounded-xl">
                   <div className="flex items-center gap-2">
-                    <Heart className="w-4 h-4 text-[var(--ecodoa-alert)]" />
+                    <Heart className="w-3 h-3 text-[var(--ecodoa-alert)]" /> {/* Ícone ajustado */}
                     <div>
                       <p className="text-xs text-[var(--ecodoa-text)]/60">
                         Impacto
@@ -147,7 +147,7 @@ export default function PartnersSection() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4 text-[var(--ecodoa-olive)]" />
+                    <Users className="w-3 h-3 text-[var(--ecodoa-olive)]" /> {/* Ícone ajustado */}
                     <div>
                       <p className="text-xs text-[var(--ecodoa-text)]/60">
                         Equipa
@@ -163,10 +163,10 @@ export default function PartnersSection() {
                   href={partner.site}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg"
+                  className="inline-flex items-center justify-center gap-2 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white font-semibold py-2 px-4 rounded-xl transition-all duration-300 hover:shadow-lg text-sm"
                 >
                   <span>Visitar Site</span>
-                  <ExternalLink className="w-4 h-4" />
+                  <ExternalLink className="w-3 h-3" /> {/* Ícone ajustado */}
                 </a>
               </div>
             </motion.div>
@@ -176,10 +176,10 @@ export default function PartnersSection() {
         {/* Botão Direita */}
         <button
           onClick={() => handleScroll(sectionRef, "right")}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 translate-x-2"
           aria-label="Scroll direita"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-5 h-5" />
         </button>
       </div>
     </section>

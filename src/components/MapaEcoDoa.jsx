@@ -106,7 +106,7 @@ export default function MapaEcoDoa() {
       center={[41.55, -8.45]} // Norte de Portugal
       zoom={8}
       scrollWheelZoom={false}
-      style={{
+      style={{ // Altura fixa, largura 100% do container pai (375px)
         height: "420px",
         width: "100%",
         borderRadius: "16px",

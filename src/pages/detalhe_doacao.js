@@ -14,11 +14,11 @@ export default function DetalheDoacao() {
   ];
 
   return (
-    <div>
+    <>
       <Navbar />
 
       {/* Botão voltar */}
-      <div className="z-8 px-4 pt-20">
+      <div className="z-8 px-4">
         <a
           href="#"
           className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 backdrop-blur-md hover:bg-gray-100 transition-all shadow-md"
@@ -27,24 +27,22 @@ export default function DetalheDoacao() {
         </a>
       </div>
 
-      <main className="max-w-4xl mx-auto px-6 py-10">
+      {/* Layout ajustado para coluna única e com padding vertical para mobile */}
+      <main className="max-w-4xl mx-auto px-4 pb-16">
         {/* Galeria */}
         <div className="flex flex-col gap-6 mb-8">
           <div className="flex-1">
             <Image
               src={fotos[0]}
               alt="Foto principal"
-              className="rounded-lg object-cover w-full h-[400px] shadow-md"
+              width={375}
+              height={400}
+              className="rounded-lg object-cover w-full h-auto shadow-md"
             />
           </div>
           <div className="flex flex-col gap-4 w-40">
             {fotos.slice(1).map((foto, index) => (
-              <Image
-                key={index}
-                src={foto}
-                alt={`Foto ${index + 2}`}
-                className="rounded-lg object-cover w-full h-20 shadow-sm hover:scale-105 transition"
-              />
+              <Image key={index} src={foto} alt={`Foto ${index + 2}`} width={80} height={80} className="rounded-lg object-cover shadow-sm" />
             ))}
           </div>
         </div>
@@ -85,6 +83,6 @@ export default function DetalheDoacao() {
           </Button>
         </div>
       </main>
-    </div>
+    </>
   );
 }

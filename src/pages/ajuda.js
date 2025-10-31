@@ -5,11 +5,10 @@ import { useEffect, useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
-import DonateSection from "@/components/DonateSection";
-import PartnersSection from "@/components/PartnersSection";
+import DonateSection from "@/components/DonateSection"; // Importe o componente DonateSection
+import PartnersSection from "@/components/PartnersSection"; // Importe o componente PartnersSection
 import NavbarScroll from "@/components/NavbarScroll";
 import SideBarMenu from "@/components/SideBarMenu";
-
 
 // importação dinâmica do mapa (sem SSR)
 const MapaEcoDoa = dynamic(() => import("@/components/MapaEcoDoa"), {
@@ -98,7 +97,8 @@ export default function Ajuda() {
       <NavbarScroll />
       <SideBarMenu/>
 
-      <section className="px-6 pt-24 pb-6 text-center max-w-4xl mx-auto">
+      {/* Ajustado padding vertical para garantir margens no layout mobile */}
+      <section className="px-4 pt-24 pb-8 text-center max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-[var(--ecodoa-primary)] mb-4">
           Pontos de Ajuda
         </h1>
@@ -114,7 +114,7 @@ export default function Ajuda() {
       </div>
 
       {/* MAPA */}
-      <section className="relative max-w-5xl mx-auto px-6 pb-16 z-0">
+      <section className="relative max-w-5xl mx-auto px-4 pb-16 z-0">
         <div className="relative rounded-2xl overflow-hidden border border-[var(--ecodoa-soft)] shadow-sm z-0">
           <MapaEcoDoa places={visiblePlaces} />
         </div>
