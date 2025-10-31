@@ -26,7 +26,7 @@ export default function DetalheDoacao() {
 
       <main className="max-w-4xl mx-auto px-6 py-10">
         {/* Galeria */}
-        <div className="flex flex-col sm:flex-row gap-6 mb-8">
+        <div className="flex flex-col gap-6 mb-8">
           <div className="flex-1">
             <Image
               src={fotos[0]}
@@ -34,7 +34,7 @@ export default function DetalheDoacao() {
               className="rounded-lg object-cover w-full h-[400px] shadow-md"
             />
           </div>
-          <div className="flex flex-col gap-4 sm:w-40">
+          <div className="flex flex-col gap-4 w-40">
             {fotos.slice(1).map((foto, index) => (
               <Image
                 key={index}
