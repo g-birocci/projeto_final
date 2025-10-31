@@ -105,7 +105,7 @@ export default function Index() {
 
       {/* Campo de pesquisa e botão de filtro */}
       <div className="flex flex-wrap items-center justify-center gap-4 max-w-2xl mx-auto mt-8 px-4">
-        <div className="relative w-full flex-1">
+        <div className="relative w-full sm:w-auto flex-1">
           <Search className="absolute left-3 top-3 h-5 w-5 text-ecodoa-olive" />
           <Input
             placeholder="Pesquisar doações..."
@@ -117,7 +117,7 @@ export default function Index() {
         <Button
           variant="outline"
           size="default"
-          className="w-full"
+          className="w-full sm:w-auto"
           onClick={() => setModalFiltrosAberto(true)}
         >
           Filtros
@@ -148,7 +148,7 @@ export default function Index() {
         </Button>
       </header>
 
-      <main className="container mx-auto px-6 py-10 pb-20 grid grid-cols-1 gap-6">
+      <main className="container mx-auto px-6 py-10 pb-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {loading ? (
           <p className="text-center text-gray-600 col-span-full">
             Carregando...

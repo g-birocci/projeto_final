@@ -82,7 +82,7 @@ export default function Educacionais() {
       </div>
 
       {/* Cards principais */}
-      <div className="grid grid-cols-1 gap-10">
+      <div className="grid md:grid-cols-2 gap-10">
         {educationalResources.map((section, index) => (
           <motion.div
             key={index}

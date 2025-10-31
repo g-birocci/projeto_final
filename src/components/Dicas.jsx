@@ -58,7 +58,7 @@ export default function Dicas() {
       </p>
 
       {/* Lista de Dicas */}
-      <div className="grid grid-cols-1 gap-10 max-w-5xl mx-auto text-lg leading-relaxed text-[var(--ecodoa-text)]/85">
+      <div className="grid sm:grid-cols-2 gap-10 max-w-5xl mx-auto text-lg leading-relaxed text-[var(--ecodoa-text)]/85">
         {dicas.map((d, i) => (
           <motion.div
             key={i}

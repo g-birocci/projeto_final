@@ -81,7 +81,7 @@ export default function PaginaUsuario() {
         <h2 className="text-2xl font-semibold mb-4 text-foreground">
           Doações dispon
         </h2>
-                <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {itens.map((item) => (
             <div key={item.id} className="relative">
               <CardProduto produto={item} />

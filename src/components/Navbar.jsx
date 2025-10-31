@@ -24,19 +24,19 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Botão do Menu relativo ao app viewport (canto superior direito) */}
+      {/* Botão do Menu Fixo no Canto Superior Direito */}
       <button
         onClick={() => setSidebarOpen(true)}
         aria-label="Abrir menu"
-        className="absolute top-6 right-6 z-50 w-14 h-14 bg-[var(--ecodoa-accent)] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110"
+        className="fixed top-6 right-6 z-50 w-14 h-14 bg-[var(--ecodoa-accent)] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110"
       >
         <span className="text-2xl">☰</span>
       </button>
 
-      {/* Logo relativo ao app viewport (canto superior esquerdo) */}
+      {/* Logo Fixo no Canto Superior Esquerdo */}
       <Link 
         href="/" 
-        className="absolute top-6 left-6 z-50 flex items-center gap-2 hover:opacity-90 transition-opacity"
+        className="fixed top-6 left-6 z-50 flex items-center gap-2 hover:opacity-90 transition-opacity"
       >
         <Image
           src="/img/EcoDoa.svg"
@@ -45,22 +45,22 @@ export default function Navbar() {
           height={50}
           className="drop-shadow-md"
         />
-        <span className="text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
+        <span className="hidden sm:inline text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
           EcoDoa
         </span>
       </Link>
 
-      {/* Overlay dentro do app viewport */}
+      {/* Overlay */}
       <div
-        className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
           sidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
         onClick={() => setSidebarOpen(false)}
       />
 
-      {/* Sidebar ancorada ao app viewport */}
+      {/* Sidebar */}
       <div
-        className={`absolute top-0 right-0 h-full w-80 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-80 sm:w-96 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

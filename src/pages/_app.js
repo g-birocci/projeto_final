@@ -1,19 +1,23 @@
+import Navbar from '@/components/Navbar';
 import '@/styles/globals.css';
 import 'leaflet/dist/leaflet.css';
-import Head from 'next/head';
+import Footer  from '@/components/Footer';
+import NavbarScroll from '@/components/NavbarScroll';
 
 export default function App({ Component, pageProps }) {
-  return (
+  return ( 
     <>
-      <Head>
-        <meta name="viewport" content="width=375, user-scalable=no, maximum-scale=1.0" />
-      </Head>
-      <div className="app-outer">
-        <div className="app-viewport">
-          <Component {...pageProps} />
-        </div>
+      <div className='hidden md:block'>
+        <Navbar/>
       </div>
+        <Component {...pageProps}/>;
+      <div className='block md:hidden'>
+        <Footer /> 
+      </div>
+
+
     </>
-  );
+  )
+  
 }
 

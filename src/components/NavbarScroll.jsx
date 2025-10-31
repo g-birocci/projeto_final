@@ -36,7 +36,7 @@ export default function NavbarScroll() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.4 }}
-          className="sticky bottom-4 z-50 mx-auto bg-[#005C53]/90 text-[#D6D58E] border border-[#9FC131]/30 shadow-md rounded-full px-5 py-3 flex justify-around items-center w-[90%] max-w-sm backdrop-blur-sm"
+          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-[#005C53]/90 text-[#D6D58E] border border-[#9FC131]/30 shadow-md rounded-full px-5 py-3 flex justify-around items-center w-[90%] max-w-sm backdrop-blur-sm"
         >
           <NavItem href="/" icon={<Home />} label="Início" />
           <NavItem href="/doacao" icon={<HeartHandshake />} label="Doar" />

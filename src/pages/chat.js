@@ -116,11 +116,11 @@ export default function ChatPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="absolute top-5 right-5 z-50">
+      <div className="fixed top-5 right-5 z-50">
         <Notificacoes lista={notificacoes} />
       </div>
 
-      <main className="grow pt-24 px-4 pb-32 max-w-6xl mx-auto grid grid-cols-1 gap-8">
+      <main className="grow pt-24 px-4 pb-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Lista de conversas */}
         <div>
           <h1

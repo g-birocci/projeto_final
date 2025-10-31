@@ -83,7 +83,7 @@ export default function Calculadora() {
         ].map((item, i) => (
           <div
             key={i}
-            className="flex flex-col items-center gap-6 px-2"
+            className="flex flex-col sm:flex-row items-center gap-6 px-2 sm:px-6"
           >
             <div className="flex items-center gap-3 w-64">
               <item.icon className="w-6 h-6 text-[var(--ecodoa-primary)]" />
