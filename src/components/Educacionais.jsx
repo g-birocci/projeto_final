@@ -46,7 +46,7 @@ export default function Educacionais() {
           url: "https://www.netflix.com/title/80049832",
         },
         {
-          title: 'Podcast "Sustentabilidade em Ação"',
+          title: 'Podcast "Sustentabilidade"',
           description:
             "Conversas inspiradoras sobre práticas sustentáveis",
           time: "30–45 min",

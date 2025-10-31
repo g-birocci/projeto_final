@@ -8,7 +8,7 @@ import DashboardSobre from "@/components/DashboardSobre";
 import Feedbacks from "@/components/Feedbacks";
 import ChamadaDoacao from "@/components/Doar";
 import NavbarScroll from "@/components/NavbarScroll";
-import BottomPages from "@/components/BottomPages";
+import SidebarMenu from "@/components/SideBarMenu";
 
 export default function Sobre() {
   return (
