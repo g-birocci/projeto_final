@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DoarEcoDoaModal from "@/components/DoarEcoModal";
+import DoarEcoDoaModal from "@/components/sections/about/DoarEcoModal";
 import { Sparkles, HeartHandshake } from "lucide-react";
 
 export default function DonateSection() {

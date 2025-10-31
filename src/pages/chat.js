@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import Footer from "../components/layout/Footer";
+import Navbar from "../components/layout/Navbar";
 import { Input } from "@/components/ui/Pesquisa";
 import { Button } from "@/components/ui/Button";
 import Notificacoes from "@/components/ui/Notificacoes"; //importei aqui o Notificaçao apenas para ficar visivel para configurar.

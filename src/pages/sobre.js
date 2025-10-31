@@ -2,13 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import DashboardSobre from "@/components/DashboardSobre"; // Importe o componente DashboardSobre
-import Feedbacks from "@/components/Feedbacks"; // Importe o componente Feedbacks
-import ChamadaDoacao from "@/components/Doar"; // Importe o componente ChamadaDoacao
-import NavbarScroll from "@/components/NavbarScroll";
-import SidebarMenu from "@/components/SideBarMenu";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import DashboardSobre from "@/components/sections/about/DashboardSobre"; 
+import Feedbacks from "@/components/sections/about/Feedbacks"; 
+import ChamadaDoacao from "@/components/sections/about/Doar";
+import NavbarScroll from "@/components/layout/NavbarScroll";
+import SidebarMenu from "@/components/layout/SideBarMenu";
 
 export default function Sobre() {
   // Layout ajustado para ser fixo em escala mobile, removendo classes responsivas e ajustando fontes.
