@@ -1,22 +1,20 @@
-import Navbar from '@/components/Navbar';
-import '@/styles/globals.css';
-import 'leaflet/dist/leaflet.css';
-import Footer  from '@/components/Footer';
+import Navbar from "@/components/Navbar";
+import Navmobile from "@/components/Navmobile";
+import Footer from "@/components/Footer";
+import "@/styles/globals.css";
+import "leaflet/dist/leaflet.css";
 
 export default function App({ Component, pageProps }) {
-  return ( 
+  return (
     <>
-      <div className='hidden md:block'>
-        
+      <div className="hidden md:block">
+        <Navbar />
       </div>
-        <Component {...pageProps}/>;
-      <div className='block md:hidden'>
-        <Footer /> 
+        <Component {...pageProps} />
+      <div className="md:hidden">
+        <Navmobile />
       </div>
-
-
+        <Footer />
     </>
-  )
-  
+  );
 }
-

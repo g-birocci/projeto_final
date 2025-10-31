@@ -5,7 +5,7 @@ import Image from "next/image";
 import DashboardSobre from "@/components/DashboardSobre";
 import Feedbacks from "@/components/Feedbacks";
 import ChamadaDoacao from "@/components/Doar";
-import BottomPages from "@/components/BottomPages";
+//import BottomPages from "@/components/BottomPages";
 
 export default function Sobre() {
   return (
@@ -112,7 +112,7 @@ export default function Sobre() {
       </motion.section>
       <Feedbacks />
       <ChamadaDoacao />
-      <BottomPages />
+      
     </div>
   );
 }
