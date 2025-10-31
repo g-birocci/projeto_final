@@ -4,7 +4,7 @@ export default function Footer() {
       <p className="text-sm text-[var(--ecodoa-secondary)]/70 tracking-wide">
         © 2025 - Desenvolvido por EcoDoa usando Next.js, Tailwind CSS, Express.js e MongoDB.
       </p>
-      <div className="pb-20"></div>  {/* espaço para a bottombar nao ficar em cima do footer*/} 
+      <div className="pb-20"></div>  
     </footer>
   );
 }
