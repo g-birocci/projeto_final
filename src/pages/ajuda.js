@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
 import DonateSection from "@/components/DonateSection";
 import PartnersSection from "@/components/PartnersSection";
@@ -56,7 +55,7 @@ export default function Ajuda() {
         type: "job",
         city: "Coimbra",
         info: "Apoio à recolocação profissional.",
-        lat: 40.20,
+        lat: 40.2,
         lng: -8.41,
       },
       {
@@ -129,8 +128,6 @@ export default function Ajuda() {
 
       {/* SEÇÃO DE DOAÇÃO */}
       <DonateSection />
-
-      <Footer />
     </div>
   );
 }
