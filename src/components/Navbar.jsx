@@ -1,103 +1,136 @@
-import { useState } from "react";
-import Image from "next/image";
+"use client";
 
-// Itens da navbar
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { X } from "lucide-react";
+
 const navItems = [
-  { view: "doacoes", label: "Doações" },
-  { view: "pontos", label: "Pontos de Ajuda" },
-  { view: "vida", label: "Vida Sustentável" },
-  { view: "sobre", label: "Quem Somos" },
+  { href: "/doacoes", label: "Doações" },
+  { href: "/ajuda", label: "Pontos de Ajuda" },
+  { href: "/viver", label: "Vida Sustentável" },
+  { href: "/sobre", label: "Quem Somos" },
 ];
 
-export default function Navbar({ currentView = "home", onNavigate }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function Navbar() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const handleNavigate = (view) => {
-    if (onNavigate) onNavigate(view);
-    setMenuOpen(false);
-  };
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-[#9FC131]/30 bg-[#005C53]/95 backdrop-blur-sm shadow-md">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 text-[#D6D58E]">
+    <>
+      {/* Botão do Menu relativo ao app viewport (canto superior direito) */}
+      <button
+        onClick={() => setSidebarOpen(true)}
+        aria-label="Abrir menu"
+        className="absolute top-6 right-6 z-50 w-14 h-14 bg-[var(--ecodoa-accent)] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110"
+      >
+        <span className="text-2xl">☰</span>
+      </button>
 
-        {/* Área esquerda → Perfil no mobile */}
-        <div className="flex items-center gap-3">
-          {/* Foto de perfil (visível no mobile e desktop) */}
-          <Image
-            src="/img/profile.jpg"
-            alt="Perfil"
-            width={40}
-            height={40}
-            className="rounded-full border-2 border-[#9FC131] shadow-md hover:scale-105 transition-transform order-1 lg:order-2"
-          />
+      {/* Logo relativo ao app viewport (canto superior esquerdo) */}
+      <Link 
+        href="/" 
+        className="absolute top-6 left-6 z-50 flex items-center gap-2 hover:opacity-90 transition-opacity"
+      >
+        <Image
+          src="/img/EcoDoa.svg"
+          alt="EcoDoa"
+          width={50}
+          height={50}
+          className="drop-shadow-md"
+        />
+        <span className="text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
+          EcoDoa
+        </span>
+      </Link>
 
-          {/* Menu hamburguer no mobile (vai para direita com flex-row-reverse) */}
+      {/* Overlay dentro do app viewport */}
+      <div
+        className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
+          sidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
+        onClick={() => setSidebarOpen(false)}
+      />
+
+      {/* Sidebar ancorada ao app viewport */}
+      <div
+        className={`absolute top-0 right-0 h-full w-80 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${
+          sidebarOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col h-full p-8 pt-8">
+          {/* Botão Fechar */}
           <button
-            type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#9FC131]/40 bg-[#005C53]/90 text-2xl text-[#DBF227] transition hover:bg-[#77850B]/40 lg:hidden order-2 lg:order-1"
-            onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label="Abrir menu"
-            aria-expanded={menuOpen}
+            onClick={() => setSidebarOpen(false)}
+            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--ecodoa-secondary)]/50 hover:bg-[var(--ecodoa-olive)]/30 transition-all duration-300"
+            aria-label="Fechar menu"
           >
-            {menuOpen ? "✖" : "☰"}
+            <X size={24} className="text-[var(--ecodoa-accent)]" />
           </button>
-        </div>
 
-        {/* Logo centralizada */}
-        <button
-          type="button"
-          onClick={() => handleNavigate("home")}
-          className="flex items-center gap-2"
-        >
-          <Image
-            src="/img/ecodoa-logo-folha.svg"
-            alt="EcoDoa"
-            width={60}
-            height={60}
-            className="drop-shadow-md hover:opacity-90 transition"
-          />
-          <span className="hidden text-xl font-bold tracking-tight text-[#DBF227] sm:inline">
-            EcoDoa
-          </span>
-        </button>
+          {/* Perfil e Título */}
+          <div className="mb-12 mt-4">
+            <div className="flex items-center gap-4 mb-4">
+              <Image
+                src="/img/profile.jpg"
+                alt="Perfil"
+                width={60}
+                height={60}
+                className="rounded-full border-3 border-[var(--ecodoa-accent)] shadow-lg"
+              />
+              <div>
+                <h2 className="text-2xl font-bold text-[var(--ecodoa-accent)]">Olá, Gretta.</h2>
+                <p className="text-sm text-[var(--ecodoa-soft)]">Portugal</p>
+              </div>
+            </div>
+          </div>
 
-        {/* Espaçador invisível para equilibrar layout central da logo */}
-        <div className="w-12 lg:w-auto"></div>
-
-        {/* Menu de navegação */}
-        <div
-          className={`absolute left-0 right-0 top-full origin-top bg-[#005C53]/98 px-4 pb-6 pt-3 shadow-lg transition-all lg:static lg:flex lg:w-auto lg:translate-y-0 lg:bg-transparent lg:p-0 lg:shadow-none ${
-            menuOpen
-              ? "pointer-events-auto scale-y-100 opacity-100"
-              : "pointer-events-none scale-y-75 opacity-0 lg:pointer-events-auto lg:scale-y-100 lg:opacity-100"
-          }`}
-        >
-          <ul className="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-4">
-            {navItems.map((item) => {
-              const active = currentView === item.view;
-              const base =
-                "flex items-center justify-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold transition";
-              const activeStyles =
-                "bg-gradient-to-r from-[#9FC131]/90 via-[#DBF227]/90 to-[#77850B]/80 text-[#005C53] shadow-md";
-              const idleStyles =
-                "border border-[#9FC131]/40 bg-[#005C53]/80 text-[#D6D58E] hover:text-[#DBF227] hover:border-[#DBF227]/60";
-
-              return (
-                <li key={item.view}>
-                  <button
-                    type="button"
-                    onClick={() => handleNavigate(item.view)}
-                    className={`${base} ${active ? activeStyles : idleStyles}`}
+          {/* Menu Items */}
+          <nav className="flex-1">
+            <ul className="space-y-2">
+              {navItems.map((item, index) => (
+                <li key={index}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setSidebarOpen(false)}
+                    className="block py-4 px-5 text-lg font-semibold text-[var(--ecodoa-soft)] hover:text-[var(--ecodoa-accent)] hover:bg-[var(--ecodoa-secondary)]/30 rounded-xl transition-all duration-200 hover:translate-x-2 border border-transparent hover:border-[var(--ecodoa-light-olive)]/40"
                   >
                     {item.label}
-                  </button>
+                  </Link>
                 </li>
-              );
-            })}
-          </ul>
+              ))}
+            </ul>
+          </nav>
+
+          {/* CTA Button */}
+          <div className="mt-8">
+            <Link 
+              href="/doacoes"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <button className="w-full bg-[var(--ecodoa-accent)] text-white py-4 rounded-full font-semibold hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-105 shadow-lg">
+                Log in ou Log out
+              </button>
+            </Link>
+          </div>
+
+          {/* Info Adicional */}
+          <div className="mt-8 pt-8 border-t border-[var(--ecodoa-light-olive)]/30">
+            <p className="text-sm text-[var(--ecodoa-soft)]">
+              <span className="block font-semibold text-[var(--ecodoa-accent)] mb-2">
+                Junte-se a nós
+              </span>
+              Transforme vidas através da doação e sustentabilidade.
+            </p>
+          </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </>
   );
 }
