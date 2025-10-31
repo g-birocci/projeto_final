@@ -2,16 +2,16 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState, useMemo } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import FilterBar from "@/components/FilterBar";
-import DonateSection from "@/components/DonateSection"; // Importe o componente DonateSection
-import PartnersSection from "@/components/PartnersSection"; // Importe o componente PartnersSection
-import NavbarScroll from "@/components/NavbarScroll";
-import SideBarMenu from "@/components/SideBarMenu";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import FilterBar from "@/components/sections/ajuda/FilterBar";
+import DonateSection from "@/components/sections/ajuda/DonateSection"; 
+import PartnersSection from "@/components/sections/ajuda/PartnersSection"; 
+import NavbarScroll from "@/components/layout/NavbarScroll";
+import SideBarMenu from "@/components/layout/SideBarMenu";
 
 // importação dinâmica do mapa (sem SSR)
-const MapaEcoDoa = dynamic(() => import("@/components/MapaEcoDoa"), {
+const MapaEcoDoa = dynamic(() => import("@/components/sections/ajuda/MapaEcoDoa"), {
   ssr: false,
   loading: () => (
     <p className="text-center text-[var(--ecodoa-primary)] py-10">

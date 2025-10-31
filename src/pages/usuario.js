@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import CardProduto from "../components/CardProduto";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+import CardProduto from "../components/ui/CardProduto";
 import { Button } from "@/components/ui/Button";
 import CardAvaliacao from "@/components/ui/CardAvaliacao";
 
@@ -168,7 +168,6 @@ export default function PaginaUsuario() {
                         />
                     ))}
                 </div> 
-                 */}
             </section>
             
 

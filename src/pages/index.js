@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import CardProduto from "../components/CardProduto";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import CardProduto from "../components/ui/CardProduto";
+import Footer from "../components/layout/Footer";
+import Navbar from "../components/layout/Navbar";
 import ModalDoacao from "../components/ui/ModalDoacao";
 import { Input } from "@/components/ui/Pesquisa";
 import { Button } from "@/components/ui/Button";
