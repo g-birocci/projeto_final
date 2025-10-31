@@ -32,11 +32,11 @@ export default function DoarEcoDoaModal({ isOpen, onClose }) {
             {/* Ícone e título */}
             <div className="flex justify-center mb-5">
               <div className="bg-green-100 p-4 rounded-full">
-                <HeartHandshake className="w-8 h-8 text-green-600" />
+                <HeartHandshake className="w-8 h-8 text-[var(--ecodoa-primary)] " />
               </div>
             </div>
 
-            <h2 className="text-2xl font-bold text-green-700 mb-3">
+            <h2 className="text-2xl font-bold text-[var(--ecodoa-primary)]  mb-3">
               Obrigado por querer apoiar o EcoDoa!
             </h2>
 
@@ -47,11 +47,11 @@ export default function DoarEcoDoaModal({ isOpen, onClose }) {
 
             {/* IBAN fictício / área de doação */}
             <div className="bg-green-50 border border-green-100 rounded-xl p-4 text-left mb-6">
-              <p className="font-semibold text-green-700">IBAN:</p>
+              <p className="font-semibold text-[var(--ecodoa-primary)] ">IBAN:</p>
               <p className="text-sm text-[#1E2D2F]/80 select-all">
                 PT50 0018 0003 1234 5678 9017 5
               </p>
-              <p className="mt-3 font-semibold text-green-700">MBWay:</p>
+              <p className="mt-3 font-semibold text-[var(--ecodoa-primary)] ">MBWay:</p>
               <p className="text-sm text-[#1E2D2F]/80 select-all">+351 912 345 678</p>
             </div>
 
@@ -59,7 +59,7 @@ export default function DoarEcoDoaModal({ isOpen, onClose }) {
               onClick={onClose}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-green-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-green-700 transition"
+              className="bg-[var(--ecodoa-primary)]  text-white px-8 py-3 rounded-xl font-semibold hover:bg-[var(--ecodoa-primary)]  transition"
             >
               Fechar
             </motion.button>

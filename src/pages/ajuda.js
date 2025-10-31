@@ -7,6 +7,9 @@ import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
 import DonateSection from "@/components/DonateSection";
 import PartnersSection from "@/components/PartnersSection";
+import NavbarScroll from "@/components/NavbarScroll";
+import SideBarMenu from "@/components/SideBarMenu";
+
 
 // importação dinâmica do mapa (sem SSR)
 const MapaEcoDoa = dynamic(() => import("@/components/MapaEcoDoa"), {
@@ -50,15 +53,7 @@ export default function Ajuda() {
         lat: 41.147,
         lng: -8.59,
       },
-      {
-        id: 3,
-        name: "Centro de Emprego de Coimbra",
-        type: "job",
-        city: "Coimbra",
-        info: "Apoio à recolocação profissional.",
-        lat: 40.20,
-        lng: -8.41,
-      },
+
       {
         id: 4,
         name: "Escola Popular Gaia",
@@ -100,8 +95,9 @@ export default function Ajuda() {
   return (
     <div className="min-h-screen bg-[var(--ecodoa-bg)] text-[var(--ecodoa-text)]">
       <Navbar />
+      <NavbarScroll />
+      <SideBarMenu/>
 
-      {/* INTRODUÇÃO */}
       <section className="px-6 pt-24 pb-6 text-center max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-[var(--ecodoa-primary)] mb-4">
           Pontos de Ajuda
@@ -123,13 +119,8 @@ export default function Ajuda() {
           <MapaEcoDoa places={visiblePlaces} />
         </div>
       </section>
-
-      {/* PARCEIROS */}
       <PartnersSection />
-
-      {/* SEÇÃO DE DOAÇÃO */}
       <DonateSection />
-
       <Footer />
     </div>
   );

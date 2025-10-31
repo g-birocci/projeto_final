@@ -53,7 +53,7 @@ export default function Educacionais({ scroll, refProp }) {
           time: "8 episódios",
         },
         {
-          title: 'Podcast "Sustentabilidade em Ação"',
+          title: 'Podcast "Sustentabilidade"',
           url: "https://open.spotify.com/show/22a2vUF8kA7I7Rio9Egyrh",
           description: "Conversas inspiradoras sobre práticas sustentáveis",
           time: "30-45 min",
