@@ -16,7 +16,7 @@ export default function Sustentavel() {
       ></motion.div>
 
       {/* CONTEÚDO */}
-      <div className="relative max-w-5xl mx-auto z-10">
+      <div className="relative max-w-full mx-auto z-10">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

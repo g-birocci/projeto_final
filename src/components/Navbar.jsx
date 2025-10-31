@@ -10,6 +10,7 @@ const navItems = [
   { href: "/ajuda", label: "Pontos de Ajuda" },
   { href: "/viver", label: "Vida Sustentável" },
   { href: "/sobre", label: "Quem Somos" },
+  { href: "/usuario", label: "Meu Perfil" }, // Adicionado item para Perfil
 ];
 
 export default function Navbar() {
@@ -24,12 +25,11 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Botão do Menu relativo ao app viewport (canto superior direito) */}
+      {/* Botão do Menu Fixo no Canto Superior Direito */}
       <button
         onClick={() => setSidebarOpen(true)}
         aria-label="Abrir menu"
-        className="absolute top-6 right-6 z-50 w-14 h-14 bg-[var(--ecodoa-accent)] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110"
-      >
+        className="absolute top-6 right-6 z-50 w-14 h-14 bg-[var(--ecodoa-accent)] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110">
         <span className="text-2xl">☰</span>
       </button>
 
@@ -46,7 +46,7 @@ export default function Navbar() {
           className="drop-shadow-md"
         />
         <span className="text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
-          EcoDoa
+        EcoDoa
         </span>
       </Link>
 
@@ -60,7 +60,7 @@ export default function Navbar() {
 
       {/* Sidebar ancorada ao app viewport */}
       <div
-        className={`absolute top-0 right-0 h-full w-80 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${
+        className={`absolute top-0 right-0 h-full w-80 sm:w-96 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
