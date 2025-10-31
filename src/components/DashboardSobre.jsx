@@ -38,7 +38,11 @@ export default function DashboardSobre() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
+<<<<<<< HEAD
       className="grid grid-cols-2 gap-8 text-center max-w-6xl mx-auto px-6 pb-12"
+=======
+      className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-6xl mx-auto px-6 pb-12"
+>>>>>>> main
     >
       {stats.map((s, i) => (
         <motion.div

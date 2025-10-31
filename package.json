@@ -17,12 +17,17 @@
     "crypto": "^1.0.1",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
     "framer-motion": "^12.23.24",
     "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",
 >>>>>>> Stashed changes
+=======
+    "framer-motion": "^12.23.24",
+    "leaflet": "^1.9.4",
+>>>>>>> main
     "lucide": "^0.548.0",
     "lucide-react": "^0.548.0",
     "mongodb": "^6.20.0",
@@ -30,6 +35,8 @@
     "next": "^16.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-icons": "^5.5.0",
+    "react-leaflet": "^5.0.0",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {

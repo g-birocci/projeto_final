@@ -21,7 +21,11 @@ export default function Sustentavel() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+<<<<<<< HEAD
           className="text-5xl font-extrabold text-[var(--ecodoa-primary)] mb-8 drop-shadow-sm"
+=======
+          className="text-5xl sm:text-6xl font-extrabold text-[var(--ecodoa-primary)] mb-8 drop-shadow-sm"
+>>>>>>> main
         >
           Viver Sustentável
         </motion.h1>
@@ -30,7 +34,11 @@ export default function Sustentavel() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
+<<<<<<< HEAD
           className="text-lg text-[var(--ecodoa-text)]/85 max-w-2xl mx-auto leading-relaxed mb-12"
+=======
+          className="text-lg sm:text-xl text-[var(--ecodoa-text)]/85 max-w-2xl mx-auto leading-relaxed mb-12"
+>>>>>>> main
         >
           Ser sustentável é pensar no amanhã com as ações de hoje.  
           Este espaço foi criado para inspirar hábitos conscientes.

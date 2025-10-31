@@ -111,7 +111,11 @@ export default function PartnersSection() {
               key={idx}
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 200 }}
+<<<<<<< HEAD
               className="flex-none w-[320px] bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-[var(--ecodoa-light-olive)] hover:border-[var(--ecodoa-accent)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+=======
+              className="flex-none w-[380px] bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-[var(--ecodoa-light-olive)] hover:border-[var(--ecodoa-accent)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+>>>>>>> main
             >
               <div className="relative h-48 overflow-hidden">
                 <img

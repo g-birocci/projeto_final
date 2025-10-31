@@ -20,7 +20,11 @@ export default function Feedbacks() {
       <h2 className="text-3xl font-bold text-center text-green-700 mb-10">
         Vozes que Inspiram
       </h2>
+<<<<<<< HEAD
       <div className="max-w-6xl mx-auto grid grid-cols-1 gap-8 px-6">
+=======
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
+>>>>>>> main
         {feedbacks.map((f, i) => (
           <motion.div
             key={i}

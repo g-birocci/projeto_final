@@ -89,7 +89,11 @@ export default function Educacionais({ scroll, refProp }) {
 
         <div ref={refProp} className="flex gap-6 overflow-x-auto scrollbar-hide pb-4">
           {educationalResources.map((resource, idx) => (
+<<<<<<< HEAD
             <div key={idx} className="flex-none w-[320px]">
+=======
+            <div key={idx} className="flex-none w-[450px]">
+>>>>>>> main
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-[var(--ecodoa-soft)] hover:border-[var(--ecodoa-accent)] transition-all duration-300 hover:shadow-2xl">
                 <div className="relative h-48 overflow-hidden">
                   <img

@@ -28,24 +28,39 @@ const CardProduto = ({ produto }) => {
         className="object-cover rounded-lg"
       />
       </div>  
-
+                   
       <CardHeader>
         <CardTitle>{produto.nome}</CardTitle>
       </CardHeader>
 
       <CardContent>
-        <p className="text-sm text-gray-700 mb-2">{produto.descricao}</p>
-        <span
-          className={`text-xs px-2 py-1 rounded-full ${
-            produto.estado === "Novo"
-              ? "bg-green-100 text-green-700"
-              : produto.estado === "Usado"
-              ? "bg-yellow-100 text-yellow-700"
-              : "bg-gray-100 text-gray-600"
-          }`}
-        >
-          {produto.estado}
-        </span>
+        <p
+  className="text-sm mb-2"
+  style={{ color: "var(--ecodoa-sand)" }}
+>
+  {produto.descricao}
+</p>
+
+<span
+  className="text-xs px-2 py-1 rounded-full"
+  style={{
+    backgroundColor:
+      produto.estado === "Novo"
+        ? "var(--ecodoa-alert)"
+        : produto.estado === "Usado"
+        ? "var(--ecodoa-accent)"
+        : "var(--ecodoa-soft)",
+    color:
+      produto.estado === "Novo"
+        ? "#FFFFFF"
+        : produto.estado === "Usado"
+        ? "var(--ecodoa-text)"
+        : "var(--ecodoa-primary)",
+  }}
+>
+  {produto.estado}
+</span>
+
         <div className="mt-4 flex gap-12">
           <Button variant="default" size="sm">
             Enviar mensagem

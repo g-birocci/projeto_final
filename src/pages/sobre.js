@@ -29,7 +29,11 @@ export default function Sobre() {
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
+<<<<<<< HEAD
                         className="text-4xl font-extrabold text-green-700 mb-6"
+=======
+                        className="text-4xl md:text-5xl font-extrabold text-green-700 mb-6"
+>>>>>>> main
                     >
                         Fazer o bem é contagiante
                     </motion.h1>
@@ -72,7 +76,11 @@ export default function Sobre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
+<<<<<<< HEAD
                 className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 gap-10 items-center"
+=======
+                className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-10 items-center"
+>>>>>>> main
             >
                 <div>
                     <h2 className="text-3xl font-bold text-green-700 mb-6">Por que Doar?</h2>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 import "@/styles/globals.css";
 =======
@@ -5,6 +6,10 @@ import '@/styles/globals.css';
 import 'leaflet/dist/leaflet.css';
 import Head from 'next/head';
 >>>>>>> Stashed changes
+=======
+import '@/styles/globals.css';
+import 'leaflet/dist/leaflet.css';
+>>>>>>> main
 
 export default function App({ Component, pageProps }) {
   return (
@@ -20,3 +25,4 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+

@@ -118,7 +118,11 @@ export default function ChatPage() {
         <Notificacoes lista={notificacoes} />
       </div>
 
+<<<<<<< HEAD
       <main className="grow pt-24 px-4 pb-32 max-w-6xl mx-auto grid grid-cols-1 gap-8">
+=======
+      <main className="grow pt-24 px-4 pb-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+>>>>>>> main
         {/* Lista de conversas */}
         <div>
           <h1

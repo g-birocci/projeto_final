@@ -1,4 +1,5 @@
 const User = require("../model/User");
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 const Validator = require("../validators/user.validator")
@@ -6,6 +7,9 @@ const jwt = require('jsonwebtoken')
 
 >>>>>>> Stashed changes
 
+=======
+const Validator = require("../validators/user.validator")
+>>>>>>> main
 User.init()
   .then(() => console.log("Índices criados com sucesso"))
   .catch((err) => console.error("Erro ao criar índices:", err));
@@ -94,7 +98,7 @@ const userLogin = async (req, res) => {
     }
 
     // Procura usuário pelo email
-    const user = await User.findOne({ where: { email } }); 
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({
@@ -141,16 +145,25 @@ const userLogin = async (req, res) => {
     });
   }
 };
+
+
 // Já está pronto =====================================================================
 const userCreate = async (req, res) => {
   try {
     const { firstName, lastName, password, city, email, district } = req.body;
 
-    if (!firstName || !lastName || !password || !email || !city || !district) {
-      return res.status(400).json("Boom, errou");
+    const vali = Validator.validateReq(firstName, lastName, password, city, email, district)
+    
+    if (!vali.validacao) {
+      console.log({
+        vali, firstName, lastName, password, city, email, district
+      })
+      return res.status(400).json({
+        message: vali.errors
+      }); //chamo a função pra validar os dados
     }
     const user = await User.create({
-      firtName: firstName,
+      firstName: firstName,
       lastName: lastName,
       email: email,
       password: password,
@@ -251,4 +264,4 @@ const userDelete = async (req, res) => {
     }
 };
 
-module.exports = { userCreate, userDelete, userLogin, userUpdate, getUserById };
+module.exports = { userCreate, userDelete, userLogin, userUpdate, getUserById, userGetId};

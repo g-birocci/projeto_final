@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 const mongoose = require("mongoose");
@@ -5,6 +6,9 @@ const Product = require("../model/Products");
 
 
 
+=======
+const mongoose = require("mongoose");
+>>>>>>> main
 let slugify;
 try {
   slugify = require("slugify");
@@ -19,6 +23,10 @@ try {
       .trim()
       .replace(/\s+/g, "-");
 }
+<<<<<<< HEAD
+=======
+const Product = require("../model/Products");
+>>>>>>> main
 
 // Helpers temporários — APAGAR quando middleware/funções reais forem implementados
 const isObjectId = (val) => mongoose.Types.ObjectId.isValid(String(val)); // APAGAR após integrar validação real
@@ -496,4 +504,7 @@ module.exports = {
   unreserveProduct,
   deleteProduct,
 };
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main

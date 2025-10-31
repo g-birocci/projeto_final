@@ -20,7 +20,11 @@ export default function BottomPages() {
         Descobre como viver de forma mais sustentável ou saiba sobre parceiros e como conseguir ajuda.
       </p>
 
+<<<<<<< HEAD
       <div className="flex flex-col items-center justify-center gap-6">
+=======
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+>>>>>>> main
         {/* Vida Sustentável */}
         <motion.a
           href="/viver"
