@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import SideBarMenu from "./SideBarMenu";
+import { X } from "lucide-react";
 
 const navItems = [
   { href: "/doacoes", label: "Doações" },
@@ -13,8 +13,7 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -25,74 +24,113 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-[var(--ecodoa-light-olive)]/30 bg-[var(--ecodoa-primary)]/95 backdrop-blur-md shadow-md transition-all duration-300">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 text-[var(--ecodoa-soft)] sm:px-8">
-          {/* === PERFIL E MENU MOBILE === */}
-          <div className="flex items-center gap-3">
-            <Image
-              src="/img/profile.jpg"
-              alt="Perfil"
-              width={40}
-              height={40}
-              onClick={() => setShowSidebar(true)} // abre sidebar ao clicar
-              className="rounded-full border-2 border-[var(--ecodoa-light-olive)] shadow-md hover:scale-105 transition-transform cursor-pointer"
-            />
+      {/* Botão do Menu Fixo no Canto Superior Direito */}
+      <button
+        onClick={() => setSidebarOpen(true)}
+        aria-label="Abrir menu"
+        className="fixed top-6 right-6 z-50 w-14 h-14 bg-[var(--ecodoa-accent)] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110"
+      >
+        <span className="text-2xl">☰</span>
+      </button>
 
-            {/* Botão hamburguer (mobile) */}
-            <button
-              type="button"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Abrir menu"
-              aria-expanded={menuOpen}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--ecodoa-light-olive)]/40 bg-[var(--ecodoa-primary)]/90 text-2xl text-[var(--ecodoa-accent)] hover:bg-[var(--ecodoa-olive)]/30 lg:hidden"
-            >
-              {menuOpen ? "✖" : "☰"}
-            </button>
+      {/* Logo Fixo no Canto Superior Esquerdo */}
+      <Link 
+        href="/" 
+        className="fixed top-6 left-6 z-50 flex items-center gap-2 hover:opacity-90 transition-opacity"
+      >
+        <Image
+          src="/img/EcoDoa.svg"
+          alt="EcoDoa"
+          width={50}
+          height={50}
+          className="drop-shadow-md"
+        />
+        <span className="hidden sm:inline text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
+          EcoDoa
+        </span>
+      </Link>
+
+      {/* Overlay */}
+      <div
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
+          sidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
+        onClick={() => setSidebarOpen(false)}
+      />
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 right-0 h-full w-80 sm:w-96 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${
+          sidebarOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col h-full p-8 pt-8">
+          {/* Botão Fechar */}
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--ecodoa-secondary)]/50 hover:bg-[var(--ecodoa-olive)]/30 transition-all duration-300"
+            aria-label="Fechar menu"
+          >
+            <X size={24} className="text-[var(--ecodoa-accent)]" />
+          </button>
+
+          {/* Perfil e Título */}
+          <div className="mb-12 mt-4">
+            <div className="flex items-center gap-4 mb-4">
+              <Image
+                src="/img/profile.jpg"
+                alt="Perfil"
+                width={60}
+                height={60}
+                className="rounded-full border-3 border-[var(--ecodoa-accent)] shadow-lg"
+              />
+              <div>
+                <h2 className="text-2xl font-bold text-[var(--ecodoa-accent)]">Olá, Gretta.</h2>
+                <p className="text-sm text-[var(--ecodoa-soft)]">Portugal</p>
+              </div>
+            </div>
           </div>
 
-          {/* === LOGO CENTRAL === */}
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/img/ecodoa-logo-folha.svg"
-              alt="EcoDoa"
-              width={60}
-              height={60}
-              className="drop-shadow-md hover:opacity-90 transition"
-            />
-            <span className="hidden sm:inline text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
-              EcoDoa
-            </span>
-          </Link>
-
-          <div className="w-12 lg:w-auto"></div>
-
-          {/* === MENU PRINCIPAL === */}
-          <div
-            className={`absolute left-0 right-0 top-full origin-top bg-[var(--ecodoa-primary)]/98 px-4 pb-6 pt-3 shadow-lg transition-all lg:static lg:flex lg:w-auto lg:translate-y-0 lg:bg-transparent lg:p-0 lg:shadow-none ${
-              menuOpen
-                ? "pointer-events-auto scale-y-100 opacity-100"
-                : "pointer-events-none scale-y-75 opacity-0 lg:pointer-events-auto lg:scale-y-100 lg:opacity-100"
-            }`}
-          >
-            <ul className="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-4">
-              {navItems.map((item) => (
-                <li key={item.href}>
+          {/* Menu Items */}
+          <nav className="flex-1">
+            <ul className="space-y-2">
+              {navItems.map((item, index) => (
+                <li key={index}>
                   <Link
                     href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold transition border border-[var(--ecodoa-light-olive)]/40 bg-[var(--ecodoa-primary)]/80 text-[var(--ecodoa-soft)] hover:text-[var(--ecodoa-accent)] hover:border-[var(--ecodoa-accent)]/60 hover:bg-[var(--ecodoa-secondary)]/30`}
+                    onClick={() => setSidebarOpen(false)}
+                    className="block py-4 px-5 text-lg font-semibold text-[var(--ecodoa-soft)] hover:text-[var(--ecodoa-accent)] hover:bg-[var(--ecodoa-secondary)]/30 rounded-xl transition-all duration-200 hover:translate-x-2 border border-transparent hover:border-[var(--ecodoa-light-olive)]/40"
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
-        </nav>
-      </header>
+          </nav>
 
-      {/* === SIDEBAR (abre ao clicar no perfil) === */}
-      <SideBarMenu open={showSidebar} onClose={() => setShowSidebar(false)} />
+          {/* CTA Button */}
+          <div className="mt-8">
+            <Link 
+              href="/doacoes"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <button className="w-full bg-[var(--ecodoa-accent)] text-white py-4 rounded-full font-semibold hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-105 shadow-lg">
+                Log in ou Log out
+              </button>
+            </Link>
+          </div>
+
+          {/* Info Adicional */}
+          <div className="mt-8 pt-8 border-t border-[var(--ecodoa-light-olive)]/30">
+            <p className="text-sm text-[var(--ecodoa-soft)]">
+              <span className="block font-semibold text-[var(--ecodoa-accent)] mb-2">
+                Junte-se a nós
+              </span>
+              Transforme vidas através da doação e sustentabilidade.
+            </p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

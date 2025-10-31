@@ -3,13 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import {
-  HeartHandshake,
-  Leaf,
-  Info,
-  MapPin,
-  Home,
-} from "lucide-react";
+import {HeartHandshake, Leaf, Info, MapPin, Home,} from "lucide-react";
 
 export default function NavbarScroll() {
   const [show, setShow] = useState(false);
@@ -46,7 +40,7 @@ export default function NavbarScroll() {
         >
           <NavItem href="/" icon={<Home />} label="Início" />
           <NavItem href="/doacao" icon={<HeartHandshake />} label="Doar" />
-          <NavItem href="/viver" icon={<Leaf />} label="Viver" />
+          <NavItem href="/viver" icon={<Leaf />} label="´Viver Bem" />
           <NavItem href="/ajuda" icon={<MapPin />} label="Ajuda" />
           <NavItem href="/sobre" icon={<Info />} label="Sobre" />
         </motion.nav>

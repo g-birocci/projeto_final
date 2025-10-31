@@ -7,7 +7,7 @@ export default function FilterBar({ filters, toggleFilter }) {
   const filterOptions = [
     { key: "shelter", label: "Alojamento", icon: Home },
     { key: "meal", label: "Refeições", icon: Utensils },
-    { key: "job", label: "Emprego", icon: Briefcase },
+
     { key: "course", label: "Cursos", icon: GraduationCap },
     { key: "support", label: "Apoio", icon: Heart },
     { key: "clothes", label: "Roupas", icon: Shirt },
