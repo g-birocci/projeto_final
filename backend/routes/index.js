@@ -21,15 +21,45 @@ route.get('/health', async(req, res) => {
 }
  )
 
-// ================ Rotas do Usuário ===============
+ // ================ Inicio Rotas de Autenticação ===============
+
+// ================ Fim Rotas do Autenticação ===============
+
+
+ // ================ Inicio Rotas de Doação ===============
+
+// ================ Fim Rotas do Doção ===============
+
+
+// ================ Inicio Rotas do Usuário ===============
 route.get('/user/:id', getUserById)
 route.post('/login', userLogin)
 route.post('/user', userCreate)
 route.put('/user/:id', userUpdate)
+<<<<<<< Updated upstream
 route.delete('/', userDelete)
+=======
+route.delete('/user/:id', userDelete)
+// ================ Fim Rotas do Usuário ===============
+>>>>>>> Stashed changes
 
-// ================ Rotas do Item ===============
 
+<<<<<<< Updated upstream
 // ================ Rotas do Usuário ===============
+=======
+// ================ Inicio Rotas do Produto ===============
+route.post('/product', requireAuth, productCreate); // Testado OK
+route.patch('/product/:id', requireAuth, requireObjectId('id'), productUpdate);
+route.get('/products', listProducts)
+route.get('/product/search', productSearch);
+route.get('/product/:id', requireObjectId('id'), getProductId);
+// == Filtro de ptodutos
+route.get('/products/category/:categoryId', requireObjectId('categoryId'), getProductsByCategory);
+route.get('/products/subcategory/:subcategoryId', requireObjectId('subcategoryId'), getProductsBySubcategory);
+route.post('/products/:id/reserve', requireAuth, requireObjectId('id'), reserveProduct);
+route.post('/products/:id/unreserve', requireAuth, requireObjectId('id'), unreserveProduct);
+// ================ Fim Rotas do Produto ===============
+
+>>>>>>> Stashed changes
 
 module.exports = route

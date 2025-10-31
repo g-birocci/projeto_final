@@ -1,10 +1,28 @@
 const User = require("../model/User");
+<<<<<<< Updated upstream
+=======
+const Validator = require("../validators/user.validator")
+const jwt = require('jsonwebtoken')
+
+>>>>>>> Stashed changes
 
 User.init()
   .then(() => console.log("Índices criados com sucesso"))
   .catch((err) => console.error("Erro ao criar índices:", err));
 
-const genToken = () => {};
+const genToken = (id) => {
+  const secret = process.env.JWT_SECRET;
+  if(!secret)
+    {
+      throw new Error("Chave não definifa");
+    }  
+
+    return jwt.sign({id}, secret, {
+      expiresIn: '1d'
+    })
+};
+
+
 
 const getUserById = async (req, res) => {
   try {
@@ -95,7 +113,15 @@ const userLogin = async (req, res) => {
       });
     }
 
-    // Login bem-sucedido
+    const token = genToken(user.id)
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+      samesite: 'lax',
+      path:'/'
+    })
+
     res.status(200).json({
       message: "Login realizado com sucesso",
       error: false,

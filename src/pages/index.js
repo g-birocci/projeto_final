@@ -73,8 +73,13 @@ export default function Index() {
 
 
       <div className="flex flex-wrap items-center justify-center gap-4 max-w-2xl mx-auto mt-8 px-4">
+<<<<<<< Updated upstream
         <div className="relative w-full sm:w-auto flex-1">
           <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+=======
+        <div className="relative w-full flex-1">
+          <Search className="absolute left-3 top-3 h-5 w-5 text-ecodoa-olive" />
+>>>>>>> Stashed changes
           <Input
             placeholder="Pesquisar item..."
             className="pl-10 py-2 w-full"
@@ -82,7 +87,16 @@ export default function Index() {
             onChange={(e) => setBusca(e.target.value)}
           />
         </div>
+<<<<<<< Updated upstream
         <Button variant="outline" size="default" className="w-full sm:w-auto">
+=======
+        <Button
+          variant="outline"
+          size="default"
+          className="w-full"
+          onClick={() => setModalFiltrosAberto(true)}
+        >
+>>>>>>> Stashed changes
           Filtros
         </Button>
       </div>
@@ -96,10 +110,10 @@ export default function Index() {
           textShadow: "0 2px 4px rgba(0,0,0,0.5)",
         }}
       >
-        <h1 className="text-3xl sm:text-5xl font-bold text-[#265c14ad] m-0">
+        <h1 className="text-3xl font-bold text-[#265c14ad] m-0">
           Está na hora do desapego.
         </h1>
-        <p className="text-lg sm:text-xl mt-4 text-[#090871ff]">
+        <p className="text-lg mt-4 text-[#090871ff]">
           Doe seus itens, receba doações, reutilizar é viver!
         </p>
         <Button variant="default"
@@ -110,8 +124,12 @@ export default function Index() {
       </header>
 
 
+<<<<<<< Updated upstream
       <main className="container mx-auto px-6 py-10 pb-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
+=======
+      <main className="container mx-auto px-6 py-10 pb-20 grid grid-cols-1 gap-6">
+>>>>>>> Stashed changes
         {loading ? (
           <p className="text-center text-gray-600 col-span-full">Carregando...</p>
         ) : error ? (

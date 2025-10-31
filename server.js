@@ -2,6 +2,9 @@
 const express = require('express');
 const next = require('next');
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
+
+
 require('dotenv').config();
 const connectDB = require('./backend/config/mongodb');
 const dev = process.env.NODE_ENV !== 'production';
@@ -9,7 +12,9 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 const app = express();
 app.use(cors());
+app.use(cookieParser())
 app.use(express.json());
+
 const rotas = require('./backend/routes/index');
 
 // ===== INICIALIZAÇÃO DO SERVIDOR (também não se deve mexer)=====
