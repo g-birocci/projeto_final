@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import { Input } from "@/components/ui/Pesquisa";
 import { Button } from "@/components/ui/Button";
 import Notificacoes from "@/components/ui/Notificacoes"; //importei aqui o Notificaçao apenas para ficar visivel para configurar.
@@ -113,7 +111,6 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <div className="fixed top-5 right-5 z-50">
         <Notificacoes lista={notificacoes} />
       </div>

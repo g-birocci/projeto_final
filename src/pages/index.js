@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import CardProduto from "../components/CardProduto";
 import ModalDoacao from "../components/ui/ModalDoacao";
 import { Input } from "@/components/ui/Pesquisa";
@@ -90,9 +88,7 @@ export default function Index() {
 
   return (
     <div>
-      <Navbar />
-
-      <div className="z-8 px-4 pt-20">
+          <div className="z-8 px-4 pt-20">
         <a
           href="/voltar"
           className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-ecodoa-soft hover:bg-ecodoa-accent transition-all shadow-md"

@@ -46,6 +46,7 @@ export default function PaginaUsuario() {
       },
     ];
 
+    //Apagar daqui pra baixo =======================
     const mockAvaliacoes = [
       {
         id: 1,
@@ -65,10 +66,10 @@ export default function PaginaUsuario() {
     setAvaliacoes(mockAvaliacoes);
   }, []);
 
+  ///remover até aqui =================================
+
   return (
     <div>
-      <Navbar />
-
       <section className="max-w-6xl mx-auto px-4 pt-24 pb-24">
         <h1 className="text-3xl font-bold mb-6 text-foreground">gabebruu</h1>
 

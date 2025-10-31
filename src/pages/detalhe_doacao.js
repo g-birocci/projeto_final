@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft } from "lucide-react";
@@ -13,8 +12,6 @@ export default function DetalheDoacao() {
 
   return (
     <div>
-      <Navbar />
-
       {/* Botão voltar */}
       <div className="z-8 px-4 pt-20">
         <a

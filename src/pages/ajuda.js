@@ -1,4 +1,4 @@
-"use client";
+"use client"; // pra que serve isso ?
 
 import dynamic from "next/dynamic";
 import { useEffect, useState, useMemo } from "react";

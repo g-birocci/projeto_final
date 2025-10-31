@@ -1,7 +1,5 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Sustentavel from "@/components/Sustentavel";
 import Calculadora from "@/components/Calculadora";
 import Dicas from "@/components/Dicas";

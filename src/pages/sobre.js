@@ -2,12 +2,9 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import DashboardSobre from "@/components/DashboardSobre";
 import Feedbacks from "@/components/Feedbacks";
 import ChamadaDoacao from "@/components/Doar";
-import NavbarScroll from "@/components/NavbarScroll";
 import BottomPages from "@/components/BottomPages";
 
 export default function Sobre() {

@@ -1,5 +1,3 @@
-import Navbar from "@/components/Navbar";
-import NavbarScroll from "@/components/NavbarScroll";
 import Sidebar from "@/components/SideBarMenu";
 
 export default function Perfil() {
