@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { HeartHandshake } from "lucide-react";
 
-export default function Doar() {
+export default function ChamadaDoacao() {
   return (
     <motion.section
       initial={{ opacity: 0, y: 40 }}
@@ -20,7 +21,7 @@ export default function Doar() {
       </p>
 
       <motion.a
-        href="/doacao"
+        href="/" icon={<HeartHandshake />} label="Doar" 
         whileHover={{ scale: 1.08, backgroundColor: "#DBF227" }}
         whileTap={{ scale: 0.95 }}
         className="bg-[var(--ecodoa-primary)] text-white font-semibold px-10 py-4 rounded-2xl shadow-md hover:shadow-lg transition-all"

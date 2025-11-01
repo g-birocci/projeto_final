@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import {HeartHandshake, Leaf, Info, MapPin, Home,} from "lucide-react";
+import { HeartHandshake, Leaf, Info, MapPin, Home, } from "lucide-react";
 
 export default function NavbarScroll() {
   const [show, setShow] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -38,10 +38,11 @@ export default function NavbarScroll() {
           className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-[#005C53]/90 text-[#D6D58E] border border-[#9FC131]/30 shadow-md rounded-full px-5 py-3 flex justify-around items-center w-[90%] max-w-sm backdrop-blur-sm"
         >
           <NavItem href="/" icon={<Home />} label="Início" />
-          <NavItem href="/doacao" icon={<HeartHandshake />} label="Doar" />
-          <NavItem href="/viver" icon={<Leaf />} label="´Viver Bem" />
+          <NavItem href="/" icon={<HeartHandshake />} label="Doar" />
+          <NavItem href="/viver" icon={<Leaf />} label="Viver Bem" />
           <NavItem href="/ajuda" icon={<MapPin />} label="Ajuda" />
           <NavItem href="/sobre" icon={<Info />} label="Sobre" />
+
         </motion.nav>
       )}
     </AnimatePresence>

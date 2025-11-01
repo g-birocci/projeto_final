@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DoarEcoDoaModal from "@/components/sections/about/DoarEcoModal";
+import DoarEcoModal from "@/components/sections/about/DoarEcoModal";
 import { Sparkles, HeartHandshake } from "lucide-react";
 
 export default function DonateSection() {
@@ -10,6 +10,7 @@ export default function DonateSection() {
 
   return (
     <>
+      {/* ===== SEÇÃO DE DOAÇÃO ===== */}
       <section className="relative overflow-hidden bg-[var(--ecodoa-primary)] text-white py-24 px-6 text-center">
         <motion.div
           animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
@@ -18,6 +19,7 @@ export default function DonateSection() {
         />
 
         <div className="relative max-w-3xl mx-auto z-10">
+          {/* Ícone principal */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -30,6 +32,7 @@ export default function DonateSection() {
             </div>
           </motion.div>
 
+          {/* Título e texto */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -47,14 +50,15 @@ export default function DonateSection() {
             viewport={{ once: true }}
             className="text-[var(--ecodoa-soft)] mb-10 leading-relaxed"
           >
-            Cada contribuição mantém o projeto ativo e faz o bem continuar a circular.  
+            Cada contribuição mantém o projeto ativo e faz o bem continuar a circular.
             Apoia esta comunidade solidária e sustentável.
           </motion.p>
 
+          {/* BOTÃO QUE ABRE O MODAL */}
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
-            onClick={() => setOpen(true)}
+            onClick={() => setOpen(true)} // 🔥 Abre o modal
             className="inline-flex items-center justify-center gap-2 
                        bg-[var(--ecodoa-accent)] text-[var(--ecodoa-secondary)] font-semibold px-10 py-4 
                        rounded-2xl shadow-md hover:bg-[var(--ecodoa-light-olive)] transition-all duration-200"
@@ -65,8 +69,9 @@ export default function DonateSection() {
         </div>
       </section>
 
+      {/* MODAL DE DOAÇÃO */}
       <AnimatePresence>
-        {open && <DoarEcoDoaModal isOpen={open} onClose={() => setOpen(false)} />}
+        {open && <DoarEcoModal isOpen={open} onClose={() => setOpen(false)} />}
       </AnimatePresence>
     </>
   );
