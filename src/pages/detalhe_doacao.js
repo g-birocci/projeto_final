@@ -1,11 +1,18 @@
 "use client";
 
 import React from "react";
+<<<<<<< HEAD
+=======
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+>>>>>>> main
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/router";
 
 export default function DetalheDoacao() {
+  const router = useRouter();
   const fotos = [
     "https://images.unsplash.com/photo-1663144256992-6b69263cc521?auto=format&fit=crop&q=80&w=736",
     "https://images.unsplash.com/photo-1651888947765-2e0ec570bc9d?auto=format&fit=crop&q=80&w=736",
@@ -13,7 +20,13 @@ export default function DetalheDoacao() {
   ];
 
   return (
+<<<<<<< HEAD
     <div>
+=======
+    <>
+      <Navbar />
+
+>>>>>>> main
       {/* Botão voltar */}
       <div className="z-8 px-4 pt-20">
         <a
@@ -24,24 +37,22 @@ export default function DetalheDoacao() {
         </a>
       </div>
 
-      <main className="max-w-4xl mx-auto px-6 py-10">
+      {/* Layout ajustado para coluna única e com padding vertical para mobile */}
+      <main className="max-w-4xl mx-auto px-4 pb-16 pt-8">
         {/* Galeria */}
         <div className="flex flex-col gap-6 mb-8">
           <div className="flex-1">
             <Image
               src={fotos[0]}
               alt="Foto principal"
-              className="rounded-lg object-cover w-full h-[400px] shadow-md"
+              width={375}
+              height={400}
+              className="rounded-lg object-cover w-full h-auto shadow-md"
             />
           </div>
           <div className="flex flex-col gap-4 w-40">
             {fotos.slice(1).map((foto, index) => (
-              <Image
-                key={index}
-                src={foto}
-                alt={`Foto ${index + 2}`}
-                className="rounded-lg object-cover w-full h-20 shadow-sm hover:scale-105 transition"
-              />
+              <Image key={index} src={foto} alt={`Foto ${index + 2}`} width={80} height={80} className="rounded-lg object-cover shadow-sm" />
             ))}
           </div>
         </div>
@@ -77,11 +88,12 @@ export default function DetalheDoacao() {
 
         {/* Botão de mensagem */}
         <div className="mb-12">
-          <Button variant="default" size="sm">
+          <Button variant="default" size="sm" onClick={() => router.push('/chat?conversa=1')}>
             Enviar mensagem
           </Button>
         </div>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }

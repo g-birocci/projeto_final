@@ -68,7 +68,7 @@ export default function Navbar() {
           priority
           loading="eager"
         />
-        <span className="hidden sm:inline text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
+        <span className="text-xl font-bold tracking-tight text-[var(--ecodoa-primary)]">
           EcoDoa
         </span>
       </Link>

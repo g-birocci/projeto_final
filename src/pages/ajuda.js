@@ -1,6 +1,7 @@
 "use client"; // pra que serve isso ?
 
 import dynamic from "next/dynamic";
+<<<<<<< HEAD
 import { useEffect, useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import FilterBar from "@/components/FilterBar";
@@ -8,9 +9,19 @@ import DonateSection from "@/components/DonateSection";
 import PartnersSection from "@/components/PartnersSection";
 import NavbarScroll from "@/components/Navmobile";
 import SideBarMenu from "@/components/SideBarMenu";
+=======
+import { useState, useMemo } from "react";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import FilterBar from "@/components/sections/ajuda/FilterBar";
+import DonateSection from "@/components/sections/ajuda/DonateSection";
+import PartnersSection from "@/components/sections/ajuda/PartnersSection";
+import NavbarScroll from "@/components/layout/NavbarScroll";
+import { locaisData } from "@/data/locaisData"; 
+>>>>>>> main
 
 // importação dinâmica do mapa (sem SSR)
-const MapaEcoDoa = dynamic(() => import("@/components/MapaEcoDoa"), {
+const MapaEcoDoa = dynamic(() => import("@/components/sections/ajuda/MapaEcoDoa"), {
   ssr: false,
   loading: () => (
     <p className="text-center text-[var(--ecodoa-primary)] py-10">
@@ -20,7 +31,6 @@ const MapaEcoDoa = dynamic(() => import("@/components/MapaEcoDoa"), {
 });
 
 export default function Ajuda() {
-  const [places, setPlaces] = useState([]);
   const [filters, setFilters] = useState({
     shelter: true,
     meal: true,
@@ -30,6 +40,7 @@ export default function Ajuda() {
     clothes: true,
   });
 
+<<<<<<< HEAD
   // dados de teste do mapa
   useEffect(() => {
     setPlaces([
@@ -90,9 +101,12 @@ export default function Ajuda() {
     ]);
   }, []);
 
+=======
+  // aplica filtros diretamente sobre os dados da pasta /data
+>>>>>>> main
   const visiblePlaces = useMemo(
-    () => places.filter((p) => filters[p.type]),
-    [places, filters]
+    () => locaisData.filter((p) => filters[p.type]),
+    [filters]
   );
 
   const toggleFilter = (key) =>
@@ -100,33 +114,44 @@ export default function Ajuda() {
 
   return (
     <div className="min-h-screen bg-[var(--ecodoa-bg)] text-[var(--ecodoa-text)]">
+<<<<<<< HEAD
       <Navbar />
       <NavbarScroll />
       <SideBarMenu />
 
       <section className="px-6 pt-24 pb-6 text-center max-w-4xl mx-auto">
+=======
+      {/* Título da página */}
+      <section className="px-4 pt-24 pb-8 text-center max-w-4xl mx-auto">
+>>>>>>> main
         <h1 className="text-4xl font-bold text-[var(--ecodoa-primary)] mb-4">
           Pontos de Ajuda
         </h1>
         <p className="text-[var(--ecodoa-text)]/80">
-          Encontra locais em Portugal que oferecem refeições, abrigo, cursos,
-          apoio psicológico e muito mais.
+          Esses locais em Portugal podem te ajudar.
         </p>
       </section>
 
-      {/* BARRA DE FILTROS */}
+      {/* Barra de filtros */}
       <div className="relative z-10 mb-8">
         <FilterBar filters={filters} toggleFilter={toggleFilter} />
       </div>
 
-      {/* MAPA */}
-      <section className="relative max-w-5xl mx-auto px-6 pb-16 z-0">
+      {/* Mapa */}
+      <section className="relative max-w-5xl mx-auto px-4 pb-16 z-0">
         <div className="relative rounded-2xl overflow-hidden border border-[var(--ecodoa-soft)] shadow-sm z-0">
           <MapaEcoDoa places={visiblePlaces} />
         </div>
       </section>
+
       <PartnersSection />
       <DonateSection />
+<<<<<<< HEAD
+=======
+      <Navbar />
+      <NavbarScroll />
+      <Footer />
+>>>>>>> main
     </div>
   );
 }

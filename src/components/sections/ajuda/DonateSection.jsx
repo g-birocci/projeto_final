@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DoarEcoDoaModal from "@/components/DoarEcoModal";
+import DoarEcoModal from "@/components/sections/ajuda/DoarEcoModal";
 import { Sparkles, HeartHandshake } from "lucide-react";
 
 export default function DonateSection() {
@@ -25,8 +26,14 @@ export default function DonateSection() {
             viewport={{ once: true }}
             className="flex justify-center mb-6"
           >
-            <div className="bg-[var(--ecodoa-accent)]/20 p-4 rounded-full shadow-inner">
-              <HeartHandshake className="w-8 h-8 text-[var(--ecodoa-accent)]" />
+            <div className="flex justify-center mt-2 mb-4">
+              <Image
+                src="/img/EcoDoa.svg"
+                alt="Logo EcoDoa"
+                width={80}
+                height={80}
+                className="object-contain"
+              />
             </div>
           </motion.div>
 
@@ -35,7 +42,7 @@ export default function DonateSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-4xl font-extrabold mb-4 tracking-tight"
+            className="text-3xl font-extrabold mb-4 tracking-tight"
           >
             Ajuda-nos a manter o EcoDoa vivo
           </motion.h2>
@@ -47,7 +54,7 @@ export default function DonateSection() {
             viewport={{ once: true }}
             className="text-[var(--ecodoa-soft)] mb-10 leading-relaxed"
           >
-            Cada contribuição mantém o projeto ativo e faz o bem continuar a circular.  
+            Cada contribuição mantém o projeto ativo e faz o bem continuar a circular.
             Apoia esta comunidade solidária e sustentável.
           </motion.p>
 
@@ -59,14 +66,23 @@ export default function DonateSection() {
                        bg-[var(--ecodoa-accent)] text-[var(--ecodoa-secondary)] font-semibold px-10 py-4 
                        rounded-2xl shadow-md hover:bg-[var(--ecodoa-light-olive)] transition-all duration-200"
           >
-            <Sparkles className="w-5 h-5 text-[var(--ecodoa-secondary)]" />
             Apoiar o EcoDoa
           </motion.button>
         </div>
       </section>
 
       <AnimatePresence>
-        {open && <DoarEcoDoaModal isOpen={open} onClose={() => setOpen(false)} />}
+        {open && (
+          <motion.div
+            key="modal"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <DoarEcoModal isOpen={open} onClose={() => setOpen(false)} />
+          </motion.div>
+        )}
       </AnimatePresence>
     </>
   );

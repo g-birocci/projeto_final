@@ -6,7 +6,7 @@ export default function Notificacoes({ lista }) {
   const naoLidas = lista.filter((n) => !n.lida);
 
   return (
-    <div className="relative">
+    <div className="relative"> {/* Removido absolute positioning, agora é um componente normal */}
       <button
         onClick={() => setAberto(!aberto)}
         className="relative p-2 rounded-full "

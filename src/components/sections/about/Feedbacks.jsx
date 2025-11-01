@@ -27,37 +27,38 @@ export default function Feedbacks() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="py-24 bg-[var(--ecodoa-bg)] text-[var(--ecodoa-secondary)]"
+      className="py-16 px-6 bg-white text-[var(--ecodoa-secondary)]"
     >
-      <div className="max-w-5xl mx-auto px-6 text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-black text-[var(--ecodoa-primary)] mb-4">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-extrabold text-[var(--ecodoa-primary)] mb-3">
           Vozes que Inspiram
         </h2>
-        <p className="text-lg text-[var(--ecodoa-secondary)]/80 max-w-2xl mx-auto">
+        <p className="text-base text-[var(--ecodoa-secondary)]/80 max-w-md mx-auto leading-relaxed">
           Histórias reais de quem viveu o impacto da solidariedade.
         </p>
       </div>
 
-      <div className="max-w-4xl mx-auto space-y-16 px-6">
+      <div className="flex flex-col gap-10 max-w-2xl mx-auto">
         {feedbacks.map((f, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.15, duration: 0.8 }}
+            transition={{ delay: i * 0.1, duration: 0.6 }}
             viewport={{ once: true }}
             className="relative text-left"
           >
-            <blockquote className="border-l-4 border-[var(--ecodoa-accent)] pl-6 md:pl-8">
-              <p className="text-xl md:text-2xl italic leading-relaxed text-[var(--ecodoa-secondary)]/90">
+            <blockquote className="border-l-4 border-[var(--ecodoa-accent)] pl-5">
+              <p className="text-lg italic text-[var(--ecodoa-secondary)]/90 leading-relaxed">
                 “{f.texto}”
               </p>
             </blockquote>
-            <p className="mt-4 text-[var(--ecodoa-primary)] font-semibold tracking-wide">
+
+            <p className="mt-4 text-[var(--ecodoa-primary)] font-semibold text-sm tracking-wide">
               — {f.nome}
             </p>
-            {/* elemento decorativo natural */}
-            <div className="absolute -left-2 top-2 w-2 h-2 bg-[var(--ecodoa-accent)] rounded-full"></div>
+
+            <div className="absolute -left-1 top-5 w-2 h-2 bg-[var(--ecodoa-accent)] rounded-full"></div>
           </motion.div>
         ))}
       </div>

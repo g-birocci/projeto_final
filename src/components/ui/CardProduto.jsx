@@ -42,7 +42,7 @@ const CardProduto = ({ produto }) => {
 </p>
 
 <span
-  className="text-xs px-2 py-1 rounded-full"
+  className="text-xs px-2 py-1 rounded-full whitespace-nowrap" /* Adicionado whitespace-nowrap para evitar quebra de linha */
   style={{
     backgroundColor:
       produto.estado === "Novo"
@@ -61,7 +61,7 @@ const CardProduto = ({ produto }) => {
   {produto.estado}
 </span>
 
-        <div className="mt-4 flex gap-12">
+        <div className="mt-2 flex gap-5">
           <Button variant="default" size="sm">
             Enviar mensagem
           </Button>
