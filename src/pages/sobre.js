@@ -2,39 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-<<<<<<< HEAD
-import DashboardSobre from "@/components/DashboardSobre";
-import Feedbacks from "@/components/Feedbacks";
-import ChamadaDoacao from "@/components/Doar";
-//import BottomPages from "@/components/BottomPages";
-
-export default function Sobre() {
-  return (
-    <div className="min-h-screen bg-white text-[#1E2D2F]">
-       
-
-      {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden py-20">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.15 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0 bg-[url('/img/leaves-bg.svg')] bg-cover bg-center"
-        />
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-=======
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import DashboardSobre from "@/components/sections/about/DashboardSobre";
 import Feedbacks from "@/components/sections/about/Feedbacks";
 import ChamadaDoacao from "@/components/sections/about/ChamadaDoacao";
-import NavbarScroll from "@/components/layout/NavbarScroll";
 
 export default function Sobre() {
   return (
     <div className="min-h-screen bg-[var(--ecodoa-bg)] text-[var(--ecodoa-text)] overflow-hidden">
-      <Navbar />
-      <NavbarScroll />
       <section className="relative overflow-hidden pt-28 pb-16 px-5 text-center">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-56 h-56 bg-[var(--ecodoa-accent)] rounded-full blur-3xl" />
@@ -42,16 +16,11 @@ export default function Sobre() {
         </div>
 
         <div className="relative z-10 max-w-3xl mx-auto">
->>>>>>> main
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-<<<<<<< HEAD
-            className="text-4xl md:text-5xl font-extrabold text-green-700 mb-6"
-=======
             className="text-3xl sm:text-4xl font-black text-[var(--ecodoa-primary)] mb-5 leading-tight"
->>>>>>> main
           >
             Fazer o bem é contagiante
           </motion.h1>
@@ -60,27 +29,15 @@ export default function Sobre() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-<<<<<<< HEAD
-            className="text-lg text-[#1E2D2F]/80 max-w-2xl mx-auto"
-          >
-            Acreditamos que cada gesto pode mudar o mundo. No EcoDoa,
-=======
             className="text-base sm:text-lg text-[var(--ecodoa-secondary)]/80 leading-relaxed"
           >
             Acreditamos que cada gesto pode mudar o mundo.
             No <strong className="text-[var(--ecodoa-primary)]">EcoDoa</strong>,
->>>>>>> main
             transformamos doações em conexões reais e impacto sustentável.
           </motion.p>
         </div>
       </section>
 
-<<<<<<< HEAD
-      {/* ===== DASHBOARD ===== */}
-      <DashboardSobre />
-
-      {/* ===== QUEM SOMOS ===== */}
-=======
       {/* DASHBOARD SOBRE  */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
@@ -161,55 +118,11 @@ export default function Sobre() {
 </motion.section>
 
       {/* POR QUE DOAR */}
->>>>>>> main
       <motion.section
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-<<<<<<< HEAD
-        className="max-w-4xl mx-auto px-6 py-20 text-center"
-      >
-        <h2 className="text-3xl font-bold text-green-700 mb-6">Quem Somos</h2>
-        <p className="text-[#1E2D2F]/80 leading-relaxed text-lg">
-          O <strong>EcoDoa</strong> é um movimento que une pessoas dispostas a
-          partilhar o que têm com quem mais precisa. Não somos só uma plataforma
-          de doações — somos uma comunidade que acredita na força das pequenas
-          ações e na responsabilidade coletiva por um futuro sustentável.
-        </p>
-      </motion.section>
-
-      {/* ===== POR QUE DOAR ===== */}
-      <motion.section
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-10 items-center"
-      >
-        <div>
-          <h2 className="text-3xl font-bold text-green-700 mb-6">
-            Por que Doar?
-          </h2>
-          <p className="text-[#1E2D2F]/80 mb-4 text-lg">
-            Doar é um ato de amor, empatia e sustentabilidade. Cada doação reduz
-            o desperdício, inspira solidariedade e faz o bem circular
-          </p>
-          <p className="text-[#1E2D2F]/80 mb-8 text-lg">
-            O EcoDoa atua alinhado aos{" "}
-            <strong>Objetivos de Desenvolvimento Sustentável (ODS)</strong> da
-            ONU, promovendo a redução das desigualdades (ODS 10) e consumo
-            responsável (ODS 12).
-          </p>
-          <a
-            href="https://ods.pt/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-green-600 text-white py-3 px-6 rounded-xl font-semibold hover:bg-green-700 transition-all"
-          >
-            Conhecer os ODS
-          </a>
-=======
         className="max-w-5xl mx-auto px-4 py-14"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -246,28 +159,11 @@ export default function Sobre() {
               Conhecer os ODS →
             </motion.a>
           </div>
->>>>>>> main
         </div>
-
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="flex justify-center"
-        >
-          <Image
-            src="/img/sustentabilidade.jpg"
-            alt="Sustentabilidade"
-            width={420}
-            height={420}
-            className="rounded-3xl shadow-xl"
-          />
-        </motion.div>
       </motion.section>
+
       <Feedbacks />
       <ChamadaDoacao />
-      
     </div>
   );
 }
