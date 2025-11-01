@@ -30,7 +30,7 @@ export default function EcoDoaAssistant() {
 
   return (
     <div className="absolute bottom-0 right-0 w-full h-0">
-      {/* === BOTÃO AMARELO PEQUENO NO CANTO === */}
+      {/* Botão*/}
       <motion.button
         onClick={() => setOpen(!open)}
         whileHover={{ scale: 1.05 }}
@@ -48,7 +48,7 @@ export default function EcoDoaAssistant() {
         {open ? <X className="w-4 h-4" /> : <MessageCircle className="w-4 h-4" />}
       </motion.button>
 
-      {/* === CAIXA AMARELA DE FAQ === */}
+      {/* caixa faq */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -66,7 +66,6 @@ export default function EcoDoaAssistant() {
               overflow-hidden
             "
           >
-            {/* Cabeçalho */}
             <div className="px-4 py-2 flex justify-between items-center border-b border-[#e2c91d]/40">
               <h3 className="font-bold text-sm">Assistente EcoDoa</h3>
               <button
@@ -77,7 +76,6 @@ export default function EcoDoaAssistant() {
               </button>
             </div>
 
-            {/* Conteúdo */}
             <div className="p-3 max-h-[35vh] overflow-y-auto text-sm">
               {faqs.map((faq, i) => (
                 <div key={i} className="border-b border-[#e2c91d]/30 py-2">

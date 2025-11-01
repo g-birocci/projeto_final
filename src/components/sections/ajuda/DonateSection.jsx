@@ -11,9 +11,7 @@ export default function DonateSection() {
 
   return (
     <>
-      {/* ===== SEÇÃO DE DOAÇÃO ===== */}
       <section className="relative overflow-hidden bg-[var(--ecodoa-primary)] text-white py-24 px-6 text-center">
-        {/* Fundo animado suave */}
         <motion.div
           animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -21,7 +19,6 @@ export default function DonateSection() {
         />
 
         <div className="relative max-w-3xl mx-auto z-10">
-          {/* Ícone principal */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +26,6 @@ export default function DonateSection() {
             viewport={{ once: true }}
             className="flex justify-center mb-6"
           >
-          {/* logo centralizada */}
             <div className="flex justify-center mt-2 mb-4">
               <Image
                 src="/img/EcoDoa.svg"
@@ -41,7 +37,6 @@ export default function DonateSection() {
             </div>
           </motion.div>
 
-          {/* Título e texto */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +58,6 @@ export default function DonateSection() {
             Apoia esta comunidade solidária e sustentável.
           </motion.p>
 
-          {/* BOTÃO QUE ABRE O MODAL */}
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
@@ -77,7 +71,6 @@ export default function DonateSection() {
         </div>
       </section>
 
-      {/* MODAL DE DOAÇÃO */}
       <AnimatePresence>
         {open && (
           <motion.div

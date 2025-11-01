@@ -6,8 +6,6 @@ import Image from "next/image";
 export default function Sustentavel() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[var(--ecodoa-bg)] via-white to-[var(--ecodoa-green)] py-28 px-6 flex flex-col items-center justify-center text-center">
-      
-      {/* DECORAÇÃO DE FUNDO */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.15 }}
@@ -15,7 +13,6 @@ export default function Sustentavel() {
         className="absolute inset-0 bg-[url('/img/leaves-bg.svg')] bg-cover bg-center"
       ></motion.div>
 
-      {/* CONTEÚDO */}
       <div className="relative max-w-full mx-auto z-10">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}

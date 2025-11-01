@@ -5,7 +5,6 @@ import { Facebook, Instagram, Linkedin } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="w-full bg-white/70 backdrop-blur-sm text-center py-6 border-t border-[var(--ecodoa-soft)]/40">
-      {/* Ícones sociais */}
       <div className="flex justify-center gap-6 mb-3">
         <a
           href="https://facebook.com"
@@ -38,7 +37,6 @@ export default function Footer() {
         </a>
       </div>
 
-      {/* Texto principal */}
       <p className="text-sm text-[var(--ecodoa-secondary)]/70 tracking-wide">
         © 2025 - Desenvolvido por <span className="font-medium text-[var(--ecodoa-primary)]">EcoDoa</span>.
       </p>

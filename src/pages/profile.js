@@ -88,7 +88,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Carrosséis */}
+        {/* Carrosséis/histórico */}
         <Items title="Itens Doados" items={DONATED_ITEMS} />
         <Items title="Solidariedade Recebida" items={RECEIVED_ITEMS} />
       </div>

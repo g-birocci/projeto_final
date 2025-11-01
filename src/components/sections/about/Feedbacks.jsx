@@ -29,7 +29,6 @@ export default function Feedbacks() {
       viewport={{ once: true }}
       className="py-16 px-6 bg-white text-[var(--ecodoa-secondary)]"
     >
-      {/* Cabeçalho */}
       <div className="text-center mb-12">
         <h2 className="text-3xl font-extrabold text-[var(--ecodoa-primary)] mb-3">
           Vozes que Inspiram
@@ -39,7 +38,6 @@ export default function Feedbacks() {
         </p>
       </div>
 
-      {/* Feedbacks */}
       <div className="flex flex-col gap-10 max-w-2xl mx-auto">
         {feedbacks.map((f, i) => (
           <motion.div
@@ -60,7 +58,6 @@ export default function Feedbacks() {
               — {f.nome}
             </p>
 
-            {/* detalhe visual */}
             <div className="absolute -left-1 top-5 w-2 h-2 bg-[var(--ecodoa-accent)] rounded-full"></div>
           </motion.div>
         ))}

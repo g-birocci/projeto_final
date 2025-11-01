@@ -22,7 +22,6 @@ export default function DoarEcoModal({ isOpen, onClose }) {
             transition={{ duration: 0.25 }}
             className="relative bg-white w-[90%] max-w-xs rounded-2xl shadow-lg p-5 text-center text-[#1E2D2F]"
           >
-            {/* botão fechar */}
             <button
               onClick={onClose}
               className="absolute top-3 right-4 text-gray-400 hover:text-gray-600 transition"
@@ -30,7 +29,6 @@ export default function DoarEcoModal({ isOpen, onClose }) {
               <X className="w-5 h-5" />
             </button>
 
-            {/* logo centralizada */}
             <div className="flex justify-center mt-2 mb-4">
               <Image
                 src="/img/EcoDoa.svg"
@@ -41,7 +39,6 @@ export default function DoarEcoModal({ isOpen, onClose }) {
               />
             </div>
 
-            {/* título e texto */}
             <h2 className="text-lg font-bold text-[var(--ecodoa-primary)] mb-2">
              Quero ajudar o EcoDoa!
             </h2>
@@ -51,7 +48,6 @@ export default function DoarEcoModal({ isOpen, onClose }) {
               fortalecer a rede de solidariedade e sustentabilidade.
             </p>
 
-            {/* dados de doação */}
             <div className="bg-green-50 border border-green-100 rounded-xl p-3 text-left mb-4">
               <p className="font-semibold text-[var(--ecodoa-primary)] text-sm">IBAN:</p>
               <p className="text-xs text-[#1E2D2F]/80 select-all">
@@ -61,7 +57,6 @@ export default function DoarEcoModal({ isOpen, onClose }) {
               <p className="text-xs text-[#1E2D2F]/80 select-all">+351 912 345 678</p>
             </div>
 
-            {/* botão fechar */}
             <motion.button
               onClick={onClose}
               whileHover={{ scale: 1.05 }}
