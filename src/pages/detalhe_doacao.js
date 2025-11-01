@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
+<<<<<<< HEAD
+=======
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
+>>>>>>> main
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft } from "lucide-react";
@@ -17,9 +20,13 @@ export default function DetalheDoacao() {
   ];
 
   return (
+<<<<<<< HEAD
+    <div>
+=======
     <>
       <Navbar />
 
+>>>>>>> main
       {/* Botão voltar */}
       <div className="z-8 px-4 pt-20">
         <a

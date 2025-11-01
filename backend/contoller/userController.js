@@ -116,7 +116,6 @@ const userLogin = async (req, res) => {
   }
 };
 
-
 // Já está pronto =====================================================================
 const userCreate = async (req, res) => {
   try {
@@ -156,7 +155,6 @@ const userCreate = async (req, res) => {
     });
   }
 };
-
 
 // já está pronto ======================================================================
 

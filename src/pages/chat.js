@@ -1,8 +1,12 @@
 "use client";
 
+<<<<<<< HEAD
+import React, { useState } from "react";
+=======
 import React, { useState, useEffect } from "react";
 import Footer from "../components/layout/Footer";
 import Navbar from "../components/layout/Navbar";
+>>>>>>> main
 import { Input } from "@/components/ui/Pesquisa";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
@@ -75,7 +79,13 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
+<<<<<<< HEAD
+      <div className="fixed top-5 right-5 z-50">
+        <Notificacoes lista={notificacoes} />
+      </div>
+=======
       <Navbar />
+>>>>>>> main
 
       <main className="grow pt-24 px-4 pb-32 max-w-6xl mx-auto">
         {!conversaAtiva ? (
@@ -180,8 +190,6 @@ export default function ChatPage() {
           </>
         )}
       </main>
-
-      <Footer />
     </div>
   );
 }
