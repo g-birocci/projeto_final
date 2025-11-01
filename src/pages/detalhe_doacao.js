@@ -1,12 +1,15 @@
 "use client";
 
 import React from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/router";
 
 export default function DetalheDoacao() {
+  const router = useRouter();
   const fotos = [
     "https://images.unsplash.com/photo-1663144256992-6b69263cc521?auto=format&fit=crop&q=80&w=736",
     "https://images.unsplash.com/photo-1651888947765-2e0ec570bc9d?auto=format&fit=crop&q=80&w=736",
@@ -18,7 +21,7 @@ export default function DetalheDoacao() {
       <Navbar />
 
       {/* Botão voltar */}
-      <div className="z-8 px-4">
+      <div className="z-8 px-4 pt-20">
         <a
           href="#"
           className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 backdrop-blur-md hover:bg-gray-100 transition-all shadow-md"
@@ -28,7 +31,7 @@ export default function DetalheDoacao() {
       </div>
 
       {/* Layout ajustado para coluna única e com padding vertical para mobile */}
-      <main className="max-w-4xl mx-auto px-4 pb-16">
+      <main className="max-w-4xl mx-auto px-4 pb-16 pt-8">
         {/* Galeria */}
         <div className="flex flex-col gap-6 mb-8">
           <div className="flex-1">
@@ -78,11 +81,12 @@ export default function DetalheDoacao() {
 
         {/* Botão de mensagem */}
         <div className="mb-12">
-          <Button variant="default" size="sm">
+          <Button variant="default" size="sm" onClick={() => router.push('/chat?conversa=1')}>
             Enviar mensagem
           </Button>
         </div>
       </main>
+      <Footer />
     </>
   );
 }

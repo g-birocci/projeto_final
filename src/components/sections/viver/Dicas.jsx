@@ -1,14 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Recycle,
-  Droplets,
-  PlugZap,
-  HeartHandshake,
-  Leaf,
-  BookOpen,
-} from "lucide-react";
+import { Recycle, Droplets, PlugZap, HeartHandshake, Leaf, BookOpen } from "lucide-react";
 
 export default function Dicas() {
   const dicas = [
@@ -44,20 +37,15 @@ export default function Dicas() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="px-4 py-16 bg-[var(--ecodoa-bg)]" /* Padding ajustado */
+      className="px-4 py-16 bg-[var(--ecodoa-bg)]" 
     >
-      {/* Título ajustado para mobile */}
       <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-8 text-center">
         Dicas Sustentáveis
       </h2>
 
-      {/* Subtítulo ajustado para mobile */}
       <p className="text-center text-[var(--ecodoa-text)]/70 mb-12 text-base max-w-full mx-auto">
-        Pequenas ações geram grandes mudanças. Experimenta aplicar uma destas
-        ideias no teu dia a dia.
-      </p>
+        Pequenas ações geram grandes mudanças. </p>
 
-      {/* Lista de Dicas */}
       <div className="grid grid-cols-1 gap-8 max-w-full mx-auto text-base leading-relaxed text-[var(--ecodoa-text)]/85"> {/* Ajustado para grid-cols-1 e tamanhos de fonte/gap */}
         {dicas.map((d, i) => (
           <motion.div

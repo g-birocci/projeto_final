@@ -69,20 +69,19 @@ export default function Educacionais() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="px-4 py-16 bg-[var(--ecodoa-bg)]" /* Padding ajustado */
+      className="px-4 py-16 bg-[var(--ecodoa-bg)]" 
     >
-      {/* Cabeçalho ajustado para mobile */}
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-2">
           Recursos Educacionais
         </h2>
         <p className="text-[var(--ecodoa-text)]/70 text-base">
-          Aprende mais sobre sustentabilidade e impacto social
+          Aprende mais sobre sustentabilidade e impacto.
         </p>
       </div>
 
       {/* Cards principais */}
-      <div className="grid md:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 gap-10">
         {educationalResources.map((section, index) => (
           <motion.div
             key={index}
@@ -90,7 +89,6 @@ export default function Educacionais() {
             transition={{ type: "spring", stiffness: 120 }}
             className="relative bg-white rounded-3xl shadow-lg overflow-hidden border border-[var(--ecodoa-soft)] hover:shadow-2xl transition-all duration-300"
           >
-            {/* Imagem de topo */}
             <div className="relative h-48">
               <img
                 src={section.image}
@@ -107,7 +105,6 @@ export default function Educacionais() {
               </div>
             </div>
 
-            {/* Conteúdo */}
             <div className="p-6 space-y-5">
               {section.items.map((item, i) => (
                 <a
