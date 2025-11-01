@@ -3,16 +3,12 @@
 import EditModal from "@/components/sections/profile/EditModal";
 import Items from "@/components/sections/profile/Items";
 import { DONATED_ITEMS, RECEIVED_ITEMS } from "../data/items";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import {
-  ArrowLeft,
-  Edit3,
-  LogOut,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowLeft, Edit3, LogOut } from "lucide-react";
+import EcoDoaAssistant from "@/components/EcoDoaAssistant";
+import Footer from "@/components/layout/Footer";
 
 export default function ProfilePage() {
   const [editing, setEditing] = useState(false);
@@ -47,7 +43,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-[var(--ecodoa-text)] flex flex-col px-5 py-24 sm:py-20 sm:px-8">
+    <div className="min-h-screen bg-white relative text-[var(--ecodoa-text)] flex flex-col px-5 py-24 sm:py-20 sm:px-8">
       {/* Botão Voltar */}
       <button
         onClick={() => window.history.back()}
@@ -87,16 +83,8 @@ export default function ProfilePage() {
 
           <div className="grid grid-cols-3 text-center gap-4 mt-4">
             <DashboardStat label="Itens Doados" value={user.donated} color="primary" />
-            <DashboardStat
-              label="Ajudas Recebidas"
-              value={user.received}
-              color="accent"
-            />
-            <DashboardStat
-              label="Pessoas Impactadas"
-              value={user.impacted}
-              color="secondary"
-            />
+            <DashboardStat label="Ajudas Recebidas" value={user.received} color="accent" />
+            <DashboardStat label="Pessoas Impactadas" value={user.impacted} color="secondary" />
           </div>
         </div>
 
@@ -105,7 +93,7 @@ export default function ProfilePage() {
         <Items title="Solidariedade Recebida" items={RECEIVED_ITEMS} />
       </div>
 
-      {/* Botão Sair no final */}
+      {/* Botão Sair */}
       <div className="flex justify-center mt-auto pt-6 border-t border-[var(--ecodoa-soft)]/40">
         <button className="flex items-center gap-2 px-5 py-2 rounded-lg border border-[var(--ecodoa-soft)] text-[var(--ecodoa-text)]/80 hover:text-[var(--ecodoa-primary)] hover:border-[var(--ecodoa-primary)] transition">
           <LogOut className="w-4 h-4" />
@@ -113,7 +101,7 @@ export default function ProfilePage() {
         </button>
       </div>
 
-      {/* Modal Edição */}
+      {/* Modal de Edição */}
       {editing && (
         <EditModal
           form={form}
@@ -123,12 +111,14 @@ export default function ProfilePage() {
           onCancel={() => setEditing(false)}
         />
       )}
+
+      {/* Assistente */}
+      <EcoDoaAssistant />
     </div>
   );
 }
 
-/* ===== SUBCOMPONENTES ===== */
-
+/* ===== SUBCOMPONENTE ===== */
 function DashboardStat({ label, value, color }) {
   const tone =
     color === "primary"
@@ -143,6 +133,5 @@ function DashboardStat({ label, value, color }) {
       <p className="text-xs opacity-70 uppercase tracking-wide">{label}</p>
     </motion.div>
   );
+  <Footer/>
 }
-
-
