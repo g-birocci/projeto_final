@@ -8,7 +8,7 @@ import FilterBar from "@/components/sections/ajuda/FilterBar";
 import DonateSection from "@/components/sections/ajuda/DonateSection";
 import PartnersSection from "@/components/sections/ajuda/PartnersSection";
 import NavbarScroll from "@/components/layout/NavbarScroll";
-import { locaisData } from "@/data/locaisData"; // ✅ importa tua constante
+import { locaisData } from "@/data/locaisData"; 
 
 // importação dinâmica do mapa (sem SSR)
 const MapaEcoDoa = dynamic(() => import("@/components/sections/ajuda/MapaEcoDoa"), {

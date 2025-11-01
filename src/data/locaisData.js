@@ -1,5 +1,3 @@
-// src/data/locaisData.js
-
 export const locaisData = [
   {
     id: 1,

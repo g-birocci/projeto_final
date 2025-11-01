@@ -106,7 +106,6 @@ export default function Calculadora() {
       </div>
 
       <div className="text-center mt-16">
-        {/* Número total com cor sincronizada à barra */}
         <p
           className={`text-6xl font-extrabold mb-3 transition-colors duration-300 ${getBarColor().replace(
             "bg-",
@@ -118,7 +117,7 @@ export default function Calculadora() {
 
         <p className="text-lg text-[var(--ecodoa-text)]/80 mb-8">{ecoNivel}</p>
 
-        {/* Barra de progresso */}
+        {/* barra de progresso */}
         <div className="relative w-full max-w-xl mx-auto h-4 bg-[var(--ecodoa-soft)]/50 rounded-full overflow-hidden">
           <motion.div
             className={`h-full ${getBarColor()} rounded-full`}

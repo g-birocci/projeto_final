@@ -10,7 +10,7 @@ export default function Items({ title, items }) {
   const handleScroll = (dir) => {
     if (!ref.current) return;
     const cardWidth = ref.current.firstChild?.offsetWidth || 320;
-    const gap = 16; // mesmo valor do Tailwind gap-4 (4 = 1rem = 16px)
+    const gap = 16; 
     const scrollAmount = cardWidth + gap;
     ref.current.scrollBy({
       left: dir === "left" ? -scrollAmount : scrollAmount,
@@ -24,7 +24,6 @@ export default function Items({ title, items }) {
         {title}
       </h4>
 
-      {/* Botão Esquerda */}
       <button
         onClick={() => handleScroll("left")}
         className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 -translate-x-2"
@@ -32,7 +31,6 @@ export default function Items({ title, items }) {
         <ChevronLeft className="w-5 h-5" />
       </button>
 
-      {/* Conteúdo Scrolling */}
       <div
         ref={ref}
         className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 px-2 snap-x snap-mandatory"
@@ -77,7 +75,6 @@ export default function Items({ title, items }) {
         ))}
       </div>
 
-      {/* Botão Direita */}
       <button
         onClick={() => handleScroll("right")}
         className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 translate-x-2"

@@ -14,8 +14,6 @@ export default function Sobre() {
     <div className="min-h-screen bg-[var(--ecodoa-bg)] text-[var(--ecodoa-text)] overflow-hidden">
       <Navbar />
       <NavbarScroll />
-
-      {/* ===== HERO ===== */}
       <section className="relative overflow-hidden pt-28 pb-16 px-5 text-center">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-56 h-56 bg-[var(--ecodoa-accent)] rounded-full blur-3xl" />
@@ -45,7 +43,7 @@ export default function Sobre() {
         </div>
       </section>
 
-      {/* ===== DASHBOARD SOBRE ===== */}
+      {/* DASHBOARD SOBRE  */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +56,7 @@ export default function Sobre() {
         </div>
       </motion.div>
 
-     {/* ===== QUEM SOMOS ===== */}
+     {/* QUEM SOMOS */}
 <motion.section
   initial={{ opacity: 0, y: 60 }}
   whileInView={{ opacity: 1, y: 0 }}
@@ -66,7 +64,7 @@ export default function Sobre() {
   viewport={{ once: true }}
   className="max-w-4xl mx-auto px-6 py-20 text-center bg-white"
 >
-  {/* Logo EcoDoa centralizada */}
+  {/* Logo EcoDoa*/}
   <motion.div
     initial={{ opacity: 0, scale: 0.9 }}
     whileInView={{ opacity: 1, scale: 1 }}
@@ -100,8 +98,7 @@ export default function Sobre() {
   >
     O <strong className="text-[var(--ecodoa-primary)]">EcoDoa</strong> nasceu da vontade de provar que 
     <span className="text-[var(--ecodoa-accent)] font-semibold"> pequenas ações mudam o mundo</span>.
-    Somos uma comunidade que acredita no poder de doar, partilhar e cuidar — com empatia, propósito
-    e sustentabilidade.
+    Somos uma comunidade que acredita no poder de doar, partilhar e cuidar.
   </motion.p>
 
   <div className="relative mt-10 flex justify-center">
@@ -121,12 +118,11 @@ export default function Sobre() {
     className="text-base text-[var(--ecodoa-secondary)]/70 leading-relaxed mt-8"
   >
     Cada doação é uma semente plantada. Cada gesto, um elo na corrente do bem.  
-    <strong className="text-[var(--ecodoa-primary)]"> EcoDoa </strong> é mais do que um projeto —
-    é um convite para fazermos juntos o futuro florescer.
+    <strong className="text-[var(--ecodoa-primary)]"> EcoDoa </strong> é mais do que um projeto, é um convite para fazermos juntos o futuro florescer.
   </motion.p>
 </motion.section>
 
-      {/* ===== POR QUE DOAR ===== */}
+      {/* POR QUE DOAR */}
       <motion.section
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
