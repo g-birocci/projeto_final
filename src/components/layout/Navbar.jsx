@@ -76,13 +76,15 @@ export default function Navbar() {
           {/* Perfil e Título */}
           <div className="mb-12 mt-4">
             <div className="flex items-center gap-4 mb-4">
-              <Image
-                src="/img/profile.jpg"
-                alt="Perfil"
-                width={60}
-                height={60}
-                className="rounded-full border-3 border-[var(--ecodoa-accent)] shadow-lg"
-              />
+              <Link href="/profile" onClick={() => setSidebarOpen(false)}>
+                <Image
+                  src="/img/profile.jpg"
+                  alt="Perfil"
+                  width={60}
+                  height={60}
+                  className="rounded-full border-3 border-[var(--ecodoa-accent)] shadow-lg"
+                />
+              </Link>
               <div>
                 <h2 className="text-2xl font-bold text-[var(--ecodoa-accent)]">Olá, Gretta.</h2>
                 <p className="text-sm text-[var(--ecodoa-soft)]">Portugal</p>

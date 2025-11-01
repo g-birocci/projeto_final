@@ -29,14 +29,14 @@ export default function Calculadora() {
 
   const ecoNivel =
     totalImpact < 40
-      ? "Impacto Muito Baixo: Estás a viver de forma exemplar. Continua a inspirar outros!"
+      ? "Muito Baixo: Estás a viver de forma exemplar. Continua a inspirar outros!"
       : totalImpact < 80
-      ? "Impacto Baixo: Pequenas ações, grande diferença. Mantém o foco sustentável!"
+      ? "Baixo: Pequenas ações, grande diferença. Mantém o foco sustentável!"
       : totalImpact < 120
-      ? "Impacto Moderado: Estás no bom caminho, mas há espaço para melhorar."
+      ? "Moderado: Estás no bom caminho, mas há espaço para melhorar."
       : totalImpact < 160
-      ? "Impacto Elevado: Reduz um pouco o consumo e vais sentir o resultado rapidamente."
-      : "Impacto Muito Alto: Está na hora de repensar hábitos e fazer mudanças pelo planeta.";
+      ? "Elevado: Reduz um pouco o consumo e vais sentir o resultado rapidamente."
+      : "Muito Alto: Está na hora de repensar hábitos e fazer mudanças pelo planeta.";
 
   return (
     <motion.section
@@ -81,12 +81,9 @@ export default function Calculadora() {
             max: 50,
           },
         ].map((item, i) => (
-          <div
-            key={i}
-            className="flex flex-col items-center gap-4 px-2"
-          >
+          <div key={i} className="flex flex-col items-center gap-4 px-2">
             <div className="flex items-center gap-2 w-full justify-center">
-              <item.icon className="w-5 h-5 text-[var(--ecodoa-primary)]" /> {/* Ícone ajustado */}
+              <item.icon className="w-5 h-5 text-[var(--ecodoa-primary)]" />
               <span className="font-medium text-[var(--ecodoa-text)]">
                 {item.label}
               </span>
@@ -109,19 +106,27 @@ export default function Calculadora() {
       </div>
 
       <div className="text-center mt-16">
-        <p className="text-6xl font-extrabold text-[var(--ecodoa-accent)] mb-3">
+        {/* Número total com cor sincronizada à barra */}
+        <p
+          className={`text-6xl font-extrabold mb-3 transition-colors duration-300 ${getBarColor().replace(
+            "bg-",
+            "text-"
+          )}`}
+        >
           {totalImpact}
         </p>
+
         <p className="text-lg text-[var(--ecodoa-text)]/80 mb-8">{ecoNivel}</p>
 
+        {/* Barra de progresso */}
         <div className="relative w-full max-w-xl mx-auto h-4 bg-[var(--ecodoa-soft)]/50 rounded-full overflow-hidden">
           <motion.div
+            className={`h-full ${getBarColor()} rounded-full`}
             initial={{ width: 0 }}
             animate={{
               width: `${Math.min((totalImpact / 200) * 100, 100)}%`,
             }}
-            transition={{ duration: 1 }}
-            className={`absolute left-0 top-0 h-full rounded-full ${getBarColor()} shadow-sm`}
+            transition={{ duration: 0.6 }}
           ></motion.div>
         </div>
 

@@ -33,6 +33,7 @@ export default function DonateSection() {
           </motion.div>
 
           {/* Título e texto */}
+          {/* Título e texto */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -42,7 +43,6 @@ export default function DonateSection() {
           >
             Ajuda-nos a manter o EcoDoa vivo
           </motion.h2>
-
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}

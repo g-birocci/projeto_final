@@ -77,7 +77,7 @@ export default function Educacionais() {
           Recursos Educacionais
         </h2>
         <p className="text-[var(--ecodoa-text)]/70 text-base">
-          Aprende mais sobre sustentabilidade e impacto social
+          Aprende mais sobre sustentabilidade e impacto.
         </p>
       </div>
 
