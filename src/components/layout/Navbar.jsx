@@ -46,7 +46,7 @@ export default function Navbar() {
           height={50}
           className="drop-shadow-md"
         />
-        <span className="text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
+        <span className="text-xl font-bold tracking-tight text-[var(--ecodoa-primary)]">
           EcoDoa
         </span>
       </Link>

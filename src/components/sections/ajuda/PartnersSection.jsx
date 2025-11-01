@@ -86,7 +86,7 @@ export default function PartnersSection() {
           Parceiros que Fazem a Diferença
         </h2>
         <p className="text-[var(--ecodoa-text)]/70 text-base">
-          Organizações que acreditam num futuro mais solidário e sustentável
+          Organizações que acreditam num futuro mais solidário e sustentável.
         </p>
       </div>
 
