@@ -53,9 +53,7 @@ export default function Dicas() {
 
       {/* Subtítulo ajustado para mobile */}
       <p className="text-center text-[var(--ecodoa-text)]/70 mb-12 text-base max-w-full mx-auto">
-        Pequenas ações geram grandes mudanças. Experimenta aplicar uma destas
-        ideias no teu dia a dia.
-      </p>
+        Pequenas ações geram grandes mudanças. </p>
 
       {/* Lista de Dicas */}
       <div className="grid grid-cols-1 gap-8 max-w-full mx-auto text-base leading-relaxed text-[var(--ecodoa-text)]/85"> {/* Ajustado para grid-cols-1 e tamanhos de fonte/gap */}

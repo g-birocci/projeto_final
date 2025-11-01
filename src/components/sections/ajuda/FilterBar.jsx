@@ -1,36 +1,34 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Home, Utensils, Briefcase, GraduationCap, Heart, Shirt } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 export default function FilterBar({ filters, toggleFilter }) {
   const filterOptions = [
-    { key: "shelter", label: "Alojamento", icon: Home },
-    { key: "meal", label: "Refeições", icon: Utensils },
-
-    { key: "course", label: "Cursos", icon: GraduationCap },
-    { key: "support", label: "Apoio", icon: Heart },
-    { key: "clothes", label: "Roupas", icon: Shirt },
+    { key: "shelter", label: "Alojamento", color: "text-rose-500" },
+    { key: "meal", label: "Refeições", color: "text-amber-500" },
+    { key: "course", label: "Cursos", color: "text-blue-500" },
+    { key: "support", label: "Apoio", color: "text-emerald-600" },
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="z-10 w-full bg-[var(--ecodoa-bg)] border-y border-[var(--ecodoa-soft)]/60 shadow-sm py-3 px-2 flex flex-wrap justify-center gap-2"
+      transition={{ duration: 0.5 }}
+      className="z-10 w-full bg-white/90 backdrop-blur-md py-2 px-3 flex flex-wrap justify-center gap-2 sticky top-0"
     >
-      {filterOptions.map(({ key, label, icon: Icon }) => (
+      {filterOptions.map(({ key, label, color }) => (
         <button
           key={key}
           onClick={() => toggleFilter(key)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all duration-200 shadow-sm ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
             filters[key]
-              ? "bg-[var(--ecodoa-primary)] text-white hover:bg-[var(--ecodoa-secondary)]"
-              : "bg-white border border-[var(--ecodoa-light-olive)] text-[var(--ecodoa-text)] hover:bg-[var(--ecodoa-green)]/40"
+              ? `bg-[var(--ecodoa-accent)] text-white`
+              : `bg-white border border-[var(--ecodoa-green)] text-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-green)]/20`
           }`}
         >
-          <Icon className="w-4 h-4" />
+          <MapPin className={`w-4 h-4 ${color}`} />
           {label}
         </button>
       ))}
