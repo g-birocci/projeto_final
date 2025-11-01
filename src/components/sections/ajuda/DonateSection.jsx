@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DoarEcoModal from "@/components/sections/about/DoarEcoModal";
+import DoarEcoModal from "@/components/sections/ajuda/DoarEcoModal";
 import { Sparkles, HeartHandshake } from "lucide-react";
 
 export default function DonateSection() {
@@ -12,6 +13,7 @@ export default function DonateSection() {
     <>
       {/* ===== SEÇÃO DE DOAÇÃO ===== */}
       <section className="relative overflow-hidden bg-[var(--ecodoa-primary)] text-white py-24 px-6 text-center">
+        {/* Fundo animado suave */}
         <motion.div
           animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -27,12 +29,18 @@ export default function DonateSection() {
             viewport={{ once: true }}
             className="flex justify-center mb-6"
           >
-            <div className="bg-[var(--ecodoa-accent)]/20 p-4 rounded-full shadow-inner">
-              <HeartHandshake className="w-8 h-8 text-[var(--ecodoa-accent)]" />
+          {/* logo centralizada */}
+            <div className="flex justify-center mt-2 mb-4">
+              <Image
+                src="/img/EcoDoa.svg"
+                alt="Logo EcoDoa"
+                width={80}
+                height={80}
+                className="object-contain"
+              />
             </div>
           </motion.div>
 
-          {/* Título e texto */}
           {/* Título e texto */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -43,6 +51,7 @@ export default function DonateSection() {
           >
             Ajuda-nos a manter o EcoDoa vivo
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -58,12 +67,11 @@ export default function DonateSection() {
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
-            onClick={() => setOpen(true)} // 🔥 Abre o modal
+            onClick={() => setOpen(true)}
             className="inline-flex items-center justify-center gap-2 
                        bg-[var(--ecodoa-accent)] text-[var(--ecodoa-secondary)] font-semibold px-10 py-4 
                        rounded-2xl shadow-md hover:bg-[var(--ecodoa-light-olive)] transition-all duration-200"
           >
-            <Sparkles className="w-5 h-5 text-[var(--ecodoa-secondary)]" />
             Apoiar o EcoDoa
           </motion.button>
         </div>
@@ -71,7 +79,17 @@ export default function DonateSection() {
 
       {/* MODAL DE DOAÇÃO */}
       <AnimatePresence>
-        {open && <DoarEcoModal isOpen={open} onClose={() => setOpen(false)} />}
+        {open && (
+          <motion.div
+            key="modal"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <DoarEcoModal isOpen={open} onClose={() => setOpen(false)} />
+          </motion.div>
+        )}
       </AnimatePresence>
     </>
   );

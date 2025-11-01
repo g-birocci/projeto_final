@@ -9,7 +9,7 @@ export default function PartnersSection() {
 
   const handleScroll = (ref, direction) => {
     if (!ref.current) return;
-    const scrollAmount = 400;
+    const scrollAmount = ref.current.offsetWidth;
     ref.current.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
@@ -17,7 +17,7 @@ export default function PartnersSection() {
   };
 
   const partners = [
-        {
+    {
       name: "Bytes4Future",
       city: "Portugal",
       desc: "Programa educativo que transforma jovens através da formação tecnológica e inclusão digital.",
@@ -76,7 +76,7 @@ export default function PartnersSection() {
         "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop",
       impact: "20K+ horas voluntariado",
       volunteers: "800+ voluntários",
-    }
+    },
   ];
 
   return (
@@ -90,37 +90,34 @@ export default function PartnersSection() {
         </p>
       </div>
 
-      {/* Wrapper principal */}
       <div className="relative group">
-        {/* Botão Esquerda */}
         <button
           onClick={() => handleScroll(sectionRef, "left")}
           className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 -translate-x-2"
           aria-label="Scroll esquerda"
         >
-          <ChevronLeft className="w-5 h-5" /> {/* Ícone ajustado */}
+          <ChevronLeft className="w-5 h-5" />
         </button>
 
-        {/* Conteúdo Scrolling */}
         <div
           ref={sectionRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 px-2"
+          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 px-2 snap-x snap-mandatory"
         >
           {partners.map((partner, idx) => (
             <motion.div
               key={idx}
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="flex-none w-[300px] bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-[var(--ecodoa-light-olive)] hover:border-[var(--ecodoa-accent)] transition-all duration-300"
+              className="flex-none w-full sm:w-[600px] snap-center bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-[var(--ecodoa-light-olive)] hover:border-[var(--ecodoa-accent)] transition-all duration-300"
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-56 overflow-hidden">
                 <img
                   src={partner.image}
                   alt={partner.name}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
                 <div className="absolute top-4 right-4 bg-[var(--ecodoa-accent)] text-[var(--ecodoa-text)] px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-                  <MapPin className="w-3 h-3" /> {/* Ícone ajustado */}
+                  <MapPin className="w-3 h-3" />
                   {partner.city}
                 </div>
               </div>
@@ -136,7 +133,7 @@ export default function PartnersSection() {
 
                 <div className="grid grid-cols-2 gap-3 mb-4 p-3 bg-[var(--ecodoa-green)]/20 rounded-xl">
                   <div className="flex items-center gap-2">
-                    <Heart className="w-3 h-3 text-[var(--ecodoa-alert)]" /> {/* Ícone ajustado */}
+                    <Heart className="w-3 h-3 text-[var(--ecodoa-alert)]" />
                     <div>
                       <p className="text-xs text-[var(--ecodoa-text)]/60">
                         Impacto
@@ -147,7 +144,7 @@ export default function PartnersSection() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Users className="w-3 h-3 text-[var(--ecodoa-olive)]" /> {/* Ícone ajustado */}
+                    <Users className="w-3 h-3 text-[var(--ecodoa-olive)]" />
                     <div>
                       <p className="text-xs text-[var(--ecodoa-text)]/60">
                         Equipa
@@ -166,14 +163,13 @@ export default function PartnersSection() {
                   className="inline-flex items-center justify-center gap-2 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white font-semibold py-2 px-4 rounded-xl transition-all duration-300 hover:shadow-lg text-sm"
                 >
                   <span>Visitar Site</span>
-                  <ExternalLink className="w-3 h-3" /> {/* Ícone ajustado */}
+                  <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Botão Direita */}
         <button
           onClick={() => handleScroll(sectionRef, "right")}
           className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 translate-x-2"
