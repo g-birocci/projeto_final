@@ -5,10 +5,9 @@ import { useEffect, useState, useMemo } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FilterBar from "@/components/sections/ajuda/FilterBar";
-import DonateSection from "@/components/sections/ajuda/DonateSection"; 
-import PartnersSection from "@/components/sections/ajuda/PartnersSection"; 
+import DonateSection from "@/components/sections/ajuda/DonateSection";
+import PartnersSection from "@/components/sections/ajuda/PartnersSection";
 import NavbarScroll from "@/components/layout/NavbarScroll";
-import SideBarMenu from "@/components/layout/SideBarMenu";
 
 // importação dinâmica do mapa (sem SSR)
 const MapaEcoDoa = dynamic(() => import("@/components/sections/ajuda/MapaEcoDoa"), {
@@ -93,10 +92,6 @@ export default function Ajuda() {
 
   return (
     <div className="min-h-screen bg-[var(--ecodoa-bg)] text-[var(--ecodoa-text)]">
-      <Navbar />
-      <NavbarScroll />
-      <SideBarMenu/>
-
       {/* Ajustado padding vertical para garantir margens no layout mobile */}
       <section className="px-4 pt-24 pb-8 text-center max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-[var(--ecodoa-primary)] mb-4">
@@ -121,6 +116,8 @@ export default function Ajuda() {
       </section>
       <PartnersSection />
       <DonateSection />
+      <Navbar />
+      <NavbarScroll />
       <Footer />
     </div>
   );

@@ -1,6 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
 import NavbarScroll from "@/components/layout/NavbarScroll";
-import Sidebar from "@/components/layout/SideBarMenu";
 
 export default function Perfil() {
   return (

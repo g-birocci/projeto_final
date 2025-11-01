@@ -6,11 +6,12 @@ import Link from "next/link";
 import { X } from "lucide-react";
 
 const navItems = [
-  { href: "/doacoes", label: "Doações" },
+  { href: "/", label: "Doações" },
   { href: "/ajuda", label: "Pontos de Ajuda" },
   { href: "/viver", label: "Vida Sustentável" },
   { href: "/sobre", label: "Quem Somos" },
-  { href: "/usuario", label: "Meu Perfil" }, // Adicionado item para Perfil
+  { href: "/profile", label: "Meu Perfil" }, // Perfil do user logado
+
 ];
 
 export default function Navbar() {
@@ -34,8 +35,8 @@ export default function Navbar() {
       </button>
 
       {/* Logo relativo ao app viewport (canto superior esquerdo) */}
-      <Link 
-        href="/" 
+      <Link
+        href="/"
         className="absolute top-6 left-6 z-50 flex items-center gap-2 hover:opacity-90 transition-opacity"
       >
         <Image
@@ -46,23 +47,21 @@ export default function Navbar() {
           className="drop-shadow-md"
         />
         <span className="text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">
-        EcoDoa
+          EcoDoa
         </span>
       </Link>
 
       {/* Overlay dentro do app viewport */}
       <div
-        className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
-          sidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
+        className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${sidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
         onClick={() => setSidebarOpen(false)}
       />
 
       {/* Sidebar ancorada ao app viewport */}
       <div
-        className={`absolute top-0 right-0 h-full w-80 sm:w-96 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${
-          sidebarOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`absolute top-0 right-0 h-full w-80 sm:w-96 bg-[var(--ecodoa-primary)] shadow-2xl z-50 transform transition-transform duration-500 ease-in-out ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className="flex flex-col h-full p-8 pt-8">
           {/* Botão Fechar */}
@@ -110,7 +109,7 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="mt-8">
-            <Link 
+            <Link
               href="/doacoes"
               onClick={() => setSidebarOpen(false)}
             >

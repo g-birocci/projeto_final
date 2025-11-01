@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import DashboardSobre from "@/components/sections/about/DashboardSobre"; 
-import Feedbacks from "@/components/sections/about/Feedbacks"; 
+import DashboardSobre from "@/components/sections/about/DashboardSobre";
+import Feedbacks from "@/components/sections/about/Feedbacks";
 import ChamadaDoacao from "@/components/sections/about/Doar";
 import NavbarScroll from "@/components/layout/NavbarScroll";
-import SidebarMenu from "@/components/layout/SideBarMenu";
+import { HeartHandshake } from "lucide-react";
 
 export default function Sobre() {
   // Layout ajustado para ser fixo em escala mobile, removendo classes responsivas e ajustando fontes.
@@ -16,9 +16,6 @@ export default function Sobre() {
     <div className="min-h-screen bg-white text-[#1E2D2F]">
       <Navbar />
       <NavbarScroll />
-      <SidebarMenu />
-
-   
       <section className="relative overflow-hidden pt-32 pb-24">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--ecodoa-accent)] rounded-full blur-3xl" />
@@ -31,7 +28,7 @@ export default function Sobre() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             className="text-4xl font-extrabold text-green-700 mb-6"
-            >
+          >
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -48,7 +45,7 @@ export default function Sobre() {
               className="text-lg text-[var(--ecodoa-secondary)]/70 max-w-3xl mx-auto leading-relaxed"
             >
               Acreditamos que cada gesto pode mudar o mundo.
-              No <strong className="text-[var(--ecodoa-primary)]">EcoDoa</strong>, 
+              No <strong className="text-[var(--ecodoa-primary)]">EcoDoa</strong>,
               transformamos doações em conexões reais e impacto sustentável.
             </motion.p>
           </motion.div>
@@ -77,7 +74,7 @@ export default function Sobre() {
         <div className="relative bg-gradient-to-br from-[var(--ecodoa-primary)] to-[var(--ecodoa-secondary)] rounded-3xl p-8 shadow-2xl overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--ecodoa-accent)]/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl" />
-          
+
           <div className="relative z-10 text-center">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -88,7 +85,7 @@ export default function Sobre() {
             >
               Quem Somos
             </motion.h2>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -169,7 +166,7 @@ export default function Sobre() {
             {/* Decoração Circular Atrás */}
             <div className="absolute -top-8 -right-8 w-full h-full bg-[var(--ecodoa-accent)]/20 rounded-3xl -z-10" />
             <div className="absolute -bottom-8 -left-8 w-full h-full bg-[var(--ecodoa-primary)]/10 rounded-3xl -z-10" />
-            
+
             <div className="relative overflow-hidden rounded-3xl shadow-2xl border-4 border-white">
               <Image
                 src="/img/sustentabilidade.jpg"
@@ -183,12 +180,11 @@ export default function Sobre() {
           </motion.div>
         </div>
       </motion.section>
-
       <Feedbacks />
-      <ChamadaDoacao />
+      <ChamadaDoacao/>
       <Footer />
     </div>
   );
 }
 
-// commit
+
