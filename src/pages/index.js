@@ -19,7 +19,6 @@ export default function Index() {
   const [modalFiltrosAberto, setModalFiltrosAberto] = useState(false);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
 
-
   // modal
   const [fotos, setFotos] = useState([]);
   const [descricao, setDescricao] = useState("");
@@ -80,7 +79,6 @@ export default function Index() {
       },
     ];
 
-
     setTimeout(() => {
       setProdutos(mockProdutos);
       setLoading(false);
@@ -91,116 +89,99 @@ export default function Index() {
     <div>
       <Navbar />
       <div className="z-8 px-4 pt-20">
-        <a
-          href="/voltar"
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-ecodoa-soft hover:bg-ecodoa-accent transition-all shadow-md"
-        >
-          <ArrowLeft className="w-5 h-5 text-ecodoa-text" />
-        </a>
-
-      </div>
-
-      {/* Campo de pesquisa e botão de filtro */}
-      {/* Ajustado para layout de coluna única em mobile */}
-      <div className="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto mt-8 px-4">
-      <div className="relative w-full flex-1">
-      <Search className="absolute left-3 top-3 h-5 w-5 text-ecodoa-olive" />
-          <Input
-            placeholder="Pesquisar doações..."
-            className="pl-10 py-2 w-full --ecodoa-bg text-ecodoa-text placeholder-ecodoa-olive border border-ecodoa-accent focus:outline-none focus:ring-2 focus:ring-ecodoa-primary focus:border-ecodoa-primary"
-            value={busca}
-            onChange={(e) => setBusca(e.target.value)}
-          />
-
-
+        {/* Campo de pesquisa e botão de filtro */}
+        {/* Ajustado para layout de coluna única em mobile */}
+        <div className="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto mt-8 px-4">
+          <div className="relative w-full flex-1">
+            <Search className="absolute left-3 top-3 h-5 w-5 text-ecodoa-olive" />
+            <Input
+              placeholder="Pesquisar doações..."
+              className="pl-10 py-2 w-full --ecodoa-bg text-ecodoa-text placeholder-ecodoa-olive border border-ecodoa-accent focus:outline-none focus:ring-2 focus:ring-ecodoa-primary focus:border-ecodoa-primary"
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+            />
+          </div>
+          <Button
+            variant="outline"
+            size="default"
+            className="w-full"
+            onClick={() => setModalFiltrosAberto(true)}
+          >
+            Filtros
+          </Button>
         </div>
-        <Button
-          variant="outline"
-          size="default"
-          className="w-full"
-          onClick={() => setModalFiltrosAberto(true)}
+
+        {/* Header ajustado para layout mobile fixo */}
+        <header
+          className="h-[300px] bg-cover bg-center flex flex-col items-center justify-center text-white text-center px-4 py-8 mt-6"
+          style={{
+            backgroundImage: 'url("https://via.placeholder.com/1200x400?text=Doe+o+que+n%C3%A3o+usa+mais")',
+            textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+          }}
         >
-          Filtros
-        </Button>
-
-      </div>
-
-
-      {/* Header ajustado para layout mobile fixo */}
-      <header
-        className="h-[300px] bg-cover bg-center flex flex-col items-center justify-center text-white text-center px-4 py-8 mt-6"
-        style={{
-          backgroundImage:
-            'url("https://via.placeholder.com/1200x400?text=Doe+o+que+n%C3%A3o+usa+mais")',
-          textShadow: "0 2px 4px rgba(0,0,0,0.5)",
-        }}
-      >
-        <h1 className="text-3xl font-bold text-[#265c14ad] m-0">
-        Está na hora do desapego.
-        </h1>
-        <p className="text-lg mt-4 text-[#090871ff]">
-          Doe seus itens, receba doações, reutilizar é viver!
-        </p>
-        <Button
-          variant="default"
-          size="default"
-          className="mt-6 bg-yellow-600 hover:bg-green-800"
-          onClick={() => setModalAberto(true)}
-        >
-          Publicar Doação
-        </Button>
-      </header>
-
-
-      {/* Grid de produtos ajustado para 2 colunas para melhor aproveitamento no mobile */}
-      <main className="px-4 py-8 grid grid-cols-2 gap-4">
-        {loading ? (
-          <p className="text-center text-gray-600 col-span-full">Carregando...</p>
-        ) : error ? (
-          <p className="text-center text-red-500 col-span-full">{error}</p>
-        ) : produtos.length > 0 ? (
-          produtos
-            .filter((produto) =>
-              produto.nome.toLowerCase().includes(busca.toLowerCase()) &&
-              (categoriaSelecionada === "" ||
-                produto.categoria?.toLowerCase() === categoriaSelecionada.toLowerCase())
-            )
-
-
-            .map((produto) => (
-              <CardProduto key={produto.id} produto={produto} />
-            ))
-        ) : (
-          <p className="text-center text-gray-600 col-span-full">
-            Nenhum item disponível no momento.
+          <h1 className="text-3xl font-bold text-[#265c14ad] m-0">
+            Está na hora do desapego.
+          </h1>
+          <p className="text-lg mt-4 text-[#090871ff]">
+            Doe seus itens, receba doações, reutilizar é viver!
           </p>
+          <Button
+            variant="default"
+            size="default"
+            className="mt-6 bg-yellow-600 hover:bg-green-800"
+            onClick={() => setModalAberto(true)}
+          >
+            Publicar Doação
+          </Button>
+        </header>
+
+        {/* Grid de produtos ajustado para 2 colunas para melhor aproveitamento no mobile */}
+        <main className="px-4 py-8 grid grid-cols-2 gap-4">
+          {loading ? (
+            <p className="text-center text-gray-600 col-span-full">Carregando...</p>
+          ) : error ? (
+            <p className="text-center text-red-500 col-span-full">{error}</p>
+          ) : produtos.length > 0 ? (
+            produtos
+              .filter((produto) =>
+                produto.nome.toLowerCase().includes(busca.toLowerCase()) &&
+                (categoriaSelecionada === "" ||
+                  produto.categoria?.toLowerCase() === categoriaSelecionada.toLowerCase())
+              )
+              .map((produto) => (
+                <CardProduto key={produto.id} produto={produto} />
+              ))
+          ) : (
+            <p className="text-center text-gray-600 col-span-full">
+              Nenhum item disponível no momento.
+            </p>
+          )}
+        </main>
+
+        {/* Modal separado */}
+        {modalAberto && (
+          <ModalDoacao
+            onClose={() => setModalAberto(false)}
+            fotos={fotos}
+            setFotos={setFotos}
+            descricao={descricao}
+            setDescricao={setDescricao}
+            categoria={categoria}
+            setCategoria={setCategoria}
+            confirmado={confirmado}
+            setConfirmado={setConfirmado}
+            handleFotoUpload={handleFotoUpload}
+            handleConfirmarDoacao={handleConfirmarDoacao}
+          />
         )}
-      </main>
-
-      {/* Modal separado */}
-      {modalAberto && (
-        <ModalDoacao
-          onClose={() => setModalAberto(false)}
-          fotos={fotos}
-          setFotos={setFotos}
-          descricao={descricao}
-          setDescricao={setDescricao}
-          categoria={categoria}
-          setCategoria={setCategoria}
-          confirmado={confirmado}
-          setConfirmado={setConfirmado}
-          handleFotoUpload={handleFotoUpload}
-          handleConfirmarDoacao={handleConfirmarDoacao}
-        />
-      )}
-      {modalFiltrosAberto && (
-        <ModalFiltros
-          onClose={() => setModalFiltrosAberto(false)}
-          categoriaSelecionada={categoriaSelecionada}
-          setCategoriaSelecionada={setCategoriaSelecionada}
-        />
-      )}
-
+        {modalFiltrosAberto && (
+          <ModalFiltros
+            onClose={() => setModalFiltrosAberto(false)}
+            categoriaSelecionada={categoriaSelecionada}
+            setCategoriaSelecionada={setCategoriaSelecionada}
+          />
+        )}
+      </div>
       <Footer />
     </div>
   );

@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Edit3, LogOut } from "lucide-react";
 import EcoDoaAssistant from "@/components/EcoDoaAssistant";
 import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 
 export default function ProfilePage() {
   const [editing, setEditing] = useState(false);
@@ -43,14 +44,16 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white relative text-[var(--ecodoa-text)] flex flex-col px-5 py-24 sm:py-20 sm:px-8">
-      {/* Botão Voltar */}
-      <button
-        onClick={() => window.history.back()}
-        className="absolute top-6 left-5 text-[var(--ecodoa-accent)] hover:opacity-80"
-      >
-        <ArrowLeft className="w-6 h-6" />
-      </button>
+    <div className="min-h-screen bg-white relative text-[var(--ecodoa-text)] flex flex-col">
+      <Navbar />
+      <div className="px-5 py-24 sm:py-20 sm:px-8">
+        {/* Botão Voltar */}
+        <button
+          onClick={() => window.history.back()}
+          className="absolute top-6 left-5 text-[var(--ecodoa-accent)] hover:opacity-80"
+        >
+          <ArrowLeft className="w-6 h-6" />
+        </button>
 
       <div className="max-w-4xl mx-auto w-full space-y-10 flex-grow">
         {/* Header */}
@@ -114,6 +117,8 @@ export default function ProfilePage() {
 
       {/* Assistente */}
       <EcoDoaAssistant />
+      </div>
+      <Footer />
     </div>
   );
 }
@@ -133,5 +138,4 @@ function DashboardStat({ label, value, color }) {
       <p className="text-xs opacity-70 uppercase tracking-wide">{label}</p>
     </motion.div>
   );
-  <Footer/>
 }
