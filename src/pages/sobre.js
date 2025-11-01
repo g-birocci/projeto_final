@@ -2,18 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import DashboardSobre from "@/components/sections/about/DashboardSobre";
 import Feedbacks from "@/components/sections/about/Feedbacks";
 import ChamadaDoacao from "@/components/sections/about/ChamadaDoacao";
-import NavbarScroll from "@/components/layout/NavbarScroll";
 
 export default function Sobre() {
   return (
     <div className="min-h-screen bg-[var(--ecodoa-bg)] text-[var(--ecodoa-text)] overflow-hidden">
-      <Navbar />
-      <NavbarScroll />
       <section className="relative overflow-hidden pt-28 pb-16 px-5 text-center">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-56 h-56 bg-[var(--ecodoa-accent)] rounded-full blur-3xl" />
@@ -169,7 +164,6 @@ export default function Sobre() {
 
       <Feedbacks />
       <ChamadaDoacao />
-      <Footer />
     </div>
   );
 }
