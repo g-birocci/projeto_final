@@ -4,7 +4,7 @@ import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-white/70 backdrop-blur-sm text-center py-6 border-t border-[var(--ecodoa-soft)]/40">
+<footer className="w-full bg-gray-50 text-center py-6 border-t border-[var(--ecodoa-soft)]/40">
       <div className="flex justify-center gap-6 mb-3">
         <a
           href="https://facebook.com"
