@@ -43,7 +43,8 @@ export default function Index() {
         descricao: "Bom estado de conservação.",
         estado: "Usado",
         categoria: "Móveis",
-        imagem: "https://images.unsplash.com/photo-1663144256992-6b69263cc521?auto=format&fit=crop&q=80&w=736",
+        imagem:
+          "https://images.unsplash.com/photo-1663144256992-6b69263cc521?auto=format&fit=crop&q=80&w=736",
       },
       {
         id: 2,
@@ -51,7 +52,8 @@ export default function Index() {
         descricao: "Pouco uso, confortável, Tam: 38.",
         estado: "Usado",
         categoria: "Roupas",
-        imagem: "https://images.unsplash.com/photo-1747063458940-e89647e3a106?auto=format&fit=crop&q=80&w=1170",
+        imagem:
+          "https://images.unsplash.com/photo-1747063458940-e89647e3a106?auto=format&fit=crop&q=80&w=1170",
       },
       {
         id: 3,
@@ -59,7 +61,8 @@ export default function Index() {
         descricao: "Camisa leve e colorida para o verão.",
         estado: "Usado",
         categoria: "Roupas",
-        imagem: "https://images.unsplash.com/photo-1651888947765-2e0ec570bc9d?auto=format&fit=crop&q=80&w=687",
+        imagem:
+          "https://images.unsplash.com/photo-1651888947765-2e0ec570bc9d?auto=format&fit=crop&q=80&w=687",
       },
       {
         id: 4,
@@ -67,7 +70,8 @@ export default function Index() {
         descricao: "Já lidos, repassando para quem quer.",
         estado: "Usado",
         categoria: "Livros",
-        imagem: "https://images.unsplash.com/photo-1616852246157-f095beb2aef9?auto=format&fit=crop&q=80&w=1084",
+        imagem:
+          "https://images.unsplash.com/photo-1616852246157-f095beb2aef9?auto=format&fit=crop&q=80&w=1084",
       },
       {
         id: 5,
@@ -75,7 +79,8 @@ export default function Index() {
         descricao: "Doando pois estou de mudança.",
         estado: "Usado",
         categoria: "Eletrônicos",
-        imagem: "https://images.unsplash.com/photo-1689402059849-02c1b5a7931b?auto=format&fit=crop&q=80&w=735",
+        imagem:
+          "https://images.unsplash.com/photo-1689402059849-02c1b5a7931b?auto=format&fit=crop&q=80&w=735",
       },
     ];
 
