@@ -26,30 +26,33 @@ const {
 const requireObjectId = (paramName) => (req, res, next) => {
   const value = req.params[paramName];
   if (!/^[a-fA-F0-9]{24}$/.test(String(value))) {
-    return res.status(400).json({ error: true, message: `ID do parâmetro ${paramName} inválido`, data: {} });
+    return res.status(400).json({
+      error: true,
+      message: `ID do parâmetro ${paramName} inválido`,
+      data: {},
+    });
   }
   next();
 };
 
 const route = express.Router();
 
-route.get('/health', async(req, res) => {
-    try {
-        res.status(200).json({
-            message: 'Rota funcionando',
-            error:false,
-            data: {nome:'Grupo 1'}
-        })
-    } catch (error) {
-        console.error(error)
-        res.status(500).json({
-            message: 'Erro',
-            error:true,
-            data: {}
-        })
-    }
-}
- )
+route.get("/health", async (req, res) => {
+  try {
+    res.status(200).json({
+      message: "Rota funcionando",
+      error: false,
+      data: { nome: "Grupo 1" },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Erro",
+      error: true,
+      data: {},
+    });
+  }
+});
 
 // ================ Rotas do Usuário ===============
 route.get('/user/:id', requireObjectId('id'), getUserById)
@@ -90,6 +93,9 @@ route.get('/subcategories', listSubcategories);
 route.get('/subcategories/:id', requireObjectId('id'), getSubcategoryById);
 route.post('/subcategories', createSubcategory); // Admin only (futuro)
 
+
+route.post("/forgot-password", authController.forgotPassword); //para o esqueci a minha senha
+route.patch("/reset-password", authController.resetPassword);
 
 module.exports = route;
 

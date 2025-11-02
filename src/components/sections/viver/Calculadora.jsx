@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Car, UtensilsCrossed, ShowerHead, Flame } from "lucide-react";
+import { Car, UtensilsCrossed, ShowerHead, Flame, Shirt } from "lucide-react";
 
 export default function Calculadora() {
   const [data, setData] = useState({
@@ -10,21 +10,38 @@ export default function Calculadora() {
     carneSemana: 0,
     banhoMin: 0,
     energia: 0,
+    modaDescarte: 0, // Novo campo para peças de roupa compradas por mês
   });
 
+  const fatores = {
+    kmCarro: 0.2,
+    carneSemana: 2,
+    banhoMin: 0.5,
+    energia: 1.5,
+    modaDescarte: 3, // Cada peça representa ~3kg de CO₂
+  };
+
   const totalImpact = Math.round(
-    data.kmCarro * 0.2 +
-      data.carneSemana * 2 +
-      data.banhoMin * 0.5 +
-      data.energia * 1.5
+    data.kmCarro * fatores.kmCarro +
+      data.carneSemana * fatores.carneSemana +
+      data.banhoMin * fatores.banhoMin +
+      data.energia * fatores.energia +
+      data.modaDescarte * fatores.modaDescarte
   );
 
+  const toneladasEstimadas = (data.modaDescarte * fatores.modaDescarte * 12) / 1000;
+
+  const getColorClass = (value, max, type = 'bg') => {
+    const ratio = value / max;
+    if (ratio < 0.2) return `${type}-[var(--ecodoa-primary)]`;
+    if (ratio < 0.4) return `${type}-[var(--ecodoa-light-olive)]`;
+    if (ratio < 0.6) return `${type}-[var(--ecodoa-accent)]`;
+    if (ratio < 0.8) return `${type}-orange-400`;
+    return `${type}-[var(--ecodoa-alert)]`;
+  };
+
   const getBarColor = () => {
-    if (totalImpact < 40) return "bg-[var(--ecodoa-primary)]";
-    if (totalImpact < 80) return "bg-[var(--ecodoa-light-olive)]";
-    if (totalImpact < 120) return "bg-[var(--ecodoa-accent)]";
-    if (totalImpact < 160) return "bg-orange-400";
-    return "bg-[var(--ecodoa-alert)]";
+    return getColorClass(totalImpact, 200, 'bg');
   };
 
   const ecoNivel =
@@ -80,6 +97,13 @@ export default function Calculadora() {
             min: 0,
             max: 50,
           },
+          {
+            icon: Shirt,
+            key: "modaDescarte",
+            label: "Peças de roupa compradas por mês",
+            min: 0,
+            max: 30,
+          },
         ].map((item, i) => (
           <div key={i} className="flex flex-col items-center gap-4 px-2">
             <div className="flex items-center gap-2 w-full justify-center">
@@ -98,7 +122,12 @@ export default function Calculadora() {
               }
               className="w-full accent-[var(--ecodoa-olive)] cursor-pointer"
             />
-            <span className="text-[var(--ecodoa-primary)] font-semibold">
+            <span
+              className={`font-semibold transition-colors duration-300 ${getBarColor().replace(
+                "bg-",
+                "text-"
+              )}`}
+            >
               {data[item.key]}
             </span>
           </div>
@@ -115,7 +144,14 @@ export default function Calculadora() {
           {totalImpact}
         </p>
 
-        <p className="text-lg text-[var(--ecodoa-text)]/80 mb-8">{ecoNivel}</p>
+        <p
+          className={`text-lg mb-8 transition-colors duration-300 ${getBarColor().replace(
+            "bg-",
+            "text-"
+          )}`}
+        >
+          {ecoNivel}
+        </p>
 
         {/* barra de progresso */}
         <div className="relative w-full max-w-xl mx-auto h-4 bg-[var(--ecodoa-soft)]/50 rounded-full overflow-hidden">
@@ -133,6 +169,16 @@ export default function Calculadora() {
           <span>Baixo</span>
           <span>Médio</span>
           <span>Alto</span>
+        </div>
+
+        {/* impacto da moda */}
+        <div className="mt-10 text-sm text-[var(--ecodoa-text)]/70 max-w-xl mx-auto">
+          <p>
+            Estima-se que mais de <strong>39 mil toneladas</strong> de roupas sejam descartadas por ano no Deserto do Atacama. Cada peça comprada contribui para esse número.
+          </p>
+          <p className="mt-2">
+            Com o teu consumo atual, estimas contribuir com cerca de <strong>{toneladasEstimadas.toFixed(2)} toneladas</strong> de impacto anual relacionado à moda.
+          </p>
         </div>
       </div>
     </motion.section>

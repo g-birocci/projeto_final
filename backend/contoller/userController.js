@@ -234,7 +234,6 @@ const userCreate = async (req, res) => {
   }
 };
 
-
 // já está pronto ======================================================================
 
 const userUpdate = async (req, res) => {
