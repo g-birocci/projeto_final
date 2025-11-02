@@ -1,24 +1,61 @@
 const User = require("../model/User");
-const Validator = require("../validators/user.validator")
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const Validator = require("../validators/user.validator");
 User.init()
   .then(() => console.log("Índices criados com sucesso"))
   .catch((err) => console.error("Erro ao criar índices:", err));
 
-const genToken = () => {};
+const genToken = (data) => {
+  const secret = process.env.JWT_SECRET;
+  if(!secret)
+    return {mesage: 'nenhuma chave fornecida'}
+
+  return jwt.sign(data, secret, {
+    expiresIn: '1d'
+  })};
 
 const getUserById = async (req, res) => {
   try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        message: 'Id não fornecido',
+        error: true,
+        data: {}
+      });
+    }
+
+    if (!/^[a-fA-F0-9]{24}$/.test(String(id))) {
+      return res.status(400).json({
+        message: 'ID inválido',
+        error: true,
+        data: {}
+      });
+    }
+    
+    const user = await User.findById(id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        message: 'Usuário não encontrado',
+        error: true,
+        data: {}
+      });
+    }
+
     res.status(200).json({
-      message: "Rota funcionando",
+      message: 'Usuário encontrado com sucesso',
       error: false,
-      data: { nome: "Mario" },
+      data: user,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      message: "Erro",
+      message: 'Erro ao buscar usuário',
       error: true,
-      data: {},
+      data: {}
     });
   }
 };
@@ -66,6 +103,8 @@ const userLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    console.log("Dados no controller: ", req.body)
+
     // Verifica se enviou os campos
     if (!email || !password) {
       return res.status(400).json({
@@ -75,7 +114,6 @@ const userLogin = async (req, res) => {
       });
     }
 
-    // Procura usuário pelo email
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -86,22 +124,48 @@ const userLogin = async (req, res) => {
       });
     }
 
-    // Verifica se a senha confere
-    if (user.password !== password) {
+    // Verifica se a senha confere (compatível com senhas antigas em texto plano)
+    let passwordMatch = false;
+    if (user.password.startsWith('$2b$')) {
+      // Senha já está com hash bcrypt
+      passwordMatch = await bcrypt.compare(password, user.password);
+    } else {
+      // Senha antiga em texto plano (migração)
+      passwordMatch = user.password === password;
+      // Se a senha antiga estiver correta, vamos atualizar para hash
+      // Usando updateOne para não validar outros campos que podem ter valores inválidos
+      if (passwordMatch) {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await User.updateOne(
+          { _id: user._id },
+          { password: hashedPassword },
+          { runValidators: false }
+        );
+      }
+    }
+
+    if (!passwordMatch) {
       return res.status(401).json({
-        message: "Senha incorreta",
+        message: "Email ou senha incorretos",
         error: true,
         data: {},
       });
     }
 
-    // Login bem-sucedido
+    const token = genToken({id: user._id.toString()})
+
+    res.cookie("auth", token, {
+      httpOnly: true,
+      path: "/",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res.status(200).json({
       message: "Login realizado com sucesso",
       error: false,
       data: {
-        id: user.id,
-        firstName: user.firstName,
+        id: user._id,
+        firstName: user.firtName,
         lastName: user.lastName,
         email: user.email,
       },
@@ -115,6 +179,16 @@ const userLogin = async (req, res) => {
     });
   }
 };
+
+const logout = (req, res) => {
+  res.clearCookie("auth", { path: "/" }); 
+  res.status(200).json({
+    message: "Logout realizado com sucesso",
+    error: false,
+    data: {},
+  });
+};
+
 
 // Já está pronto =====================================================================
 const userCreate = async (req, res) => {
@@ -131,11 +205,15 @@ const userCreate = async (req, res) => {
         message: vali.errors
       }); //chamo a função pra validar os dados
     }
+
+    // Hash da senha antes de salvar
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = await User.create({
       firstName: firstName,
       lastName: lastName,
       email: email,
-      password: password,
+      password: hashedPassword,
       city: city,
       district: district,
     });
@@ -232,4 +310,24 @@ const userDelete = async (req, res) => {
     }
 };
 
-module.exports = { userCreate, userDelete, userLogin, userUpdate, getUserById, userGetId};
+
+const getMe = async (req, res) => {
+  try {
+    // req.user já está disponível pelo middleware requireAuth
+    if (!req.user) {
+      return res.status(401).json({ message: "Não autenticado", error: true, data: {} });
+    }
+
+    res.status(200).json({
+      message: "Usuário autenticado",
+      error: false,
+      data: req.user,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(401).json({ message: "Erro ao buscar usuário", error: true, data: {} });
+  }
+};
+
+
+module.exports = { userCreate, logout, getMe, userDelete, userLogin, userUpdate, getUserById, userGetId};

@@ -1,102 +1,132 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "@/context/authContext";
+import { createProduct, uploadImagesToCloudinary } from "@/services/api";
 import CardProduto from "../components/ui/CardProduto";
 import Footer from "../components/layout/Footer";
 import Navbar from "../components/layout/Navbar";
 import ModalDoacao from "../components/ui/ModalDoacao";
 import { Input } from "@/components/ui/Pesquisa";
 import { Button } from "@/components/ui/Button";
-import { Search, ArrowLeft } from "lucide-react";
+import { Search } from "lucide-react";
 import ModalFiltros from "../components/ui/ModalFiltros";
+import { useProducts } from "@/hooks/useProducts";
+import { useCategories } from "@/hooks/useCategories";
 
 export default function Index() {
-  const [produtos, setProdutos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const router = useRouter();
+  const { user } = useAuth();
   const [busca, setBusca] = useState("");
   const [modalAberto, setModalAberto] = useState(false);
   const [modalFiltrosAberto, setModalFiltrosAberto] = useState(false);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
-
+  const { products, loading, error, reload } = useProducts({
+    categoria: categoriaSelecionada,
+    busca: busca,
+  });
+  const {selectedCategory, selectedSubcategory} = useCategories();
+  
   // modal
   const [fotos, setFotos] = useState([]);
   const [descricao, setDescricao] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [title, setTitle] = useState("");
+  const [condition, setCondition] = useState("BOM");
+  const [district, setDistrict] = useState("");
+  const [city, setCity] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [subcategoryId, setSubcategoryId] = useState("");
   const [confirmado, setConfirmado] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
 
   const handleFotoUpload = (e) => {
-    const files = Array.from(e.target.files);
-    const urls = files.map((file) => URL.createObjectURL(file));
-    setFotos(urls);
+    const files = Array.from(e.target.files || []);
+    const newImages = [];
+
+    files.forEach(file => {
+      if (file.type.startsWith("image/") && fotos.length + newImages.length < 4) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          newImages.push(event.target.result);
+          if (newImages.length === Math.min(files.length, 4 - fotos.length)) {
+            setFotos(prev => [...prev, ...newImages]);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
   };
 
-  const handleConfirmarDoacao = () => {
-    setConfirmado(true);
+  const handleConfirmarDoacao = async () => {
+    if (!title.trim()) return alert("Título é obrigatório");
+    if (!condition) return alert("Condição é obrigatória");
+    if (!district) return alert("Distrito é obrigatório");
+    if (!city.trim()) return alert("Cidade é obrigatória");
+    if (!user) {
+      alert("Você precisa estar logado para publicar uma doação");
+      router.push("/auth/login");
+      return;
+    }
+  
+    try {
+      setSubmitting(true);
+  
+      const fileInput = document.querySelector('#fileInputDoacao');
+      const files = fileInput?.files ? Array.from(fileInput.files) : [];
+  
+      const formData = new FormData();
+      formData.append("title", title.trim());
+      formData.append("description", descricao.trim());
+      formData.append("condition", condition);
+      formData.append("district", district);
+      formData.append("city", city.trim());
+      formData.append("categoryId", categoryId);
+      formData.append("subcategoryId", subcategoryId);
+  
+      files.forEach((file, idx) => formData.append("images", file));
+  
+      const result = await createProduct(formData);
+  
+      if (result.error) return alert(result.message || "Erro ao criar produto");
+  
+      setConfirmado(true);
+      reload();
+      setTimeout(() => {
+        setModalAberto(false);
+        resetForm();
+        router.push("/");
+      }, 2000);
+    } catch (err) {
+      console.error(err);
+      alert(err.message || "Erro ao criar produto");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  useEffect(() => {
-    const mockProdutos = [
-      {
-        id: 1,
-        nome: "Mesa com 4 Cadeiras",
-        descricao: "Bom estado de conservação.",
-        estado: "Usado",
-        categoria: "Móveis",
-        imagem:
-          "https://images.unsplash.com/photo-1663144256992-6b69263cc521?auto=format&fit=crop&q=80&w=736",
-      },
-      {
-        id: 2,
-        nome: "Tênis Nike Air",
-        descricao: "Pouco uso, confortável, Tam: 38.",
-        estado: "Usado",
-        categoria: "Roupas",
-        imagem:
-          "https://images.unsplash.com/photo-1747063458940-e89647e3a106?auto=format&fit=crop&q=80&w=1170",
-      },
-      {
-        id: 3,
-        nome: "Camisa Floral",
-        descricao: "Camisa leve e colorida para o verão.",
-        estado: "Usado",
-        categoria: "Roupas",
-        imagem:
-          "https://images.unsplash.com/photo-1651888947765-2e0ec570bc9d?auto=format&fit=crop&q=80&w=687",
-      },
-      {
-        id: 4,
-        nome: "Pack 3 livros",
-        descricao: "Já lidos, repassando para quem quer.",
-        estado: "Usado",
-        categoria: "Livros",
-        imagem:
-          "https://images.unsplash.com/photo-1616852246157-f095beb2aef9?auto=format&fit=crop&q=80&w=1084",
-      },
-      {
-        id: 5,
-        nome: "Conjunto Chá",
-        descricao: "Doando pois estou de mudança.",
-        estado: "Usado",
-        categoria: "Eletrônicos",
-        imagem:
-          "https://images.unsplash.com/photo-1689402059849-02c1b5a7931b?auto=format&fit=crop&q=80&w=735",
-      },
-    ];
+  const resetForm = () => {
+    setConfirmado(false);
+    setFotos([]);
+    setDescricao("");
+    setCategoria("");
+    setTitle("");
+    setCondition("BOM");
+    setDistrict("");
+    setCity("");
+    setCategoryId("");
+    setSubcategoryId("");
+  };
 
-    setTimeout(() => {
-      setProdutos(mockProdutos);
-      setLoading(false);
-    }, 500);
-  }, []);
 
   return (
     <div>
       <Navbar />
       <div className="z-8 px-4 pt-20">
-        {/* Campo de pesquisa e botão de filtro */}
-        {/* Ajustado para layout de coluna única em mobile */}
-        <div className="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto mt-8 px-4">
+
+        <div className="flex flex-col items-center justify-center align-middle gap-4 max-w-2xl mx-auto mt-8 px-4">
           <div className="relative w-full flex-1">
             <Search className="absolute left-3 top-3 h-5 w-5 text-ecodoa-olive" />
             <Input
@@ -109,7 +139,7 @@ export default function Index() {
           <Button
             variant="outline"
             size="default"
-            className="w-full"
+            className="w-full hover:cursor-pointer"
             onClick={() => setModalFiltrosAberto(true)}
           >
             Filtros
@@ -118,55 +148,50 @@ export default function Index() {
 
         {/* Header ajustado para layout mobile fixo */}
         <header
-          className="h-[300px] bg-cover bg-center flex flex-col items-center justify-center text-white text-center px-4 py-8 mt-6"
+          className="bg-cover bg-center flex flex-col items-center justify-center text-center px-4 py-8 mt-6"
           style={{
             backgroundImage: 'url("https://via.placeholder.com/1200x400?text=Doe+o+que+n%C3%A3o+usa+mais")',
             textShadow: "0 2px 4px rgba(0,0,0,0.5)",
           }}
         >
-          <h1 className="text-3xl font-bold text-[#265c14ad] m-0">
-            Está na hora do desapego.
-          </h1>
-          <p className="text-lg mt-4 text-[#090871ff]">
-            Doe seus itens, receba doações, reutilizar é viver!
-          </p>
           <Button
             variant="default"
             size="default"
-            className="mt-6 bg-yellow-600 hover:bg-green-800"
+            className="inline-flex items-center gap-3 py-3 px-6 rounded-full font-bold transition-all duration-300"
             onClick={() => setModalAberto(true)}
           >
             Publicar Doação
           </Button>
         </header>
 
-        {/* Grid de produtos ajustado para 2 colunas para melhor aproveitamento no mobile */}
-        <main className="px-4 py-8 grid grid-cols-2 gap-4">
-          {loading ? (
-            <p className="text-center text-gray-600 col-span-full">Carregando...</p>
-          ) : error ? (
-            <p className="text-center text-red-500 col-span-full">{error}</p>
-          ) : produtos.length > 0 ? (
-            produtos
-              .filter((produto) =>
-                produto.nome.toLowerCase().includes(busca.toLowerCase()) &&
-                (categoriaSelecionada === "" ||
-                  produto.categoria?.toLowerCase() === categoriaSelecionada.toLowerCase())
-              )
-              .map((produto) => (
-                <CardProduto key={produto.id} produto={produto} />
-              ))
-          ) : (
-            <p className="text-center text-gray-600 col-span-full">
-              Nenhum item disponível no momento.
-            </p>
-          )}
-        </main>
+            <main className="px-4 py-8 grid grid-cols-2 gap-4">
+      {loading ? (
+        <p className="text-center text-gray-600 col-span-full">Carregando...</p>
+      ) : error ? (
+        <p className="text-center text-red-500 col-span-full">{error}</p>
+      ) : products.length > 0 ? (
+        products
+          .filter(
+            (produto) =>
+              produto.title?.toLowerCase().includes(busca.toLowerCase()) &&
+              (categoriaSelecionada === "" ||
+                produto.category?.toLowerCase() === categoriaSelecionada.toLowerCase())
+          )
+          .map((produto) => <CardProduto key={produto._id} produto={produto} />)
+      ) : (
+        <p className="text-center text-gray-600 col-span-full">
+          Nenhum item disponível no momento.
+        </p>
+      )}
+    </main>
 
-        {/* Modal separado */}
+
         {modalAberto && (
           <ModalDoacao
-            onClose={() => setModalAberto(false)}
+            onClose={() => {
+              setModalAberto(false);
+              resetForm();
+            }}
             fotos={fotos}
             setFotos={setFotos}
             descricao={descricao}
@@ -177,6 +202,19 @@ export default function Index() {
             setConfirmado={setConfirmado}
             handleFotoUpload={handleFotoUpload}
             handleConfirmarDoacao={handleConfirmarDoacao}
+            title={title}
+            setTitle={setTitle}
+            condition={condition}
+            setCondition={setCondition}
+            district={district}
+            setDistrict={setDistrict}
+            city={city}
+            setCity={setCity}
+            categoryId={categoryId}
+            setCategoryId={setCategoryId}
+            subcategoryId={subcategoryId}
+            setSubcategoryId={setSubcategoryId}
+            submitting={submitting}
           />
         )}
         {modalFiltrosAberto && (

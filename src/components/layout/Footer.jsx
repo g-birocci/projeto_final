@@ -40,9 +40,6 @@ export default function Footer() {
       <p className="text-sm text-[var(--ecodoa-secondary)]/70 tracking-wide">
         © 2025 - Desenvolvido por <span className="font-medium text-[var(--ecodoa-primary)]">EcoDoa</span>.
       </p>
-
-      {/* Espaço para a bottom bar */}
-      <div className="pb-20"></div>
     </footer>
   );
 }

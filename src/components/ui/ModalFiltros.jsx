@@ -6,7 +6,7 @@ export default function ModalFiltros({ onClose, categoriaSelecionada, setCategor
 
     return (
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg shadow-xl max-w-sm w-full p-6 relative animate-fadeIn">
+            <div className="bg-white rounded-lg shadow-xl max-w-sm w-80 p-6 relative animate-fadeIn">
 
                 <button
                     onClick={onClose}
