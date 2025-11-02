@@ -61,7 +61,7 @@ export default function Navbar() {
     return () => root.classList.remove("overflow-hidden");
   }, [open]);
 
-  // 🔧 Removida tipagem no parâmetro
+  // Removida tipagem no parâmetro
   const handleNavigate = (href) => {
     setOpen(false);
     window.location.href = href;
@@ -71,28 +71,30 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Botão/hamburger (abre o painel) */}
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="Abrir menu"
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        aria-controls={panelId}
-        className="fixed top-6 right-6 z-50 w-14 h-14 bg-[var(--ecodoa-accent)] text-[var(--ecodoa-primary)] rounded-full flex flex-col items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110 gap-[6px]"
-      >
-        <span className="block h-[2px] w-6 bg-[var(--ecodoa-primary)] rounded" />
-        <span className="block h-[2px] w-6 bg-[var(--ecodoa-primary)] rounded" />
-        <span className="block h-[2px] w-6 bg-[var(--ecodoa-primary)] rounded" />
-      </button>
+      {/* Header fixo com container central (max 1024px) */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <div className="max-w-screen-lg mx-auto px-6 md:px-8 py-4 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
+            <Image src="/img/EcoDoa1.png" alt="EcoDoa" width={50} height={50} className="drop-shadow-md" />
+            <span className="hidden sm:inline text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">EcoDoa</span>
+          </Link>
 
-      {/* Logo */}
-      <Link
-        href="/"
-        className="fixed top-6 left-6 z-50 flex items-center gap-2 hover:opacity-90 transition-opacity"
-      >
-        <Image src="/img/EcoDoa1.png" alt="EcoDoa" width={50} height={50} className="drop-shadow-md" />
-        <span className="hidden sm:inline text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">EcoDoa</span>
-      </Link>
+          {/* Botão/hamburger (abre o painel) */}
+          <button
+            onClick={() => setOpen(true)}
+            aria-label="Abrir menu"
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            aria-controls={panelId}
+            className="w-14 h-14 bg-[var(--ecodoa-accent)] text-[var(--ecodoa-primary)] rounded-full flex flex-col items-center justify-center shadow-lg hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-110 gap-[6px]"
+          >
+            <span className="block h-[2px] w-6 bg-[var(--ecodoa-primary)] rounded" />
+            <span className="block h-[2px] w-6 bg-[var(--ecodoa-primary)] rounded" />
+            <span className="block h-[2px] w-6 bg-[var(--ecodoa-primary)] rounded" />
+          </button>
+        </div>
+      </div>
 
       {/* Overlay */}
       <div
@@ -163,7 +165,7 @@ export default function Navbar() {
                   <button
                     onMouseEnter={() => setCurrent(item.key)}
                     onFocus={() => setCurrent(item.key)}
-                    onClick={() => handleNavigate(item.href)}
+                    onClick={() => handleNavigate(item.key === "doacoes" ? "/app" : item.href)}
                     className="w-full text-left py-4 px-5 text-lg font-semibold text-[var(--ecodoa-soft)] hover:text-[var(--ecodoa-accent)] hover:bg-[var(--ecodoa-secondary)]/30 rounded-xl transition-all duration-200 hover:translate-x-2 border border-transparent hover:border-[var(--ecodoa-light-olive)]/40"
                   >
                     {item.label}

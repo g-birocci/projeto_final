@@ -6,6 +6,10 @@ import { ChevronLeft, ChevronRight, MapPin, Heart, Users, ExternalLink } from "l
 
 export default function PartnersSection() {
   const sectionRef = useRef(null);
+  const isDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+  const movedRef = useRef(false);
 
   const handleScroll = (ref, direction) => {
     if (!ref.current) return;
@@ -22,8 +26,7 @@ export default function PartnersSection() {
       city: "Portugal",
       desc: "Programa educativo que transforma jovens através da formação tecnológica e inclusão digital.",
       site: "https://bytes4future.pt/",
-      image:
-        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop",
       impact: "+500 jovens formados",
       volunteers: "50+ mentores e parceiros",
     },
@@ -32,8 +35,7 @@ export default function PartnersSection() {
       city: "Porto",
       desc: "Recolhe e distribui alimentos para famílias e instituições sociais em situação de vulnerabilidade.",
       site: "https://www.bancoalimentar.pt/",
-      image:
-        "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&h=600&fit=crop",
       impact: "5M+ refeições/ano",
       volunteers: "2000+ voluntários",
     },
@@ -42,8 +44,7 @@ export default function PartnersSection() {
       city: "Lisboa",
       desc: "Rede nacional de solidariedade que apoia quem mais precisa com alimentação, habitação e integração social.",
       site: "https://www.caritas.pt/",
-      image:
-        "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop",
       impact: "100K+ pessoas apoiadas",
       volunteers: "5000+ voluntários",
     },
@@ -52,8 +53,7 @@ export default function PartnersSection() {
       city: "Lisboa",
       desc: "Apoia pessoas em situação de sem-abrigo com alimentação, apoio psicológico e programas de reinserção social.",
       site: "https://www.cvidaepaz.pt/",
-      image:
-        "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&h=600&fit=crop",
       impact: "300+ pessoas/dia",
       volunteers: "150+ voluntários",
     },
@@ -62,8 +62,7 @@ export default function PartnersSection() {
       city: "Lisboa",
       desc: "Promove inclusão social e apoio a migrantes e pessoas vulneráveis através de programas integrados.",
       site: "https://crescer.org/",
-      image:
-        "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&h=600&fit=crop",
       impact: "1000+ famílias apoiadas",
       volunteers: "200+ voluntários",
     },
@@ -72,8 +71,7 @@ export default function PartnersSection() {
       city: "Porto",
       desc: "Movimento de voluntariado urbano e comunitário que promove ações práticas de solidariedade.",
       site: "https://servethecity.pt/",
-      image:
-        "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop",
       impact: "20K+ horas voluntariado",
       volunteers: "800+ voluntários",
     },
@@ -81,102 +79,147 @@ export default function PartnersSection() {
 
   return (
     <section className="px-4 py-16 bg-[var(--ecodoa-bg)]">
-      <div className="mb-10 text-center">
-        <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-3">
-          Parceiros que Fazem a Diferença
-        </h2>
-        <p className="text-[var(--ecodoa-text)]/70 text-base">
-          Organizações que acreditam num futuro mais solidário e sustentável.
-        </p>
-      </div>
-
-      <div className="relative group">
-        <button
-          onClick={() => handleScroll(sectionRef, "left")}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 -translate-x-2"
-          aria-label="Scroll esquerda"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-
-        <div
-          ref={sectionRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 px-2 snap-x snap-mandatory"
-        >
-          {partners.map((partner, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 200 }}
-              className="flex-none w-full sm:w-[600px] snap-center bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-[var(--ecodoa-light-olive)] hover:border-[var(--ecodoa-accent)] transition-all duration-300"
-            >
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src={partner.image}
-                  alt={partner.name}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
-                <div className="absolute top-4 right-4 bg-[var(--ecodoa-accent)] text-[var(--ecodoa-text)] px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-                  <MapPin className="w-3 h-3" />
-                  {partner.city}
-                </div>
-              </div>
-
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-[var(--ecodoa-primary)] mb-2">
-                  {partner.name}
-                </h3>
-
-                <p className="text-[var(--ecodoa-text)]/80 leading-relaxed mb-4 flex-1">
-                  {partner.desc}
-                </p>
-
-                <div className="grid grid-cols-2 gap-3 mb-4 p-3 bg-[var(--ecodoa-green)]/20 rounded-xl">
-                  <div className="flex items-center gap-2">
-                    <Heart className="w-3 h-3 text-[var(--ecodoa-alert)]" />
-                    <div>
-                      <p className="text-xs text-[var(--ecodoa-text)]/60">
-                        Impacto
-                      </p>
-                      <p className="text-sm font-bold text-[var(--ecodoa-primary)]">
-                        {partner.impact}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="w-3 h-3 text-[var(--ecodoa-olive)]" />
-                    <div>
-                      <p className="text-xs text-[var(--ecodoa-text)]/60">
-                        Equipa
-                      </p>
-                      <p className="text-sm font-bold text-[var(--ecodoa-primary)]">
-                        {partner.volunteers}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <a
-                  href={partner.site}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white font-semibold py-2 px-4 rounded-xl transition-all duration-300 hover:shadow-lg text-sm"
-                >
-                  <span>Visitar Site</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </motion.div>
-          ))}
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-3">
+            Parceiros que Fazem a Diferença
+          </h2>
+          <p className="text-[var(--ecodoa-text)]/70 text-base max-w-2xl mx-auto">
+            Organizações que acreditam num futuro mais solidário e sustentável.
+          </p>
         </div>
 
-        <button
-          onClick={() => handleScroll(sectionRef, "right")}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 translate-x-2"
-          aria-label="Scroll direita"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+        <div className="relative group">
+          <button
+            onClick={() => handleScroll(sectionRef, "left")}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 -translate-x-2"
+            aria-label="Scroll esquerda"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <div
+            ref={sectionRef}
+            className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 px-2 snap-x snap-mandatory cursor-grab select-none"
+            onMouseDown={(e) => {
+              if (!sectionRef.current) return;
+              isDownRef.current = true;
+              startXRef.current = e.clientX;
+              scrollLeftRef.current = sectionRef.current.scrollLeft;
+              sectionRef.current.classList.add("cursor-grabbing");
+              movedRef.current = false;
+            }}
+            onMouseLeave={() => {
+              if (!sectionRef.current) return;
+              isDownRef.current = false;
+              sectionRef.current.classList.remove("cursor-grabbing");
+            }}
+            onMouseUp={() => {
+              if (!sectionRef.current) return;
+              isDownRef.current = false;
+              sectionRef.current.classList.remove("cursor-grabbing");
+            }}
+            onMouseMove={(e) => {
+              if (!sectionRef.current || !isDownRef.current) return;
+              e.preventDefault();
+              const dx = e.clientX - startXRef.current;
+              sectionRef.current.scrollLeft = scrollLeftRef.current - dx;
+              if (Math.abs(dx) > 5) movedRef.current = true;
+            }}
+            onClickCapture={(e) => {
+              // Evita clique acidental em links quando houve arrasto
+              if (movedRef.current) {
+                e.preventDefault();
+                e.stopPropagation();
+                movedRef.current = false;
+              }
+            }}
+            onTouchStart={(e) => {
+              if (!sectionRef.current) return;
+              const touch = e.touches[0];
+              isDownRef.current = true;
+              startXRef.current = touch.clientX;
+              scrollLeftRef.current = sectionRef.current.scrollLeft;
+              movedRef.current = false;
+            }}
+            onTouchEnd={() => {
+              isDownRef.current = false;
+            }}
+            onTouchMove={(e) => {
+              if (!sectionRef.current || !isDownRef.current) return;
+              const touch = e.touches[0];
+              const dx = touch.clientX - startXRef.current;
+              sectionRef.current.scrollLeft = scrollLeftRef.current - dx;
+              if (Math.abs(dx) > 5) movedRef.current = true;
+            }}
+          >
+            {partners.map((partner, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 200 }}
+                className="flex-none w-full sm:w-[600px] snap-center bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-[var(--ecodoa-light-olive)] hover:border-[var(--ecodoa-accent)] transition-all duration-300"
+              >
+                <div className="relative h-56 overflow-hidden">
+                  <img
+                    src={partner.image}
+                    alt={partner.name}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  />
+                  <div className="absolute top-4 right-4 bg-[var(--ecodoa-accent)] text-[var(--ecodoa-text)] px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
+                    <MapPin className="w-3 h-3" />
+                    {partner.city}
+                  </div>
+                </div>
+
+                <div className="p-6 flex-1 flex flex-col">
+                  <h3 className="text-lg font-bold text-[var(--ecodoa-primary)] mb-2">
+                    {partner.name}
+                  </h3>
+
+                  <p className="text-[var(--ecodoa-text)]/80 leading-relaxed mb-4 flex-1">
+                    {partner.desc}
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-3 mb-4 p-3 bg-[var(--ecodoa-green)]/20 rounded-xl">
+                    <div className="flex items-center gap-2">
+                      <Heart className="w-3 h-3 text-[var(--ecodoa-alert)]" />
+                      <div>
+                        <p className="text-xs text-[var(--ecodoa-text)]/60">Impacto</p>
+                        <p className="text-sm font-bold text-[var(--ecodoa-primary)]">{partner.impact}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Users className="w-3 h-3 text-[var(--ecodoa-olive)]" />
+                      <div>
+                        <p className="text-xs text-[var(--ecodoa-text)]/60">Equipa</p>
+                        <p className="text-sm font-bold text-[var(--ecodoa-primary)]">{partner.volunteers}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a
+                    href={partner.site}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white font-semibold py-2 px-4 rounded-xl transition-all duration-300 hover:shadow-lg text-sm"
+                  >
+                    <span>Visitar Site</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <button
+            onClick={() => handleScroll(sectionRef, "right")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--ecodoa-primary)] hover:bg-[var(--ecodoa-secondary)] text-white p-2 rounded-full shadow-lg transition-all duration-300 translate-x-2"
+            aria-label="Scroll direita"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
     </section>
   );

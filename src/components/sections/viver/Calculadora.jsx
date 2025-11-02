@@ -44,6 +44,17 @@ export default function Calculadora() {
     return getColorClass(totalImpact, 200, 'bg');
   };
 
+  // Evita perda de cor por purge do Tailwind ao gerar classes dinâmicas
+  // Retorna o valor de cor direto para usar em inline style
+  const getImpactColorValue = () => {
+    const ratio = totalImpact / 200;
+    if (ratio < 0.2) return 'var(--ecodoa-primary)';
+    if (ratio < 0.4) return 'var(--ecodoa-light-olive)';
+    if (ratio < 0.6) return 'var(--ecodoa-accent)';
+    if (ratio < 0.8) return '#fb923c'; // tailwind orange-400
+    return 'var(--ecodoa-alert)';
+  };
+
   const ecoNivel =
     totalImpact < 40
       ? "Muito Baixo: Estás a viver de forma exemplar. Continua a inspirar outros!"
@@ -63,6 +74,7 @@ export default function Calculadora() {
       viewport={{ once: true }}
       className="px-4 py-16 bg-[var(--ecodoa-bg)]"
     >
+      <div className="max-w-2xl mx-auto">
       <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-8 text-center">
         Calcula o teu Impacto
       </h2>
@@ -123,10 +135,8 @@ export default function Calculadora() {
               className="w-full accent-[var(--ecodoa-olive)] cursor-pointer"
             />
             <span
-              className={`font-semibold transition-colors duration-300 ${getBarColor().replace(
-                "bg-",
-                "text-"
-              )}`}
+              className={`font-semibold transition-colors duration-300`}
+              style={{ color: getImpactColorValue() }}
             >
               {data[item.key]}
             </span>
@@ -136,19 +146,15 @@ export default function Calculadora() {
 
       <div className="text-center mt-16">
         <p
-          className={`text-6xl font-extrabold mb-3 transition-colors duration-300 ${getBarColor().replace(
-            "bg-",
-            "text-"
-          )}`}
+          className={`text-6xl font-extrabold mb-3 transition-colors duration-300`}
+          style={{ color: getImpactColorValue() }}
         >
           {totalImpact}
         </p>
 
         <p
-          className={`text-lg mb-8 transition-colors duration-300 ${getBarColor().replace(
-            "bg-",
-            "text-"
-          )}`}
+          className={`text-lg mb-8 transition-colors duration-300`}
+          style={{ color: getImpactColorValue() }}
         >
           {ecoNivel}
         </p>
@@ -156,7 +162,8 @@ export default function Calculadora() {
         {/* barra de progresso */}
         <div className="relative w-full max-w-xl mx-auto h-4 bg-[var(--ecodoa-soft)]/50 rounded-full overflow-hidden">
           <motion.div
-            className={`h-full ${getBarColor()} rounded-full`}
+            className={`h-full rounded-full`}
+            style={{ backgroundColor: getImpactColorValue() }}
             initial={{ width: 0 }}
             animate={{
               width: `${Math.min((totalImpact / 200) * 100, 100)}%`,
@@ -180,6 +187,7 @@ export default function Calculadora() {
             Com o teu consumo atual, estimas contribuir com cerca de <strong>{toneladasEstimadas.toFixed(2)} toneladas</strong> de impacto anual relacionado à moda.
           </p>
         </div>
+      </div>
       </div>
     </motion.section>
   );

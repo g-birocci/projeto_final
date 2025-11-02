@@ -39,6 +39,7 @@ export default function Dicas() {
       viewport={{ once: true }}
       className="px-4 py-16 bg-[var(--ecodoa-bg)]" 
     >
+      <div className="max-w-3xl mx-auto">
       <h2 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-8 text-center">
         Dicas Sustentáveis
       </h2>
@@ -62,6 +63,7 @@ export default function Dicas() {
             </p>
           </motion.div>
         ))}
+      </div>
       </div>
     </motion.section>
   );
