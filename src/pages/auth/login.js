@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -60,7 +60,7 @@ export default function Login() {
         </form>
 
         <p className="text-[#042940] text-center mt-4">
-          Não tem conta?{" "}
+          NÃ£o tem conta?{" "}
           <Link href="/auth/register" className="text-[#042940] font-semibold hover:underline">
             Registrar
           </Link>
@@ -69,3 +69,4 @@ export default function Login() {
     </div>
   );
 }
+

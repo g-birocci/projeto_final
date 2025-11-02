@@ -154,10 +154,13 @@ const userLogin = async (req, res) => {
 
     const token = genToken({id: user._id.toString()})
 
+    const isProd = process.env.NODE_ENV === 'production';
     res.cookie("auth", token, {
       httpOnly: true,
       path: "/",
       maxAge: 24 * 60 * 60 * 1000,
+      sameSite: 'lax',
+      secure: isProd,
     });
 
     res.status(200).json({
@@ -165,7 +168,7 @@ const userLogin = async (req, res) => {
       error: false,
       data: {
         id: user._id,
-        firstName: user.firtName,
+        firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
       },

@@ -31,18 +31,32 @@ const io = socketio(server, {
 });
 
 io.use((socket, next) => {
-  const token = socket.handshake.auth?.token;
-  if (!token) return next(new Error("no token"));
   try {
+    const authFromHandshake = socket.handshake?.auth?.token;
+    let token = authFromHandshake;
+
+    if (!token) {
+      const cookieHeader = socket.request?.headers?.cookie || "";
+      const parts = cookieHeader.split(";").map((p) => p.trim());
+      for (const p of parts) {
+        if (p.startsWith("auth=")) {
+          token = decodeURIComponent(p.substring(5));
+          break;
+        }
+      }
+    }
+
+    if (!token) return next(new Error("no token"));
+
     socket.user = jwt.verify(token, process.env.JWT_SECRET);
-    next();
-  } catch {
-    next(new Error("invalid token"));
+    return next();
+  } catch (err) {
+    return next(new Error("invalid token"));
   }
 });
 
 io.on("connection", (socket) => {
-  console.log("🔌 Novo socket conectado:", socket.user?.id);
+  console.log("Novo socket conectado:", socket.user?.id);
   socket.on("conv:join", (convId) => socket.join(`conv:${convId}`));
   socket.on("conv:leave", (convId) => socket.leave(`conv:${convId}`));
 });
@@ -81,3 +95,5 @@ const iniciarServidor = async () => {
 };
 
 iniciarServidor();
+
+

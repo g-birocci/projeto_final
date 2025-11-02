@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 <<<<<<< HEAD
@@ -27,7 +27,7 @@ export default function DetalheDoacao() {
       <Navbar />
 
 >>>>>>> main
-      {/* Botão voltar */}
+      {/* BotÃ£o voltar */}
       <div className="z-8 px-4 pt-20">
         <a
           href="#"
@@ -37,7 +37,7 @@ export default function DetalheDoacao() {
         </a>
       </div>
 
-      {/* Layout ajustado para coluna única e com padding vertical para mobile */}
+      {/* Layout ajustado para coluna Ãºnica e com padding vertical para mobile */}
       <main className="max-w-4xl mx-auto px-4 pb-16 pt-8">
         {/* Galeria */}
         <div className="flex flex-col gap-6 mb-8">
@@ -57,18 +57,18 @@ export default function DetalheDoacao() {
           </div>
         </div>
 
-        {/* Informações do item */}
+        {/* InformaÃ§Ãµes do item */}
         <section className="mb-6">
           <h2 className="text-2xl font-bold text-[#265c14ad]">
             Mesa com 4 cadeiras
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
-            Categoria: Móveis &nbsp;•&nbsp; Estado: Usado, bom estado
-            &nbsp;•&nbsp; Cor: Branca
+            Categoria: MÃ³veis &nbsp;â€¢&nbsp; Estado: Usado, bom estado
+            &nbsp;â€¢&nbsp; Cor: Branca
           </p>
           <p className="text-lg text-[#090871ff] mt-4 leading-relaxed">
-            Mesa com 4 Cadeiras, bom estado de conservação, estou doando pois
-            estou de mudança. Retirar em Matosinhos, enviar mensagem para
+            Mesa com 4 Cadeiras, bom estado de conservaÃ§Ã£o, estou doando pois
+            estou de mudanÃ§a. Retirar em Matosinhos, enviar mensagem para
             combinar.
           </p>
         </section>
@@ -86,7 +86,7 @@ export default function DetalheDoacao() {
           </p>
         </section>
 
-        {/* Botão de mensagem */}
+        {/* BotÃ£o de mensagem */}
         <div className="mb-12">
           <Button variant="default" size="sm" onClick={() => router.push('/chat?conversa=1')}>
             Enviar mensagem
@@ -97,3 +97,4 @@ export default function DetalheDoacao() {
     </>
   );
 }
+

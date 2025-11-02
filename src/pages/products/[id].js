@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { fetchProductById, reserveProduct, unreserveProduct, donateProduct } from "@/services/api";
+import { fetchProductById, reserveProduct, unreserveProduct, donateProduct, createConversation } from "@/services/api";
 import { useAuth } from "@/context/authContext";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";`nimport toast from "@/lib/toast";
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -39,7 +39,7 @@ export default function ProductDetailPage() {
 
   async function handleReserve() {
     if (!user) {
-      alert("Você precisa estar logado para reservar um produto");
+      toast({ type: "info", message: "VocÃª precisa estar logado para reservar um produto" });
       return;
     }
 
@@ -47,13 +47,13 @@ export default function ProductDetailPage() {
       setActionLoading(true);
       const result = await reserveProduct(id);
       if (result.error) {
-        alert(result.message || "Erro ao reservar produto");
+        toast({ type: "info", message: result.message || "Erro ao reservar produto" });
       } else {
-        alert("Produto reservado com sucesso!");
+        toast({ type: "info", message: "Produto reservado com sucesso!" });
         loadProduct(); // Recarregar dados
       }
     } catch (err) {
-      alert("Erro ao reservar produto");
+      toast({ type: "info", message: "Erro ao reservar produto" });
       console.error(err);
     } finally {
       setActionLoading(false);
@@ -65,13 +65,13 @@ export default function ProductDetailPage() {
       setActionLoading(true);
       const result = await unreserveProduct(id);
       if (result.error) {
-        alert(result.message || "Erro ao cancelar reserva");
+        toast({ type: "info", message: result.message || "Erro ao cancelar reserva" });
       } else {
-        alert("Reserva cancelada com sucesso!");
+        toast({ type: "info", message: "Reserva cancelada com sucesso!" });
         loadProduct(); // Recarregar dados
       }
     } catch (err) {
-      alert("Erro ao cancelar reserva");
+      toast({ type: "info", message: "Erro ao cancelar reserva" });
       console.error(err);
     } finally {
       setActionLoading(false);
@@ -80,7 +80,7 @@ export default function ProductDetailPage() {
 
   async function handleDonate() {
     if (!user) {
-      alert("Você precisa estar logado para doar um produto");
+      toast({ type: "info", message: "VocÃª precisa estar logado para doar um produto" });
       return;
     }
 
@@ -93,14 +93,37 @@ export default function ProductDetailPage() {
       const receiverId = product.reservedBy || null;
       const result = await donateProduct(id, receiverId);
       if (result.error) {
-        alert(result.message || "Erro ao doar produto");
+        toast({ type: "info", message: result.message || "Erro ao doar produto" });
       } else {
-        alert("Produto doado com sucesso!");
+        toast({ type: "info", message: "Produto doado com sucesso!" });
         loadProduct(); // Recarregar dados
       }
     } catch (err) {
-      alert("Erro ao doar produto");
+      toast({ type: "info", message: "Erro ao doar produto" });
       console.error(err);
+    } finally {
+      setActionLoading(false);
+    }
+  }
+
+  async function handleChat() {
+    if (!user) {
+      toast({ type: "info", message: "Você precisa estar logado para conversar com o doador" });
+      router.push("/auth/login");
+      return;
+    }
+    try {
+      setActionLoading(true);
+      const conv = await createConversation(id);
+      const convId = (conv && conv._id) || (conv && conv.data && conv.data._id) || conv?.id;
+      if (!convId) {
+        toast({ type: "info", message: "Não foi possível abrir a conversa" });
+        return;
+      }
+      router.push(`/chat?conversa=${convId}`);
+    } catch (err) {
+      console.error(err);
+      toast({ type: "info", message: err.message || "Erro ao iniciar conversa" });
     } finally {
       setActionLoading(false);
     }
@@ -108,9 +131,11 @@ export default function ProductDetailPage() {
 
   const isOwner = user && product && product.ownerId?.toString() === user.id?.toString();
   const isReservedByMe = user && product && product.reservedBy?.toString() === user.id?.toString();
-  const canReserve = user && product && !isOwner && product.status === "DISPONÍVEL";
+  const canReserve = user && product && !isOwner && product.status === "DISPONÃVEL";
   const canCancelReserve = user && product && (isReservedByMe || isOwner) && product.status === "RESERVADO";
-  const canDonate = user && product && isOwner && (product.status === "DISPONÍVEL" || product.status === "RESERVADO");
+  const canDonate = user && product && isOwner && (product.status === "DISPONÃVEL" || product.status === "RESERVADO");
+
+  const canChat = user && product && !isOwner;
 
   if (loading) {
     return (
@@ -124,7 +149,7 @@ export default function ProductDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <p className="text-[var(--ecodoa-alert)] mb-4">{error || "Produto não encontrado"}</p>
+          <p className="text-[var(--ecodoa-alert)] mb-4">{error || "Produto nÃ£o encontrado"}</p>
           <Button
             onClick={() => router.push("/products")}
             variant="default"
@@ -143,7 +168,7 @@ export default function ProductDetailPage() {
         variant="ghost"
         className="mb-4 text-[var(--ecodoa-primary)] hover:text-[var(--ecodoa-secondary)]"
       >
-        ← Voltar
+        â† Voltar
       </Button>
 
       <div className="bg-white rounded-sm shadow-lg overflow-hidden">
@@ -162,12 +187,12 @@ export default function ProductDetailPage() {
         )}
 
         <div className="p-6">
-          {/* Título e Status */}
+          {/* TÃ­tulo e Status */}
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-3xl font-bold">{product.title}</h1>
             <span
               className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                product.status === "DISPONÍVEL"
+                product.status === "DISPONÃVEL"
                   ? "bg-[var(--ecodoa-green)] text-[var(--ecodoa-primary)]"
                   : product.status === "RESERVADO"
                   ? "bg-[var(--ecodoa-accent)] text-[var(--ecodoa-primary)]"
@@ -180,15 +205,15 @@ export default function ProductDetailPage() {
             </span>
           </div>
 
-          {/* Descrição */}
+          {/* DescriÃ§Ã£o */}
           {product.description && (
             <p className="text-foreground mb-4">{product.description}</p>
           )}
 
-          {/* Informações */}
+          {/* InformaÃ§Ãµes */}
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
-              <p className="text-sm text-muted-foreground">Condição</p>
+              <p className="text-sm text-muted-foreground">CondiÃ§Ã£o</p>
               <p className="font-semibold text-foreground">{product.condition}</p>
             </div>
             <div>
@@ -201,7 +226,7 @@ export default function ProductDetailPage() {
             </div>
             {product.status === "RESERVADO" && product.reservedUntil && (
               <div>
-                <p className="text-sm text-muted-foreground">Reserva até</p>
+                <p className="text-sm text-muted-foreground">Reserva até©</p>
                 <p className="font-semibold text-foreground">
                   {new Date(product.reservedUntil).toLocaleDateString("pt-PT")}
                 </p>
@@ -209,7 +234,7 @@ export default function ProductDetailPage() {
             )}
           </div>
 
-          {/* Ações */}
+          {/* AÃ§Ãµes */}
           {user && (
             <div className="flex gap-4 flex-wrap">
               {canReserve && (
@@ -243,7 +268,15 @@ export default function ProductDetailPage() {
                 </Button>
               )}
 
-              {isOwner && (
+              {canChat && (
+                <Button
+                  onClick={handleChat}
+                  disabled={actionLoading}
+                  variant="outline"
+                >
+                  {actionLoading ? "Abrindo..." : "Conversar com doador"}
+                </Button>
+              )}              {isOwner && (
                 <Button
                   onClick={() => router.push(`/products/edit/${id}`)}
                   variant="outline"
@@ -256,11 +289,11 @@ export default function ProductDetailPage() {
 
           {!user && (
             <p className="text-muted-foreground italic">
-              Faça login para reservar ou doar produtos
+              FaÃ§a login para reservar ou doar produtos
             </p>
           )}
 
-          {/* Data de criação */}
+          {/* Data de criaÃ§Ã£o */}
           <div className="mt-6 pt-4 border-t border-border">
             <p className="text-sm text-muted-foreground">
               Publicado em {new Date(product.createdAt).toLocaleDateString("pt-PT")}
@@ -271,4 +304,13 @@ export default function ProductDetailPage() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
 

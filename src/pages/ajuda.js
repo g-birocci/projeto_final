@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import dynamic from "next/dynamic";
 import { useState, useMemo } from "react";
@@ -7,7 +7,7 @@ import DonateSection from "@/components/sections/ajuda/DonateSection";
 import PartnersSection from "@/components/sections/ajuda/PartnersSection";
 import { locaisData } from "@/data/locaisData"; 
 
-// importação dinâmica do mapa (sem SSR)
+// importaÃ§Ã£o dinÃ¢mica do mapa (sem SSR)
 const MapaEcoDoa = dynamic(() => import("@/components/sections/ajuda/MapaEcoDoa"), {
   ssr: false,
   loading: () => (
@@ -38,7 +38,7 @@ export default function Ajuda() {
 
   return (
     <div className="min-h-screen bg-[var(--ecodoa-bg)] text-[var(--ecodoa-text)]">
-      {/* Título da página */}
+      {/* TÃ­tulo da pÃ¡gina */}
       <section className="px-4 pt-24 pb-8 text-center max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-[var(--ecodoa-primary)] mb-4">
           Pontos de Ajuda
@@ -65,3 +65,4 @@ export default function Ajuda() {
     </div>
   );
 }
+

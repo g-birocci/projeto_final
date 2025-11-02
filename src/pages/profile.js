@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import EditModal from "@/components/sections/profile/EditModal";
 import Items from "@/components/sections/profile/Items";
@@ -71,17 +71,17 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     if (!validateEmail(form.email)) {
-      setError("Por favor, insere um e-mail válido.");
+      setError("Por favor, insere um e-mail vÃ¡lido.");
       return;
     }
     try {
-      // TODO: Implementar updateUser quando o endpoint estiver disponível
+      // TODO: Implementar updateUser quando o endpoint estiver disponÃ­vel
       setUser(form);
       setEditing(false);
       setError("");
     } catch (err) {
       console.error("Erro ao salvar perfil:", err);
-      setError("Erro ao salvar alterações");
+      setError("Erro ao salvar alteraÃ§Ãµes");
     }
   };
 
@@ -109,7 +109,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-white relative text-[var(--ecodoa-text)] flex flex-col">
       <Navbar />
       <div className="px-5 py-24 sm:py-20 sm:px-8">
-        {/* Botão Voltar */}
+        {/* BotÃ£o Voltar */}
         <button
           onClick={() => window.history.back()}
           className="absolute top-6 left-5 text-[var(--ecodoa-accent)] hover:opacity-80"
@@ -153,23 +153,23 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Carrosséis/histórico */}
+        {/* CarrossÃ©is/histÃ³rico */}
         <Items title="Itens Doados" items={DONATED_ITEMS} />
         <Items title="Solidariedade Recebida" items={RECEIVED_ITEMS} />
       </div>
 
-      {/* Botão Sair */}
+      {/* BotÃ£o Sair */}
       <div className="flex justify-center mt-auto pt-6 border-t border-[var(--ecodoa-soft)]/40">
         <button 
           onClick={handleLogout}
           className="flex items-center gap-2 px-5 py-2 rounded-lg border border-[var(--ecodoa-soft)] text-[var(--ecodoa-text)]/80 hover:text-[var(--ecodoa-primary)] hover:border-[var(--ecodoa-primary)] transition"
         >
           <LogOut className="w-4 h-4" />
-          Sair da sessão
+          Sair da sessÃ£o
         </button>
       </div>
 
-      {/* Modal de Edição */}
+      {/* Modal de EdiÃ§Ã£o */}
       {editing && (
         <EditModal
           form={form}
@@ -204,3 +204,4 @@ function DashboardStat({ label, value, color }) {
     </motion.div>
   );
 }
+

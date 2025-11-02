@@ -1,48 +1,26 @@
-const API_URL = "http://localhost:3000/api";
+// Base da API: usa env em produção e fallback para o prefixo local
+// Mantém mesmas-origens em dev para evitar CORS e envia cookies httpOnly
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "/api";
 
 
-export async function uploadImagesToCloudinary(files) {
-  if (!files || files.length === 0) return [];
+// OBS: Rota /upload/images não existe no backend atual.
+// Para uploads, use o endpoint de criação/edição de produto com FormData e campo "images".
+// Mantemos esta função desativada para evitar chamadas inconsistentes.
+// export async function uploadImagesToCloudinary(files) { /* desativado */ }
 
-  const formData = new FormData();
-  files.forEach(file => formData.append("images", file));
 
-  const res = await fetch(`${API_URL}/upload/images`, {
+
+// Registro de usuário no backend (/api/user)
+export async function createUser(payload) {
+  const res = await fetch(`${API_URL}/user`, {
     method: "POST",
-    body: formData,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   });
-
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Erro ao enviar imagens: ${text}`);
-  }
-
   const data = await res.json();
-  return data.urls || [];
+  if (!res.ok) throw new Error(data.message || "Erro ao registrar");
+  return data;
 }
-
-
-
-export async function createUser()
-{
-  try {
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await res.json();
-    console.log("Resposta do backend:", data);
-
-    if (!res.ok) throw new Error(data.message || "Erro ao registrar");
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  } finally {
-    setLoading(false);
-  }
-};
 
 
 
@@ -136,7 +114,8 @@ export async function createProduct(data) {
         console.log('------------------------');
     
 
-    const res = await fetch(`${API_URL}/product`, {
+    // Backend expõe POST /api/products (plural)
+    const res = await fetch(`${API_URL}/products`, {
       method: "POST",
       credentials: "include",
       body: data,
@@ -228,4 +207,64 @@ export async function unreserveProduct(id) {
     credentials: "include",
   });
   return res.json();
+}
+
+// ====== Chat (Conversations & Messages) ======
+export async function listConversations() {
+  const res = await fetch(`${API_URL}/conversations`, {
+    method: "GET",
+    credentials: "include",
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || "Erro ao listar conversas");
+  return data;
+}
+
+export async function createConversation(itemId) {
+  const res = await fetch(`${API_URL}/conversations`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ itemId }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || "Erro ao criar conversa");
+  return data;
+}
+
+export async function getMessages(conversationId, { before, limit } = {}) {
+  const params = new URLSearchParams();
+  if (before) params.set("before", before);
+  if (limit) params.set("limit", String(limit));
+  const qs = params.toString() ? `?${params.toString()}` : "";
+
+  const res = await fetch(`${API_URL}/conversations/${conversationId}/messages${qs}`, {
+    method: "GET",
+    credentials: "include",
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || "Erro ao buscar mensagens");
+  return data;
+}
+
+export async function sendMessage(conversationId, body) {
+  const res = await fetch(`${API_URL}/conversations/${conversationId}/messages`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ body }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || "Erro ao enviar mensagem");
+  return data;
+}
+
+export async function markRead(conversationId) {
+  const res = await fetch(`${API_URL}/conversations/${conversationId}/read`, {
+    method: "PATCH",
+    credentials: "include",
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || "Erro ao marcar como lida");
+  return data;
 }

@@ -1,231 +1,80 @@
-"use client";
+﻿"use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "@/context/authContext";
-import { createProduct, uploadImagesToCloudinary } from "@/services/api";
-import CardProduto from "../components/ui/CardProduto";
-import Footer from "../components/layout/Footer";
-import Navbar from "../components/layout/Navbar";
-import ModalDoacao from "../components/ui/ModalDoacao";
-import { Input } from "@/components/ui/Pesquisa";
+import React from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Search } from "lucide-react";
-import ModalFiltros from "../components/ui/ModalFiltros";
-import { useProducts } from "@/hooks/useProducts";
-import { useCategories } from "@/hooks/useCategories";
 
-export default function Index() {
-  const router = useRouter();
-  const { user } = useAuth();
-  const [busca, setBusca] = useState("");
-  const [modalAberto, setModalAberto] = useState(false);
-  const [modalFiltrosAberto, setModalFiltrosAberto] = useState(false);
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
-  const { products, loading, error, reload } = useProducts({
-    categoria: categoriaSelecionada,
-    busca: busca,
-  });
-  const {selectedCategory, selectedSubcategory} = useCategories();
-  
-  // modal
-  const [fotos, setFotos] = useState([]);
-  const [descricao, setDescricao] = useState("");
-  const [categoria, setCategoria] = useState("");
-  const [title, setTitle] = useState("");
-  const [condition, setCondition] = useState("BOM");
-  const [district, setDistrict] = useState("");
-  const [city, setCity] = useState("");
-  const [categoryId, setCategoryId] = useState("");
-  const [subcategoryId, setSubcategoryId] = useState("");
-  const [confirmado, setConfirmado] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-
-  const handleFotoUpload = (e) => {
-    const files = Array.from(e.target.files || []);
-    const newImages = [];
-
-    files.forEach(file => {
-      if (file.type.startsWith("image/") && fotos.length + newImages.length < 4) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          newImages.push(event.target.result);
-          if (newImages.length === Math.min(files.length, 4 - fotos.length)) {
-            setFotos(prev => [...prev, ...newImages]);
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  };
-
-  const handleConfirmarDoacao = async () => {
-    if (!title.trim()) return alert("Título é obrigatório");
-    if (!condition) return alert("Condição é obrigatória");
-    if (!district) return alert("Distrito é obrigatório");
-    if (!city.trim()) return alert("Cidade é obrigatória");
-    if (!user) {
-      alert("Você precisa estar logado para publicar uma doação");
-      router.push("/auth/login");
-      return;
-    }
-  
-    try {
-      setSubmitting(true);
-  
-      const fileInput = document.querySelector('#fileInputDoacao');
-      const files = fileInput?.files ? Array.from(fileInput.files) : [];
-  
-      const formData = new FormData();
-      formData.append("title", title.trim());
-      formData.append("description", descricao.trim());
-      formData.append("condition", condition);
-      formData.append("district", district);
-      formData.append("city", city.trim());
-      formData.append("categoryId", categoryId);
-      formData.append("subcategoryId", subcategoryId);
-  
-      files.forEach((file, idx) => formData.append("images", file));
-  
-      const result = await createProduct(formData);
-  
-      if (result.error) return alert(result.message || "Erro ao criar produto");
-  
-      setConfirmado(true);
-      reload();
-      setTimeout(() => {
-        setModalAberto(false);
-        resetForm();
-        router.push("/");
-      }, 2000);
-    } catch (err) {
-      console.error(err);
-      alert(err.message || "Erro ao criar produto");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const resetForm = () => {
-    setConfirmado(false);
-    setFotos([]);
-    setDescricao("");
-    setCategoria("");
-    setTitle("");
-    setCondition("BOM");
-    setDistrict("");
-    setCity("");
-    setCategoryId("");
-    setSubcategoryId("");
-  };
-
-
+export default function Landing() {
   return (
-    <div>
-      <Navbar />
-      <div className="z-8 px-4 pt-20">
-
-        <div className="flex flex-col items-center justify-center align-middle gap-4 max-w-2xl mx-auto mt-8 px-4">
-          <div className="relative w-full flex-1">
-            <Search className="absolute left-3 top-3 h-5 w-5 text-ecodoa-olive" />
-            <Input
-              placeholder="Pesquisar doações..."
-              className="pl-10 py-2 w-full --ecodoa-bg text-ecodoa-text placeholder-ecodoa-olive border border-ecodoa-accent focus:outline-none focus:ring-2 focus:ring-ecodoa-primary focus:border-ecodoa-primary"
-              value={busca}
-              onChange={(e) => setBusca(e.target.value)}
-            />
-          </div>
-          <Button
-            variant="outline"
-            size="default"
-            className="w-full hover:cursor-pointer"
-            onClick={() => setModalFiltrosAberto(true)}
-          >
-            Filtros
-          </Button>
-        </div>
-
-        {/* Header ajustado para layout mobile fixo */}
-        <header
-          className="bg-cover bg-center flex flex-col items-center justify-center text-center px-4 py-8 mt-6"
+    <div className="min-h-screen bg-white text-[var(--ecodoa-text)]">
+      {/* Hero */}
+      <section className="relative">
+        <div
+          className="h-[60vh] min-h-[520px] w-full bg-cover bg-center flex items-center"
           style={{
-            backgroundImage: 'url("https://via.placeholder.com/1200x400?text=Doe+o+que+n%C3%A3o+usa+mais")',
-            textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+            backgroundImage:
+              'url("https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1400&auto=format&fit=crop")',
           }}
         >
-          <Button
-            variant="default"
-            size="default"
-            className="inline-flex items-center gap-3 py-3 px-6 rounded-full font-bold transition-all duration-300"
-            onClick={() => setModalAberto(true)}
-          >
-            Publicar Doação
-          </Button>
-        </header>
+          <div className="max-w-6xl mx-auto px-8">
+            <h1 className="text-5xl font-extrabold text-white drop-shadow-md">EcoDoa</h1>
+            <p className="mt-4 text-xl text-white/95 max-w-2xl drop-shadow">
+              Conectamos quem quer doar com quem mais precisa — com simplicidade,
+              transparência e impacto real.
+            </p>
+            <div className="mt-8 flex gap-4">
+              <Link href="/app">
+                <Button variant="default" className="bg-[var(--ecodoa-primary)] text-white">
+                  Entrar no App
+                </Button>
+              </Link>
+              <Link href="/sobre">
+                <Button variant="outline">Conheça a iniciativa</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <main className="px-4 py-8 grid grid-cols-2 gap-4">
-      {loading ? (
-        <p className="text-center text-gray-600 col-span-full">Carregando...</p>
-      ) : error ? (
-        <p className="text-center text-red-500 col-span-full">{error}</p>
-      ) : products.length > 0 ? (
-        products
-          .filter(
-            (produto) =>
-              produto.title?.toLowerCase().includes(busca.toLowerCase()) &&
-              (categoriaSelecionada === "" ||
-                produto.category?.toLowerCase() === categoriaSelecionada.toLowerCase())
-          )
-          .map((produto) => <CardProduto key={produto._id} produto={produto} />)
-      ) : (
-        <p className="text-center text-gray-600 col-span-full">
-          Nenhum item disponível no momento.
-        </p>
-      )}
-    </main>
+      {/* Destaques */}
+      <section className="max-w-6xl mx-auto px-8 py-16 grid grid-cols-3 gap-8">
+        <div className="bg-white rounded-lg border border-[var(--ecodoa-accent)]/40 p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-[var(--ecodoa-primary)]">Doe com facilidade</h3>
+          <p className="text-sm opacity-80 mt-2">
+            Publique itens em poucos cliques e ajude sua comunidade local.
+          </p>
+        </div>
+        <div className="bg-white rounded-lg border border-[var(--ecodoa-accent)]/40 p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-[var(--ecodoa-primary)]">Transparência</h3>
+          <p className="text-sm opacity-80 mt-2">
+            Acompanhe conversas e doações diretamente no aplicativo.
+          </p>
+        </div>
+        <div className="bg-white rounded-lg border border-[var(--ecodoa-accent)]/40 p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-[var(--ecodoa-primary)]">Impacto real</h3>
+          <p className="text-sm opacity-80 mt-2">
+            Conecte pessoas e reduza o desperdício, promovendo economia circular.
+          </p>
+        </div>
+      </section>
 
-
-        {modalAberto && (
-          <ModalDoacao
-            onClose={() => {
-              setModalAberto(false);
-              resetForm();
-            }}
-            fotos={fotos}
-            setFotos={setFotos}
-            descricao={descricao}
-            setDescricao={setDescricao}
-            categoria={categoria}
-            setCategoria={setCategoria}
-            confirmado={confirmado}
-            setConfirmado={setConfirmado}
-            handleFotoUpload={handleFotoUpload}
-            handleConfirmarDoacao={handleConfirmarDoacao}
-            title={title}
-            setTitle={setTitle}
-            condition={condition}
-            setCondition={setCondition}
-            district={district}
-            setDistrict={setDistrict}
-            city={city}
-            setCity={setCity}
-            categoryId={categoryId}
-            setCategoryId={setCategoryId}
-            subcategoryId={subcategoryId}
-            setSubcategoryId={setSubcategoryId}
-            submitting={submitting}
-          />
-        )}
-        {modalFiltrosAberto && (
-          <ModalFiltros
-            onClose={() => setModalFiltrosAberto(false)}
-            categoriaSelecionada={categoriaSelecionada}
-            setCategoriaSelecionada={setCategoriaSelecionada}
-          />
-        )}
-      </div>
-      <Footer />
+      {/* Institucional */}
+      <section className="max-w-6xl mx-auto px-8 pb-20">
+        <div className="bg-[var(--ecodoa-soft)]/60 rounded-lg p-8 border border-[var(--ecodoa-accent)]/30">
+          <h2 className="text-2xl font-bold text-[var(--ecodoa-primary)]">Nossa cultura</h2>
+          <p className="mt-2 opacity-80 max-w-3xl">
+            Conheça mais sobre nossos valores, como viver a sustentabilidade e a história por trás do projeto.
+          </p>
+          <div className="mt-6 flex gap-4">
+            <Link href="/viver">
+              <Button variant="default">Viver sustentável</Button>
+            </Link>
+            <Link href="/sobre">
+              <Button variant="outline">Sobre a EcoDoa</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

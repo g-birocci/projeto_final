@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -22,7 +22,7 @@ export default function Sobre() {
             transition={{ duration: 0.8 }}
             className="text-3xl sm:text-4xl font-black text-[var(--ecodoa-primary)] mb-5 leading-tight"
           >
-            Fazer o bem é contagiante
+            Fazer o bem Ã© contagiante
           </motion.h1>
 
           <motion.p
@@ -33,7 +33,7 @@ export default function Sobre() {
           >
             Acreditamos que cada gesto pode mudar o mundo.
             No <strong className="text-[var(--ecodoa-primary)]">EcoDoa</strong>,
-            transformamos doações em conexões reais e impacto sustentável.
+            transformamos doaÃ§Ãµes em conexÃµes reais e impacto sustentÃ¡vel.
           </motion.p>
         </div>
       </section>
@@ -91,7 +91,7 @@ export default function Sobre() {
     className="text-lg text-[var(--ecodoa-text)]/80 leading-relaxed max-w-3xl mx-auto"
   >
     O <strong className="text-[var(--ecodoa-primary)]">EcoDoa</strong> nasceu da vontade de provar que 
-    <span className="text-[var(--ecodoa-accent)] font-semibold"> pequenas ações mudam o mundo</span>.
+    <span className="text-[var(--ecodoa-accent)] font-semibold"> pequenas aÃ§Ãµes mudam o mundo</span>.
     Somos uma comunidade que acredita no poder de doar, partilhar e cuidar.
   </motion.p>
 
@@ -111,8 +111,8 @@ export default function Sobre() {
     viewport={{ once: true }}
     className="text-base text-[var(--ecodoa-secondary)]/70 leading-relaxed mt-8"
   >
-    Cada doação é uma semente plantada. Cada gesto, um elo na corrente do bem.  
-    <strong className="text-[var(--ecodoa-primary)]"> EcoDoa </strong> é mais do que um projeto, é um convite para fazermos juntos o futuro florescer.
+    Cada doaÃ§Ã£o Ã© uma semente plantada. Cada gesto, um elo na corrente do bem.  
+    <strong className="text-[var(--ecodoa-primary)]"> EcoDoa </strong> Ã© mais do que um projeto, Ã© um convite para fazermos juntos o futuro florescer.
   </motion.p>
 </motion.section>
 
@@ -130,15 +130,15 @@ export default function Sobre() {
             </h2>
 
             <p className="text-base text-[var(--ecodoa-secondary)]/70 leading-relaxed mt-8">
-              Doar é um ato de <strong className="text-[var(--ecodoa-primary)]">amor, empatia e sustentabilidade</strong>.
-              Cada doação reduz o desperdício, inspira solidariedade e faz o bem circular.
+              Doar Ã© um ato de <strong className="text-[var(--ecodoa-primary)]">amor, empatia e sustentabilidade</strong>.
+              Cada doaÃ§Ã£o reduz o desperdÃ­cio, inspira solidariedade e faz o bem circular.
             </p>
 
             <div className="bg-[var(--ecodoa-soft)]/20 border-l-4 border-[var(--ecodoa-accent)] p-4 rounded-r-xl">
               <p className="text-[var(--ecodoa-secondary)]/90 text-base leading-relaxed">
                 O EcoDoa atua alinhado aos{" "}
-                <strong className="text-[var(--ecodoa-primary)]">Objetivos de Desenvolvimento Sustentável (ODS)</strong> da ONU,
-                promovendo a <strong>redução das desigualdades (ODS 10)</strong> e <strong>consumo responsável (ODS 12)</strong>.
+                <strong className="text-[var(--ecodoa-primary)]">Objetivos de Desenvolvimento SustentÃ¡vel (ODS)</strong> da ONU,
+                promovendo a <strong>reduÃ§Ã£o das desigualdades (ODS 10)</strong> e <strong>consumo responsÃ¡vel (ODS 12)</strong>.
               </p>
             </div>
 
@@ -150,7 +150,7 @@ export default function Sobre() {
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center gap-3 bg-ecodoa-accent text-[var(--ecodoa-primary) py-3 px-6 rounded-full font-bold shadow-lg hover:bg-[var(--ecodoa-secondary)] transition-all duration-300"
             >
-              Conhecer os ODS →
+              Conhecer os ODS â†’
             </motion.a>
           </div>
         </div>
@@ -161,3 +161,4 @@ export default function Sobre() {
     </div>
   );
 }
+

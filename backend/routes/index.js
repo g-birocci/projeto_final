@@ -1,5 +1,6 @@
 // routes/index.js
 const express = require("express");
+const { requireAuth } = require('../middlware/auth')
 
 // Controllers
 const authController = require("../contoller/authController"); // corrige 'contoller' -> 'controller'
@@ -38,8 +39,6 @@ const {
   createSubcategory,
 } = require("../contoller/categoriesController");
 
-// Middleware de auth (usando o do próprio authController)
-const requireAuth = authController.auth;
 
 // Middleware para validar ObjectId de rota
 const requireObjectId = (paramName) => (req, res, next) => {
