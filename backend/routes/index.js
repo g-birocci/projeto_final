@@ -1,5 +1,5 @@
 const express = require("express");
-const authController = require("../contoller/authController");
+const authController = require("../contoller/authController"); // mantém seu caminho
 
 const {
   userLogin,
@@ -8,7 +8,7 @@ const {
   userDelete,
   getUserById,
 } = require("../contoller/userController");
-// Importa todos os handlers de produtos necessários
+
 const {
   listProducts,
   productSearch,
@@ -21,7 +21,8 @@ const {
   unreserveProduct,
 } = require("../contoller/productsController");
 
-// usando apenas o objeto authController abaixo
+// 👇 ADICIONE isto:
+// você pode usar authController.auth direto, sem criar variável separada
 
 // Stubs mínimos para middlewares ausentes
 const requireObjectId = (paramName) => (req, res, next) => {
@@ -35,7 +36,7 @@ const requireObjectId = (paramName) => (req, res, next) => {
   }
   next();
 };
-const requireAuth = (req, res, next) => next();
+const requireAuth = authController.auth;
 
 const route = express.Router();
 
@@ -57,14 +58,13 @@ route.get("/health", async (req, res) => {
 });
 
 // ================ Rotas do Usuário ===============
-route.get("/user/:id", getUserById);
+route.get("/user/:id", requireObjectId("id"), getUserById);
 route.post("/login", userLogin);
 route.post("/user", userCreate);
-route.put("/user/:id", userUpdate);
-route.delete("/user/:id", userDelete);
+route.put("/user/:id", requireObjectId("id"), userUpdate);
+route.delete("/user/:id", requireObjectId("id"), userDelete);
 
 // ================ Rotas do Item ===============
-
 route.get("/products", listProducts);
 route.get("/products/search", productSearch);
 route.get(
@@ -78,9 +78,9 @@ route.get(
   getProductsBySubcategory
 );
 route.get("/products/:id", requireObjectId("id"), getProductId);
-route.post("/products", requireAuth, productCreate);
 
-//route.use('/categories', require('./categories'));
+// 👉 se já tiver JWT pronto, considere usar authController.auth aqui também
+route.post("/products", requireAuth, productCreate);
 route.patch("/products/:id", requireAuth, requireObjectId("id"), productUpdate);
 route.post(
   "/products/:id/reserve",
@@ -95,9 +95,39 @@ route.post(
   unreserveProduct
 );
 
-// ================ Rotas do Usuário ===============
-
-route.post("/forgot-password", authController.forgotPassword); //para o esqueci a minha senha
+// ================ Auth utilidades ===============
+route.post("/forgot-password", authController.forgotPassword);
 route.patch("/reset-password", authController.resetPassword);
+
+// ================ Rotas do Chat ===============
+// ✅ usando o middleware real: authController.auth
+route.post(
+  "/conversations",
+  authController.auth,
+  authController.createConversation
+);
+route.get(
+  "/conversations",
+  authController.auth,
+  authController.listConversations
+);
+route.get(
+  "/conversations/:id/messages",
+  authController.auth,
+  requireObjectId("id"),
+  authController.getMessages
+);
+route.post(
+  "/conversations/:id/messages",
+  authController.auth,
+  requireObjectId("id"),
+  authController.sendMessage
+);
+route.patch(
+  "/conversations/:id/read",
+  authController.auth,
+  requireObjectId("id"),
+  authController.markAsRead
+);
 
 module.exports = route;
