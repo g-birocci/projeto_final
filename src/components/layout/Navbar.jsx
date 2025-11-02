@@ -90,7 +90,7 @@ export default function Navbar() {
         href="/"
         className="fixed top-6 left-6 z-50 flex items-center gap-2 hover:opacity-90 transition-opacity"
       >
-        <Image src="/img/EcoDoa.svg" alt="EcoDoa" width={50} height={50} className="drop-shadow-md" />
+        <Image src="/img/EcoDoa1.png" alt="EcoDoa" width={50} height={50} className="drop-shadow-md" />
         <span className="hidden sm:inline text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">EcoDoa</span>
       </Link>
 

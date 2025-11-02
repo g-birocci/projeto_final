@@ -3,7 +3,10 @@
 import EditModal from "@/components/sections/profile/EditModal";
 import Items from "@/components/sections/profile/Items";
 import { DONATED_ITEMS, RECEIVED_ITEMS } from "../data/items";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "@/context/authContext";
+import { getUser } from "@/services/api";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowLeft, Edit3, LogOut } from "lucide-react";
@@ -12,20 +15,53 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 
 export default function ProfilePage() {
+  const router = useRouter();
+  const { user: authUser, logout: logoutAuth, loading: authLoading } = useAuth();
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [form, setForm] = useState(null);
 
-  const [user, setUser] = useState({
-    name: "Gretta Macedo Carneiro",
-    email: "grettafaztudo@gmail.com",
-    city: "Porto, Portugal",
-    avatar: "/img/profile.jpg",
-    donated: 5,
-    received: 2,
-    impacted: 8,
-  });
+  useEffect(() => {
+    if (!authLoading) {
+      if (!authUser) {
+        router.push("/auth/login");
+      } else {
+        loadUserProfile();
+      }
+    }
+  }, [authUser, authLoading]);
 
-  const [form, setForm] = useState(user);
+  async function loadUserProfile() {
+    try {
+      setLoading(true);
+      const result = await getUser();
+      if (result && result.data) {
+        const userData = result.data;
+        const userProfile = {
+          id: userData._id || userData.id,
+          name: `${userData.firtName || ""} ${userData.lastName || ""}`.trim() || userData.email,
+          email: userData.email,
+          city: userData.city ? `${userData.city}, ${userData.district || "Portugal"}` : "Portugal",
+          district: userData.district || "",
+          avatar: "/img/profile.jpg",
+          donated: userData.donationsGiven || 0,
+          received: userData.donationsRecived || 0,
+          impacted: (userData.donationsGiven || 0) + (userData.donationsRecived || 0),
+          firstName: userData.firtName || "",
+          lastName: userData.lastName || "",
+        };
+        setUser(userProfile);
+        setForm(userProfile);
+      }
+    } catch (err) {
+      console.error("Erro ao carregar perfil:", err);
+      setError("Erro ao carregar dados do perfil");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const handleEditToggle = () => setEditing(!editing);
   const handleChange = (e) =>
@@ -33,15 +69,41 @@ export default function ProfilePage() {
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!validateEmail(form.email)) {
       setError("Por favor, insere um e-mail válido.");
       return;
     }
-    setUser(form);
-    setEditing(false);
-    setError("");
+    try {
+      // TODO: Implementar updateUser quando o endpoint estiver disponível
+      setUser(form);
+      setEditing(false);
+      setError("");
+    } catch (err) {
+      console.error("Erro ao salvar perfil:", err);
+      setError("Erro ao salvar alterações");
+    }
   };
+
+  const handleLogout = async () => {
+    try {
+      await logoutAuth();
+      router.push("/");
+    } catch (err) {
+      console.error("Erro ao fazer logout:", err);
+    }
+  };
+
+  if (loading || !user || !form) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--ecodoa-primary)] mx-auto mb-4"></div>
+          <p className="text-[var(--ecodoa-primary)]">Carregando perfil...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white relative text-[var(--ecodoa-text)] flex flex-col">
@@ -98,7 +160,10 @@ export default function ProfilePage() {
 
       {/* Botão Sair */}
       <div className="flex justify-center mt-auto pt-6 border-t border-[var(--ecodoa-soft)]/40">
-        <button className="flex items-center gap-2 px-5 py-2 rounded-lg border border-[var(--ecodoa-soft)] text-[var(--ecodoa-text)]/80 hover:text-[var(--ecodoa-primary)] hover:border-[var(--ecodoa-primary)] transition">
+        <button 
+          onClick={handleLogout}
+          className="flex items-center gap-2 px-5 py-2 rounded-lg border border-[var(--ecodoa-soft)] text-[var(--ecodoa-text)]/80 hover:text-[var(--ecodoa-primary)] hover:border-[var(--ecodoa-primary)] transition"
+        >
           <LogOut className="w-4 h-4" />
           Sair da sessão
         </button>

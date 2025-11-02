@@ -1,29 +1,28 @@
-const express = require("express");
-const authController = require("../contoller/authController");
-
-const {
-  userLogin,
-  userCreate,
-  userUpdate,
-  userDelete,
-  getUserById,
-} = require("../contoller/userController");
+const express = require('express');
+const { userLogin, userCreate, userUpdate, userDelete, getUserById, getMe, logout } = require('../contoller/userController');
+const { requireAuth } = require('../middlware/auth');
 // Importa todos os handlers de produtos necessários
 const {
   listProducts,
-  productSearch,
-  getProductsByCategory,
-  getProductsBySubcategory,
   getProductId,
   productCreate,
   productUpdate,
+  deleteProduct,
   reserveProduct,
   unreserveProduct,
-} = require("../contoller/productsController");
+  donateProduct,
+  uploadImages,
+} = require('../contoller/productsController');
+const {
+  listCategories,
+  getCategoryById,
+  listSubcategories,
+  getSubcategoryById,
+  createCategory,
+  createSubcategory,
+} = require('../contoller/categoriesController');
 
-// usando apenas o objeto authController abaixo
-
-// Stubs mínimos para middlewares ausentes
+// Middleware para validar ObjectId
 const requireObjectId = (paramName) => (req, res, next) => {
   const value = req.params[paramName];
   if (!/^[a-fA-F0-9]{24}$/.test(String(value))) {
@@ -35,7 +34,6 @@ const requireObjectId = (paramName) => (req, res, next) => {
   }
   next();
 };
-const requireAuth = (req, res, next) => next();
 
 const route = express.Router();
 
@@ -57,47 +55,47 @@ route.get("/health", async (req, res) => {
 });
 
 // ================ Rotas do Usuário ===============
-route.get("/user/:id", getUserById);
-route.post("/login", userLogin);
-route.post("/user", userCreate);
-route.put("/user/:id", userUpdate);
-route.delete("/user/:id", userDelete);
+route.get('/user/:id', requireObjectId('id'), getUserById)
+route.get('/me', requireAuth, getMe)
+
+route.post('/login', userLogin)
+route.post('/logout', logout)
+
+route.post('/user', userCreate)
+route.put('/user/:id', requireAuth, requireObjectId('id'), userUpdate)
+route.delete('/user/:id', requireAuth, requireObjectId('id'), userDelete)
 
 // ================ Rotas do Item ===============
 
-route.get("/products", listProducts);
-route.get("/products/search", productSearch);
-route.get(
-  "/products/category/:categoryId",
-  requireObjectId("categoryId"),
-  getProductsByCategory
-);
-route.get(
-  "/products/subcategory/:subcategoryId",
-  requireObjectId("subcategoryId"),
-  getProductsBySubcategory
-);
-route.get("/products/:id", requireObjectId("id"), getProductId);
-route.post("/products", requireAuth, productCreate);
+// Listagem, busca e filtros
+route.get('/products', listProducts);
 
-//route.use('/categories', require('./categories'));
-route.patch("/products/:id", requireAuth, requireObjectId("id"), productUpdate);
-route.post(
-  "/products/:id/reserve",
-  requireAuth,
-  requireObjectId("id"),
-  reserveProduct
-);
-route.post(
-  "/products/:id/unreserve",
-  requireAuth,
-  requireObjectId("id"),
-  unreserveProduct
-);
+// CRUD normal de produtos
+route.get('/products/:id', requireObjectId('id'), getProductId);
+route.post('/product', requireAuth, uploadImages, productCreate);
+route.patch('/products/:id', requireAuth, requireObjectId('id'), productUpdate);
+route.delete('/products/:id', requireAuth, requireObjectId('id'), deleteProduct);
 
-// ================ Rotas do Usuário ===============
+// Reserva de produtos
+route.post('/products/:id/reserve', requireAuth, requireObjectId('id'), reserveProduct);
+route.post('/products/:id/unreserve', requireAuth, requireObjectId('id'), unreserveProduct);
+
+// Doação de produtos
+route.post('/products/:id/donate', requireAuth, requireObjectId('id'), donateProduct);
+
+// ================ Rotas de Categorias ===============
+route.get('/categories', listCategories);
+route.get('/categories/:id', requireObjectId('id'), getCategoryById);
+route.post('/categories', requireAuth, createCategory); // Admin only (futuro)
+
+// ================ Rotas de Subcategorias ===============
+route.get('/subcategories', listSubcategories);
+route.get('/subcategories/:id', requireObjectId('id'), getSubcategoryById);
+route.post('/subcategories', createSubcategory); // Admin only (futuro)
+
 
 route.post("/forgot-password", authController.forgotPassword); //para o esqueci a minha senha
 route.patch("/reset-password", authController.resetPassword);
 
 module.exports = route;
+
