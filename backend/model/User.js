@@ -8,7 +8,7 @@ const distritosPortugal = [
 ];
 
 const userSchema = new mongoose.Schema({
-firtName: {type:String, required:true},
+firstName: {type:String, required:true},
 lastName: {type:String, required:true},
 email: {
     type: String, 
@@ -30,7 +30,12 @@ district: {
     required: false
   },
 donationsGiven: {type:Number, default:0},
-donationsRecived: {type:Number, default:0}
+donationsRecived: {type:Number, default:0},
+// User.js
+resetCodeHash: String,
+resetCodeExpires: Date,
+resetCodeAttempts: { type: Number, default: 0 },
+
 },
 {
     timestamps:true

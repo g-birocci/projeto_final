@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Category = require('../models/Category');
-const Subcategory = require('../models/Subcategory');
+const Category = require('../model/Category');
+const Subcategory = require('../model/Subcategory');
 
 const data = [
   { name: "Eletrónicos", slug: "eletronicos", sub: [
