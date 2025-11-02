@@ -1,3 +1,14 @@
+const express = require("express");
+const authController = require("../contoller/authController"); // mantém seu caminho
+
+const {
+  userLogin,
+  userCreate,
+  userUpdate,
+  userDelete,
+  getUserById,
+} = require("../contoller/userController");
+
 const express = require('express');
 const { userLogin, userCreate, userUpdate, userDelete, getUserById, getMe, logout } = require('../contoller/userController');
 const { requireAuth } = require('../middlware/auth');
@@ -10,6 +21,10 @@ const {
   deleteProduct,
   reserveProduct,
   unreserveProduct,
+} = require("../contoller/productsController");
+
+// 👇 ADICIONE isto:
+// você pode usar authController.auth direto, sem criar variável separada
   donateProduct,
   uploadImages,
 } = require('../contoller/productsController');
@@ -34,6 +49,7 @@ const requireObjectId = (paramName) => (req, res, next) => {
   }
   next();
 };
+const requireAuth = authController.auth;
 
 const route = express.Router();
 
@@ -55,6 +71,45 @@ route.get("/health", async (req, res) => {
 });
 
 // ================ Rotas do Usuário ===============
+route.get("/user/:id", requireObjectId("id"), getUserById);
+route.post("/login", userLogin);
+route.post("/user", userCreate);
+route.put("/user/:id", requireObjectId("id"), userUpdate);
+route.delete("/user/:id", requireObjectId("id"), userDelete);
+
+// ================ Rotas do Item ===============
+route.get("/products", listProducts);
+route.get("/products/search", productSearch);
+route.get(
+  "/products/category/:categoryId",
+  requireObjectId("categoryId"),
+  getProductsByCategory
+);
+route.get(
+  "/products/subcategory/:subcategoryId",
+  requireObjectId("subcategoryId"),
+  getProductsBySubcategory
+);
+route.get("/products/:id", requireObjectId("id"), getProductId);
+
+// 👉 se já tiver JWT pronto, considere usar authController.auth aqui também
+route.post("/products", requireAuth, productCreate);
+route.patch("/products/:id", requireAuth, requireObjectId("id"), productUpdate);
+route.post(
+  "/products/:id/reserve",
+  requireAuth,
+  requireObjectId("id"),
+  reserveProduct
+);
+route.post(
+  "/products/:id/unreserve",
+  requireAuth,
+  requireObjectId("id"),
+  unreserveProduct
+);
+
+// ================ Auth utilidades ===============
+route.post("/forgot-password", authController.forgotPassword);
 route.get('/user/:id', requireObjectId('id'), getUserById)
 route.get('/me', requireAuth, getMe)
 
@@ -96,6 +151,37 @@ route.post('/subcategories', createSubcategory); // Admin only (futuro)
 
 route.post("/forgot-password", authController.forgotPassword); //para o esqueci a minha senha
 route.patch("/reset-password", authController.resetPassword);
+
+// ================ Rotas do Chat ===============
+// ✅ usando o middleware real: authController.auth
+route.post(
+  "/conversations",
+  authController.auth,
+  authController.createConversation
+);
+route.get(
+  "/conversations",
+  authController.auth,
+  authController.listConversations
+);
+route.get(
+  "/conversations/:id/messages",
+  authController.auth,
+  requireObjectId("id"),
+  authController.getMessages
+);
+route.post(
+  "/conversations/:id/messages",
+  authController.auth,
+  requireObjectId("id"),
+  authController.sendMessage
+);
+route.patch(
+  "/conversations/:id/read",
+  authController.auth,
+  requireObjectId("id"),
+  authController.markAsRead
+);
 
 module.exports = route;
 
