@@ -5,14 +5,14 @@ const Product = require("../model/Products");
 const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
 
-const dotenv = require('dotenv')
+const dotenv = require("dotenv");
 
 dotenv.config();
 
 // Configurar Cloudinary
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-  api_key: process.env.CLOUDINARY_API_KEY, 
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
@@ -27,7 +27,8 @@ const isObjectId = (val) => mongoose.Types.ObjectId.isValid(String(val));
 
 // Removido requireAuth local - usar middleware de auth.js
 
-const isOwner = (product, userId) => product?.ownerId?.toString() === String(userId);
+const isOwner = (product, userId) =>
+  product?.ownerId?.toString() === String(userId);
 const isAdmin = (user) => user?.role === "admin";
 
 // Inicializa índices
@@ -40,16 +41,25 @@ const getProductId = async (req, res) => {
   try {
     const { id } = req.params;
     if (!id || !isObjectId(id)) {
-      return res.status(400).json({ message: "ID inválido", error: true, data: {} });
+      return res
+        .status(400)
+        .json({ message: "ID inválido", error: true, data: {} });
     }
 
     const product = await Product.findById(id);
-    if (!product) return res.status(404).json({ message: "Produto não encontrado", error: true, data: {} });
+    if (!product)
+      return res
+        .status(404)
+        .json({ message: "Produto não encontrado", error: true, data: {} });
 
-    res.status(200).json({ message: "Produto encontrado", error: false, data: product });
+    res
+      .status(200)
+      .json({ message: "Produto encontrado", error: false, data: product });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Erro ao buscar produto", error: true, data: {} });
+    res
+      .status(500)
+      .json({ message: "Erro ao buscar produto", error: true, data: {} });
   }
 };
 
@@ -57,20 +67,38 @@ const getProductId = async (req, res) => {
 const listProducts = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page || "1", 10), 1);
-    const limit = Math.min(Math.max(parseInt(req.query.limit || "20", 10), 1), 100);
+    const limit = Math.min(
+      Math.max(parseInt(req.query.limit || "20", 10), 1),
+      100
+    );
     const skip = (page - 1) * limit;
 
-    const { q, categoryId, subcategoryId, district, city, condition, ownerId, reserved, donated, sort = "-createdAt" } = req.query;
+    const {
+      q,
+      categoryId,
+      subcategoryId,
+      district,
+      city,
+      condition,
+      ownerId,
+      reserved,
+      donated,
+      sort = "-createdAt",
+    } = req.query;
 
     const filter = {};
 
     if (q) {
       const regex = new RegExp(q, "i");
-      filter.$or = [{ title: { $regex: regex } }, { description: { $regex: regex } }];
+      filter.$or = [
+        { title: { $regex: regex } },
+        { description: { $regex: regex } },
+      ];
     }
 
     if (categoryId && isObjectId(categoryId)) filter.categoryId = categoryId;
-    if (subcategoryId && isObjectId(subcategoryId)) filter.subcategoryId = subcategoryId;
+    if (subcategoryId && isObjectId(subcategoryId))
+      filter.subcategoryId = subcategoryId;
     if (district) filter.district = district;
     if (city) filter.city = city;
     if (condition) filter.condition = condition;
@@ -82,7 +110,14 @@ const listProducts = async (req, res) => {
     if (donated === "true") filter.donatedTo = { $ne: null };
     if (donated === "false") filter.donatedTo = null;
 
-    const allowedSorts = new Set(["createdAt", "-createdAt", "title", "-title", "city", "-city"]);
+    const allowedSorts = new Set([
+      "createdAt",
+      "-createdAt",
+      "title",
+      "-title",
+      "city",
+      "-city",
+    ]);
     const sortSafe = allowedSorts.has(sort) ? sort : "-createdAt";
 
     const [items, total] = await Promise.all([
@@ -94,40 +129,64 @@ const listProducts = async (req, res) => {
       error: false,
       message: "Busca realizada com sucesso",
       data: items,
-      meta: { total, page, limit, pages: Math.ceil(total / limit), sort: sortSafe },
+      meta: {
+        total,
+        page,
+        limit,
+        pages: Math.ceil(total / limit),
+        sort: sortSafe,
+      },
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: true, message: "Erro ao buscar produtos", data: [] });
+    res
+      .status(500)
+      .json({ error: true, message: "Erro ao buscar produtos", data: [] });
   }
 };
 
 const productCreate = async (req, res) => {
   try {
     const ownerFromAuth = req.user._id || req.userId;
-    const { title, description, condition, district, city, categoryId, subcategoryId } = req.body;
+    const {
+      title,
+      description,
+      condition,
+      district,
+      city,
+      categoryId,
+      subcategoryId,
+    } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(categoryId)) {
-      return res.status(400).json({ message: "ID de categoria inválido", error: true });
+      return res
+        .status(400)
+        .json({ message: "ID de categoria inválido", error: true });
     }
     if (subcategoryId && !mongoose.Types.ObjectId.isValid(subcategoryId)) {
-      return res.status(400).json({ message: "ID de subcategoria inválido", error: true });
+      return res
+        .status(400)
+        .json({ message: "ID de subcategoria inválido", error: true });
     }
-    
+
     const uploadedImages = await Promise.all(
-      req.files.map(file =>
-        new Promise((resolve, reject) => {
-          cloudinary.uploader.upload_stream(
-            { resource_type: "image", folder: "produtos" },
-            (err, result) => (err ? reject(err) : resolve(result.secure_url))
-          ).end(file.buffer);
-        })
+      req.files.map(
+        (file) =>
+          new Promise((resolve, reject) => {
+            cloudinary.uploader
+              .upload_stream(
+                { resource_type: "image", folder: "produtos" },
+                (err, result) =>
+                  err ? reject(err) : resolve(result.secure_url)
+              )
+              .end(file.buffer);
+          })
       )
     );
 
     console.log("Recebi arquivos:", req.files.length);
     console.log("Fazendo upload...");
-    console.log("Imagens enviadas:", uploadedImages);    
+    console.log("Imagens enviadas:", uploadedImages);
 
     const productData = {
       title,
@@ -144,10 +203,14 @@ const productCreate = async (req, res) => {
 
     const product = await new Product(productData).save();
 
-    res.status(201).json({ message: "Produto criado", error: false, data: product });
+    res
+      .status(201)
+      .json({ message: "Produto criado", error: false, data: product });
   } catch (error) {
     console.error("Erro ao criar produto:", error);
-    res.status(500).json({ message: "Erro ao criar produto", error: true, data: {} });
+    res
+      .status(500)
+      .json({ message: "Erro ao criar produto", error: true, data: {} });
   }
 };
 
@@ -155,24 +218,42 @@ const productCreate = async (req, res) => {
 const productUpdate = async (req, res) => {
   try {
     const { id } = req.params;
-    if (!isObjectId(id)) return res.status(400).json({ message: "ID inválido", error: true, data: {} });
+    if (!isObjectId(id))
+      return res
+        .status(400)
+        .json({ message: "ID inválido", error: true, data: {} });
 
     const product = await Product.findById(id);
-    if (!product) return res.status(404).json({ message: "Produto não encontrado", error: true, data: {} });
+    if (!product)
+      return res
+        .status(404)
+        .json({ message: "Produto não encontrado", error: true, data: {} });
 
     const userId = req.user._id || req.userId;
     if (!(isOwner(product, userId) || isAdmin(req.user))) {
-      return res.status(403).json({ message: "Sem permissão", error: true, data: {} });
+      return res
+        .status(403)
+        .json({ message: "Sem permissão", error: true, data: {} });
     }
 
     const updateData = { ...req.body };
     if (updateData.city) updateData.citySlug = slugify(updateData.city);
 
-    const updatedProduct = await Product.findByIdAndUpdate(id, updateData, { new: true });
-    res.status(200).json({ message: "Produto atualizado", error: false, data: updatedProduct });
+    const updatedProduct = await Product.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
+    res
+      .status(200)
+      .json({
+        message: "Produto atualizado",
+        error: false,
+        data: updatedProduct,
+      });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Erro ao atualizar produto", error: true, data: {} });
+    res
+      .status(500)
+      .json({ message: "Erro ao atualizar produto", error: true, data: {} });
   }
 };
 
@@ -180,21 +261,33 @@ const productUpdate = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    if (!isObjectId(id)) return res.status(400).json({ message: "ID inválido", error: true, data: {} });
+    if (!isObjectId(id))
+      return res
+        .status(400)
+        .json({ message: "ID inválido", error: true, data: {} });
 
     const product = await Product.findById(id);
-    if (!product) return res.status(404).json({ message: "Produto não encontrado", error: true, data: {} });
+    if (!product)
+      return res
+        .status(404)
+        .json({ message: "Produto não encontrado", error: true, data: {} });
 
     const userId = req.user._id || req.userId;
     if (!(isOwner(product, userId) || isAdmin(req.user))) {
-      return res.status(403).json({ message: "Sem permissão para deletar", error: true, data: {} });
+      return res
+        .status(403)
+        .json({ message: "Sem permissão para deletar", error: true, data: {} });
     }
 
     await Product.findByIdAndDelete(id);
-    res.status(200).json({ message: "Produto deletado", error: false, data: { id } });
+    res
+      .status(200)
+      .json({ message: "Produto deletado", error: false, data: { id } });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Erro ao deletar produto", error: true, data: {} });
+    res
+      .status(500)
+      .json({ message: "Erro ao deletar produto", error: true, data: {} });
   }
 };
 
@@ -205,12 +298,16 @@ const reserveProduct = async (req, res) => {
     const { reservedUntil } = req.body; // ISO date string opcional
 
     if (!isObjectId(id)) {
-      return res.status(400).json({ error: true, message: "ID do produto inválido", data: {} });
+      return res
+        .status(400)
+        .json({ error: true, message: "ID do produto inválido", data: {} });
     }
 
     const product = await Product.findById(id);
     if (!product) {
-      return res.status(404).json({ error: true, message: "Produto não encontrado", data: {} });
+      return res
+        .status(404)
+        .json({ error: true, message: "Produto não encontrado", data: {} });
     }
 
     const userId = req.user._id || req.userId;
@@ -225,8 +322,13 @@ const reserveProduct = async (req, res) => {
     }
 
     // Verificar se já está reservado por outro
-    if (product.reservedBy && product.reservedBy.toString() !== userId.toString()) {
-      return res.status(409).json({ error: true, message: "Produto já está reservado", data: {} });
+    if (
+      product.reservedBy &&
+      product.reservedBy.toString() !== userId.toString()
+    ) {
+      return res
+        .status(409)
+        .json({ error: true, message: "Produto já está reservado", data: {} });
     }
 
     // Validar reservedUntil (se enviado)
@@ -256,7 +358,9 @@ const reserveProduct = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: true, message: "Erro ao reservar produto", data: {} });
+    return res
+      .status(500)
+      .json({ error: true, message: "Erro ao reservar produto", data: {} });
   }
 };
 
@@ -266,18 +370,26 @@ const unreserveProduct = async (req, res) => {
     const { id } = req.params;
 
     if (!isObjectId(id)) {
-      return res.status(400).json({ error: true, message: "ID do produto inválido", data: {} });
+      return res
+        .status(400)
+        .json({ error: true, message: "ID do produto inválido", data: {} });
     }
 
     const product = await Product.findById(id);
     if (!product) {
-      return res.status(404).json({ error: true, message: "Produto não encontrado", data: {} });
+      return res
+        .status(404)
+        .json({ error: true, message: "Produto não encontrado", data: {} });
     }
 
     const userId = req.user._id || req.userId;
 
     // Apenas quem reservou ou o dono pode cancelar
-    if (product.reservedBy && product.reservedBy.toString() !== userId.toString() && !isOwner(product, userId)) {
+    if (
+      product.reservedBy &&
+      product.reservedBy.toString() !== userId.toString() &&
+      !isOwner(product, userId)
+    ) {
       return res.status(403).json({
         error: true,
         message: "Sem permissão para cancelar esta reserva",
@@ -306,7 +418,9 @@ const unreserveProduct = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: true, message: "Erro ao cancelar reserva", data: {} });
+    return res
+      .status(500)
+      .json({ error: true, message: "Erro ao cancelar reserva", data: {} });
   }
 };
 
@@ -317,16 +431,22 @@ const donateProduct = async (req, res) => {
     const { receiverId } = req.body; // ID do usuário que receberá
 
     if (!isObjectId(id)) {
-      return res.status(400).json({ error: true, message: "ID do produto inválido", data: {} });
+      return res
+        .status(400)
+        .json({ error: true, message: "ID do produto inválido", data: {} });
     }
 
     if (receiverId && !isObjectId(receiverId)) {
-      return res.status(400).json({ error: true, message: "ID do receptor inválido", data: {} });
+      return res
+        .status(400)
+        .json({ error: true, message: "ID do receptor inválido", data: {} });
     }
 
     const product = await Product.findById(id);
     if (!product) {
-      return res.status(404).json({ error: true, message: "Produto não encontrado", data: {} });
+      return res
+        .status(404)
+        .json({ error: true, message: "Produto não encontrado", data: {} });
     }
 
     const userId = req.user._id || req.userId;
@@ -353,7 +473,8 @@ const donateProduct = async (req, res) => {
     if (!finalReceiverId) {
       return res.status(400).json({
         error: true,
-        message: "É necessário fornecer um receptor ou o produto deve estar reservado",
+        message:
+          "É necessário fornecer um receptor ou o produto deve estar reservado",
         data: {},
       });
     }
@@ -371,7 +492,9 @@ const donateProduct = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: true, message: "Erro ao doar produto", data: {} });
+    return res
+      .status(500)
+      .json({ error: true, message: "Erro ao doar produto", data: {} });
   }
 };
 
@@ -382,16 +505,16 @@ const getUserDonations = async (req, res) => {
 
     const donatedProducts = await Product.find({
       ownerId: userId,
-      status: 'DOADO',
+      status: "DOADO",
     })
-    .populate('donatedTo', 'name email') 
-    .sort('-updatedAt');
+      .populate("donatedTo", "name email")
+      .sort("-updatedAt");
 
     const receivedProducts = await Product.find({
       donatedTo: userId,
     })
-    .populate('ownerId', 'name email')
-    .sort('-updatedAt');
+      .populate("ownerId", "name email")
+      .sort("-updatedAt");
 
     res.status(200).json({
       error: false,
@@ -403,22 +526,39 @@ const getUserDonations = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: true, message: "Erro ao buscar histórico de doações", data: {} });
+    res
+      .status(500)
+      .json({
+        error: true,
+        message: "Erro ao buscar histórico de doações",
+        data: {},
+      });
   }
 };
 
 // ===================== HISTÓRICO DE RESERVAS DO USUÁRIO =====================
 const getUserReservations = async (req, res) => {
-    try {
-        const userId = req.user._id;
-        const reservations = await Product.find({ reservedBy: userId, status: 'RESERVADO' })
-            .populate('ownerId', 'name email')
-            .sort('-updatedAt');
-        res.status(200).json({ error: false, message: "Reservas recuperadas com sucesso", data: reservations });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: true, message: "Erro ao buscar reservas", data: {} });
-    }
+  try {
+    const userId = req.user._id;
+    const reservations = await Product.find({
+      reservedBy: userId,
+      status: "RESERVADO",
+    })
+      .populate("ownerId", "name email")
+      .sort("-updatedAt");
+    res
+      .status(200)
+      .json({
+        error: false,
+        message: "Reservas recuperadas com sucesso",
+        data: reservations,
+      });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: true, message: "Erro ao buscar reservas", data: {} });
+  }
 };
 
 // ===================== EXPORT =====================

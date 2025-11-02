@@ -292,7 +292,7 @@ const userDelete = async (req, res) => {
             })
         }
 
-        // quando foi validado o Id e que realmente o user exixte vai começar o delete
+// quando foi validado o Id e que realmente o user exixte vai começar o delete
 
         await User.findByIdAndDelete(id);
 
