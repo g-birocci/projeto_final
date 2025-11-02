@@ -44,9 +44,8 @@ export default function Sobre() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="max-w-md sm:max-w-5xl mx-auto px-4 pb-16"
       >
-        <div className="bg-white rounded-3xl shadow-lg border border-[var(--ecodoa-soft)]/20 overflow-hidden">
+        <div className="bg-white overflow-hidden bg-[var(--ecodoa-accent)] ">
           <DashboardSobre />
         </div>
       </motion.div>
@@ -57,7 +56,7 @@ export default function Sobre() {
   whileInView={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8 }}
   viewport={{ once: true }}
-  className="max-w-4xl mx-auto px-6 py-20 text-center bg-white"
+  className="max-w-4xl mx-auto px-6 py-10 text-center bg-white"
 >
   {/* Logo EcoDoa*/}
   <motion.div
@@ -68,7 +67,7 @@ export default function Sobre() {
     className="flex justify-center mb-6"
   >
     <img
-      src="/img/EcoDoa.svg"
+      src="/img/EcoDoa2.png"
       alt="Logo EcoDoa"
       className="w-20 h-20 object-contain opacity-90"
     />
@@ -99,7 +98,7 @@ export default function Sobre() {
   <div className="relative mt-10 flex justify-center">
     <div className="absolute w-60 h-60 bg-[var(--ecodoa-accent)]/10 rounded-full blur-3xl -z-10 top-0" />
     <img
-      src="/img/community-eco.jpg"
+      src="/img/sustentabilidade.jpg"
       alt="Comunidade EcoDoa"
       className="rounded-3xl shadow-xl object-cover border border-[var(--ecodoa-soft)]/30 w-full max-w-lg"
     />
@@ -117,25 +116,20 @@ export default function Sobre() {
   </motion.p>
 </motion.section>
 
-      {/* POR QUE DOAR */}
       <motion.section
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="max-w-5xl mx-auto px-4 py-14"
+        className="max-w-4xl mx-auto px-6 py-10 text-center"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div className="space-y-6">
-            <span className="inline-block px-4 py-2 bg-[var(--ecodoa-accent)]/20 text-[var(--ecodoa-olive)] rounded-full text-xs sm:text-sm font-bold uppercase tracking-wide">
-              Nossa Missão
-            </span>
-
-            <h2 className="text-2xl sm:text-3xl font-black text-[var(--ecodoa-primary)]">
+        <div className="grid grid-cols-1 gap-10 items-center">
+          <div className="space-y-6  text-center">
+            <h2 className=" text-3xl font-extrabold text-[var(--ecodoa-primary)] mb-6">
               Por que Doar?
             </h2>
 
-            <p className="text-base sm:text-lg text-[var(--ecodoa-secondary)]/80 leading-relaxed">
+            <p className="text-base text-[var(--ecodoa-secondary)]/70 leading-relaxed mt-8">
               Doar é um ato de <strong className="text-[var(--ecodoa-primary)]">amor, empatia e sustentabilidade</strong>.
               Cada doação reduz o desperdício, inspira solidariedade e faz o bem circular.
             </p>
@@ -154,14 +148,14 @@ export default function Sobre() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 bg-[var(--ecodoa-primary)] text-white py-3 px-6 rounded-full font-bold shadow-lg hover:bg-[var(--ecodoa-secondary)] transition-all duration-300"
+              className="inline-flex items-center gap-3 bg-ecodoa-accent text-[var(--ecodoa-primary) py-3 px-6 rounded-full font-bold shadow-lg hover:bg-[var(--ecodoa-secondary)] transition-all duration-300"
             >
               Conhecer os ODS →
             </motion.a>
           </div>
         </div>
+     
       </motion.section>
-
       <Feedbacks />
       <ChamadaDoacao />
     </div>

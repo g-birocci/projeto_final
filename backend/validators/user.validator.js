@@ -1,7 +1,7 @@
 const validateReq = (firstName, lastName, password, email, city, district) => {
   const requied = (field, label) =>
   {
-    !field || (typeof field === "string" && field.trim() === "")
+    return !field || (typeof field === "string" && field.trim() === "")
       ? `${label} é obrigatório`
       : null;
   }

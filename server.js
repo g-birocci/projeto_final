@@ -2,14 +2,17 @@
 const express = require('express');
 const next = require('next');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const connectDB = require('./backend/config/mongodb');
 const dev = process.env.NODE_ENV !== 'production';
-const nextApp = next({ dev });
+const nextApp = next({ dev, turbo: false});
 const handle = nextApp.getRequestHandler();
 const app = express();
-app.use(cors());
-app.use(express.json());
+app.use(cors({ credentials: true, origin: process.env.CLIENT_URL || 'http://localhost:3000' }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(cookieParser());
 const rotas = require('./backend/routes/index');
 
 // ===== INICIALIZAÇÃO DO SERVIDOR (também não se deve mexer)=====

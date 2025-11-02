@@ -38,7 +38,7 @@ export default function DashboardSobre() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="grid grid-cols-2 gap-8 text-center max-w-6xl mx-auto px-6 pb-12"
+      className="grid grid-cols-2 gap-8 justify-center text-center max-w-6xl mx-auto py-6 px-6 bg-[var(--ecodoa-accent)]"
     >
       {stats.map((s, i) => (
         <motion.div
@@ -47,7 +47,7 @@ export default function DashboardSobre() {
           transition={{ type: "spring", stiffness: 200 }}
           className="flex flex-col items-center"
         >
-          <s.icon className="w-10 h-10 text-[var(--ecodoa-primary)] mb-3" />
+          <s.icon className="m-3  w-10 h-10 text-[var(--ecodoa-primary)]" />
           <p className="text-4xl font-extrabold text-[var(--ecodoa-primary)]">{s.value}</p>
           <p className="text-sm text-[#1E2D2F]/70">{s.label}</p>
         </motion.div>

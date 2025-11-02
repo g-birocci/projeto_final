@@ -1,7 +1,7 @@
 import '@/styles/globals.css';
 import 'leaflet/dist/leaflet.css';
 import Head from 'next/head';
-
+import AuthProvider from '@/context/authContext';
 export default function App({ Component, pageProps }) {
   return (
     <>
@@ -10,7 +10,9 @@ export default function App({ Component, pageProps }) {
       </Head>
       <div className="app-outer">
         <div className="app-viewport">
+          <AuthProvider>
           <Component {...pageProps} />
+          </AuthProvider>
         </div>
       </div>
     </>

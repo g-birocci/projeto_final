@@ -28,7 +28,7 @@ export default function DonateSection() {
           >
             <div className="flex justify-center mt-2 mb-4">
               <Image
-                src="/img/EcoDoa.svg"
+                src="/img/EcoDoa1.png"
                 alt="Logo EcoDoa"
                 width={80}
                 height={80}
