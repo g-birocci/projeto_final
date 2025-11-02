@@ -12,22 +12,21 @@ const navItems = [
   { href: "/sobre", label: "Quem Somos", key: "sobre" },
 ];
 
-// 🔧 Removido o tipo TypeScript
 const previews = {
   doacoes: {
-    img: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1600&auto=format&fit=crop",
+    img: "/img/ecoDonate11.jpg",
     alt: "Mãos segurando um coração / doações",
   },
   ajuda: {
-    img: "https://images.unsplash.com/photo-1509099836639-7b0a5d19e5f4?q=80&w=1600&auto=format&fit=crop",
+    img: "/img/ecoAjuda.jpg",
     alt: "Pontos de ajuda / comunidade",
   },
   viver: {
-    img: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop",
+    img: "/img/ecoReuse.jpg",
     alt: "Natureza e vida sustentável",
   },
   sobre: {
-    img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop",
+    img: "/img/ecodoaHands.jpg",
     alt: "Equipe reunida / quem somos",
   },
 };
