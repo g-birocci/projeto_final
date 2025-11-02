@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Sustentavel from "@/components/sections/viver/Sustentavel"; 
 import Calculadora from "@/components/sections/viver/Calculadora"; 
@@ -16,3 +16,4 @@ export default function Viver() {
     </div>
   );
 }
+

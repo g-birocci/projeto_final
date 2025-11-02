@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useProducts } from "../../hooks/useProducts";
 import { useAuth } from "@/context/authContext";
@@ -37,19 +37,19 @@ export default function ProductsPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-[var(--ecodoa-primary)]">Produtos Disponíveis</h1>
+        <h1 className="text-3xl font-bold text-[var(--ecodoa-primary)]">Produtos DisponÃ­veis</h1>
         {user && (
           <Button
             onClick={() => router.push("/")}
             variant="default"
             className="bg-[var(--ecodoa-primary)] text-white hover:bg-[var(--ecodoa-olive)]"
           >
-            Publicar Doação
+            Publicar DoaÃ§Ã£o
           </Button>
         )}
       </div>
 
-      {/* Filtros básicos */}
+      {/* Filtros bÃ¡sicos */}
       <div className="mb-6 p-4 bg-muted rounded-sm">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
@@ -133,7 +133,7 @@ export default function ProductsPage() {
                     <h2 className="text-xl font-bold truncate">{product.title}</h2>
                     <span
                       className={`px-2 py-1 rounded text-xs font-semibold whitespace-nowrap ml-2 ${
-                        product.status === "DISPONÍVEL"
+                        product.status === "DISPONÃVEL"
                           ? "bg-[var(--ecodoa-green)] text-[var(--ecodoa-primary)]"
                           : product.status === "RESERVADO"
                           ? "bg-[var(--ecodoa-accent)] text-[var(--ecodoa-primary)]"
@@ -161,7 +161,7 @@ export default function ProductsPage() {
             ))}
           </div>
 
-          {/* Paginação */}
+          {/* PaginaÃ§Ã£o */}
           {meta && meta.pages > 1 && (
             <div className="flex justify-center gap-2 items-center">
               <Button
@@ -177,7 +177,7 @@ export default function ProductsPage() {
                 Anterior
               </Button>
               <span className="px-4 py-2 text-foreground">
-                Página {meta.page} de {meta.pages}
+                PÃ¡gina {meta.page} de {meta.pages}
               </span>
               <Button
                 onClick={() => {
@@ -189,7 +189,7 @@ export default function ProductsPage() {
                 variant="outline"
                 size="sm"
               >
-                Próxima
+                PrÃ³xima
               </Button>
             </div>
           )}
@@ -211,4 +211,5 @@ export default function ProductsPage() {
     </div>
   );
 }
+
 

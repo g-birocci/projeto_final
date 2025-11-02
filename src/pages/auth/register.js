@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export default function Register() {
   return (
@@ -48,7 +48,7 @@ export default function Register() {
           </button>
         </form>
         <p className="text-[#042940] text-center mt-4">
-          Já tem conta?{" "}
+          JÃ¡ tem conta?{" "}
           <Link href="/auth/login" className="text-[#042940] font-semibold hover:underline">
             Entrar
           </Link>
@@ -57,3 +57,4 @@ export default function Register() {
     </div>
   );
 }
+

@@ -10,13 +10,6 @@ const Conversation = require('../model/Conversation');
 const Products = require('../model/Products');
 const Message = require('../model/Message');
 
-/** ========================= AUTH MIDDLEWARE (JWT) ========================= */
-const auth = async (req, _res, next) => {
-  const token = (req.headers.authorization || '').replace(/^Bearer\s+/i,'');
-  if (!token) return next({ status: 401, message: 'unauthorized' });
-  try { req.user = jwt.verify(token, process.env.JWT_SECRET); return next(); }
-  catch { return next({ status: 401, message: 'invalid token' }); }
-};
 
 /** ========================= RECUPERAÇÃO DE SENHA ========================= */
 const forgotPassword = async (req, res) => {
@@ -228,7 +221,6 @@ const markAsRead = async (req, res) => {
 module.exports = {
   forgotPassword,
   resetPassword,
-  auth,
   createConversation,
   listConversations,
   getMessages,

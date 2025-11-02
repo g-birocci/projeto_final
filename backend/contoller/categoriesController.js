@@ -76,7 +76,7 @@ const listSubcategories = async (req, res) => {
   }
 };
 
-// ===================== BUSCAR SUBCATEGORIA POR ID =====================
+// ============== BUSCAR SUBCATEGORIA POR ID =====================
 const getSubcategoryById = async (req, res) => {
   try {
     const { id } = req.params;

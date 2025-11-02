@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/authContext";
 import { fetchProductById, updateProduct, fetchCategories, fetchSubcategories } from "@/services/api";
 import { Button } from "@/components/ui/Button";
 
 const DISTRICTS_PT = [
-  "Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", "Coimbra", "Évora",
-  "Faro", "Guarda", "Leiria", "Lisboa", "Portalegre", "Porto", "Santarém",
-  "Setúbal", "Viana do Castelo", "Vila Real", "Viseu", "Regiões Autónomas"
+  "Aveiro", "Beja", "Braga", "BraganÃ§a", "Castelo Branco", "Coimbra", "Ã‰vora",
+  "Faro", "Guarda", "Leiria", "Lisboa", "Portalegre", "Porto", "SantarÃ©m",
+  "SetÃºbal", "Viana do Castelo", "Vila Real", "Viseu", "RegiÃµes AutÃ³nomas"
 ];
 
 const CONDITIONS = ["NOVO", "BOM", "USADO", "PECAS"];
@@ -58,9 +58,9 @@ export default function EditProductPage() {
 
       const product = result.data;
 
-      // Verificar se usuário é o dono
+      // Verificar se usuÃ¡rio Ã© o dono
       if (user && product.ownerId?.toString() !== user.id?.toString()) {
-        alert("Você não tem permissão para editar este produto");
+        alert("VocÃª nÃ£o tem permissÃ£o para editar este produto");
         router.push(`/products/${id}`);
         return;
       }
@@ -146,22 +146,22 @@ export default function EditProductPage() {
     e.preventDefault();
     
     if (!formData.title.trim()) {
-      alert("Título é obrigatório");
+      alert("TÃ­tulo Ã© obrigatÃ³rio");
       return;
     }
 
     if (!formData.condition) {
-      alert("Condição é obrigatória");
+      alert("CondiÃ§Ã£o Ã© obrigatÃ³ria");
       return;
     }
 
     if (!formData.district) {
-      alert("Distrito é obrigatório");
+      alert("Distrito Ã© obrigatÃ³rio");
       return;
     }
 
     if (!formData.city.trim()) {
-      alert("Cidade é obrigatória");
+      alert("Cidade Ã© obrigatÃ³ria");
       return;
     }
 
@@ -207,19 +207,19 @@ export default function EditProductPage() {
         variant="ghost"
         className="mb-6 text-[var(--ecodoa-primary)] hover:text-[var(--ecodoa-secondary)]"
       >
-        ← Voltar
+        â† Voltar
       </Button>
 
       <div className="bg-white rounded-sm shadow-lg p-6">
         <h1 className="text-3xl font-bold text-[var(--ecodoa-primary)] mb-6">
-          Editar doação
+          Editar doaÃ§Ã£o
         </h1>
 
         <form onSubmit={handleSubmit}>
-          {/* Título */}
+          {/* TÃ­tulo */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-foreground mb-2">
-              Título *
+              TÃ­tulo *
             </label>
             <input
               type="text"
@@ -232,10 +232,10 @@ export default function EditProductPage() {
             />
           </div>
 
-          {/* Descrição */}
+          {/* DescriÃ§Ã£o */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-muted-foreground mb-2">
-              Descrição do produto
+              DescriÃ§Ã£o do produto
             </label>
             <textarea
               rows={4}
@@ -247,10 +247,10 @@ export default function EditProductPage() {
             />
           </div>
 
-          {/* Condição */}
+          {/* CondiÃ§Ã£o */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-foreground mb-2">
-              Condição *
+              CondiÃ§Ã£o *
             </label>
             <select
               value={formData.condition}
@@ -336,7 +336,7 @@ export default function EditProductPage() {
           {/* Upload de fotos */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-muted-foreground mb-2">
-              Fotos do produto (máximo 4)
+              Fotos do produto (mÃ¡ximo 4)
             </label>
             <div className="relative inline-block">
               <Button asChild variant="outline" size="sm" type="button">
@@ -367,7 +367,7 @@ export default function EditProductPage() {
                       onClick={() => removeImage(index)}
                       className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"
                     >
-                      ×
+                      Ã—
                     </button>
                   </div>
                 ))}
@@ -375,12 +375,12 @@ export default function EditProductPage() {
             )}
             {formData.images.length >= 4 && (
               <p className="text-sm text-muted-foreground mt-2">
-                Máximo de 4 fotos atingido
+                MÃ¡ximo de 4 fotos atingido
               </p>
             )}
           </div>
 
-          {/* Botões */}
+          {/* BotÃµes */}
           <div className="flex gap-4 justify-end">
             <Button
               type="button"
@@ -396,7 +396,7 @@ export default function EditProductPage() {
               className="bg-[var(--ecodoa-primary)] text-white hover:bg-[var(--ecodoa-olive)]"
               disabled={submitting}
             >
-              {submitting ? "Salvando..." : "Salvar Alterações"}
+              {submitting ? "Salvando..." : "Salvar AlteraÃ§Ãµes"}
             </Button>
           </div>
         </form>
@@ -404,4 +404,5 @@ export default function EditProductPage() {
     </div>
   );
 }
+
 
