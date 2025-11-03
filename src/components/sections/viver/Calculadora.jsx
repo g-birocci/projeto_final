@@ -10,7 +10,7 @@ export default function Calculadora() {
     carneSemana: 0,
     banhoMin: 0,
     energia: 0,
-    modaDescarte: 0, // Novo campo para peças de roupa compradas por mês
+    modaDescarte: 0, 
   });
 
   const fatores = {
@@ -44,8 +44,6 @@ export default function Calculadora() {
     return getColorClass(totalImpact, 200, 'bg');
   };
 
-  // Evita perda de cor por purge do Tailwind ao gerar classes dinâmicas
-  // Retorna o valor de cor direto para usar em inline style
   const getImpactColorValue = () => {
     const ratio = totalImpact / 200;
     if (ratio < 0.2) return 'var(--ecodoa-primary)';

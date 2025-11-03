@@ -47,7 +47,7 @@ export default function Dicas() {
       <p className="text-center text-[var(--ecodoa-text)]/70 mb-12 text-base max-w-full mx-auto">
         Pequenas ações geram grandes mudanças. </p>
 
-      <div className="grid grid-cols-1 gap-8 max-w-full mx-auto text-base leading-relaxed text-[var(--ecodoa-text)]/85"> {/* Ajustado para grid-cols-1 e tamanhos de fonte/gap */}
+      <div className="grid grid-cols-1 gap-8 max-w-full mx-auto text-base leading-relaxed text-[var(--ecodoa-primary)]"> 
         {dicas.map((d, i) => (
           <motion.div
             key={i}
@@ -55,10 +55,10 @@ export default function Dicas() {
             transition={{ type: "spring", stiffness: 150 }}
             className="flex items-start gap-4 group"
           >
-            <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-[var(--ecodoa-light-olive)]/25 text-[var(--ecodoa-primary)] group-hover:bg-[var(--ecodoa-accent)]/40 transition-all duration-300">
+            <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-[var(--ecodoa-light-olive)]/50 text-[var(--ecodoa-primary)] group-hover:bg-[var(--ecodoa-accent)]/40 transition-all duration-300">
               <d.icon className="w-5 h-5" />
             </div>
-            <p className="group-hover:text-[var(--ecodoa-primary)] transition-colors duration-300">
+            <p className="group-hover:text-[var(--ecodoa-secondary)] transition-colors duration-300">
               {d.text}
             </p>
           </motion.div>

@@ -148,7 +148,9 @@ export default function Sobre() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 bg-ecodoa-accent text-[var(--ecodoa-primary) py-3 px-6 rounded-full font-bold shadow-lg hover:bg-[var(--ecodoa-secondary)] transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 
+                       bg-[var(--ecodoa-accent)] text-[var(--ecodoa-secondary)] font-semibold px-10 py-4 
+                       rounded-2xl shadow-md hover:bg-[var(--ecodoa-light-olive)] transition-all duration-200"
             >
               Quero conhecer os ODS
             </motion.a>

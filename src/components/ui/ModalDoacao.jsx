@@ -8,7 +8,7 @@ const DISTRICTS_PT = [
   "Setúbal", "Viana do Castelo", "Vila Real", "Viseu", "Regiões Autónomas"
 ];
 
-const CONDITIONS = ["NOVO", "BOM", "USADO", "PECAS"];
+const CONDITIONS = ["NOVO", "BOM", "USADO"];
 
 
 export default function ModalDoacao({
