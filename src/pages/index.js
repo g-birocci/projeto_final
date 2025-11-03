@@ -16,8 +16,9 @@ export default function Landing() {
               'url("https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1400&auto=format&fit=crop")',
           }}
         >
-          <div className="max-w-screen-lg mx-auto px-8">
-            <h1 className="text-5xl font-extrabold text-white drop-shadow-md">EcoDoa</h1>
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="relative z-10 max-w-screen-lg mx-auto px-8">
+            <h1 className="text-5xl font-extrabold text-ecodoa-accent drop-shadow-md">EcoDoa</h1>
             <p className="mt-4 text-xl text-white/95 max-w-2xl drop-shadow">
               Conectamos quem quer doar com quem mais precisa — com simplicidade,
               transparência e impacto real.

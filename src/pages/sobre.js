@@ -45,76 +45,76 @@ export default function Sobre() {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="bg-white overflow-hidden bg-[var(--ecodoa-accent)] ">
+        <div className="overflow-hidden bg-[var(--ecodoa-accent)] ">
           <DashboardSobre />
         </div>
       </motion.div>
 
-     {/* QUEM SOMOS */}
-<motion.section
-  initial={{ opacity: 0, y: 60 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
-  className="max-w-4xl mx-auto px-6 py-10 text-center bg-white"
->
-  {/* Logo EcoDoa*/}
-  <motion.div
-    initial={{ opacity: 0, scale: 0.9 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.6 }}
-    viewport={{ once: true }}
-    className="flex justify-center mb-6"
-  >
-    <img
-      src="/img/EcoDoa2.png"
-      alt="Logo EcoDoa"
-      className="w-20 h-20 object-contain opacity-90"
-    />
-  </motion.div>
+      {/* QUEM SOMOS */}
+      <motion.section
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-10xl mx-auto px-6 py-10 text-center bg-white"
+      >
+        {/* Logo EcoDoa*/}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="flex justify-center mb-6"
+        >
+          <img
+            src="/img/EcoDoa2.png"
+            alt="Logo EcoDoa"
+            className="w-20 h-20 object-contain opacity-90"
+          />
+        </motion.div>
 
-  <motion.h2
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.2 }}
-    viewport={{ once: true }}
-    className="text-3xl font-extrabold text-[var(--ecodoa-primary)] mb-6"
-  >
-    Quem Somos
-  </motion.h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          viewport={{ once: true }}
+          className="text-3xl font-extrabold text-[var(--ecodoa-primary)] mb-6"
+        >
+          Quem Somos
+        </motion.h2>
 
-  <motion.p
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.3 }}
-    viewport={{ once: true }}
-    className="text-lg text-[var(--ecodoa-text)]/80 leading-relaxed max-w-3xl mx-auto"
-  >
-    O <strong className="text-[var(--ecodoa-primary)]">EcoDoa</strong> nasceu da vontade de provar que 
-    <span className="text-[var(--ecodoa-accent)] font-semibold"> pequenas aÃ§Ãµes mudam o mundo</span>.
-    Somos uma comunidade que acredita no poder de doar, partilhar e cuidar.
-  </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-lg text-[var(--ecodoa-text)]/80 leading-relaxed max-w-3xl mx-auto"
+        >
+          O <strong className="text-[var(--ecodoa-primary)]">EcoDoa</strong> nasceu da vontade de provar que
+          <span className="text-[var(--ecodoa-accent)] font-semibold"> pequenas aÃ§Ãµes mudam o mundo</span>.
+          Somos uma comunidade que acredita no poder de doar, partilhar e cuidar.
+        </motion.p>
 
-  <div className="relative mt-10 flex justify-center">
-    <div className="absolute w-60 h-60 bg-[var(--ecodoa-accent)]/10 rounded-full blur-3xl -z-10 top-0" />
-    <img
-      src="/img/sustentabilidade.jpg"
-      alt="Comunidade EcoDoa"
-      className="rounded-3xl shadow-xl object-cover border border-[var(--ecodoa-soft)]/30 w-full max-w-lg"
-    />
-  </div>
+        <div className="relative mt-10 flex justify-center">
+          <div className="absolute w-60 h-60 bg-[var(--ecodoa-accent)]/10 rounded-full blur-3xl -z-10 top-0" />
+          <img
+            src="/img/sustentabilidade.jpg"
+            alt="Comunidade EcoDoa"
+            className="rounded-3xl shadow-xl object-cover border border-[var(--ecodoa-soft)]/30 w-full max-w-lg"
+          />
+        </div>
 
-  <motion.p
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.5 }}
-    viewport={{ once: true }}
-    className="text-base text-[var(--ecodoa-secondary)]/70 leading-relaxed mt-8"
-  >
-    Cada doaÃ§Ã£o Ã© uma semente plantada. Cada gesto, um elo na corrente do bem.  
-    <strong className="text-[var(--ecodoa-primary)]"> EcoDoa </strong> Ã© mais do que um projeto, Ã© um convite para fazermos juntos o futuro florescer.
-  </motion.p>
-</motion.section>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          viewport={{ once: true }}
+          className="text-base text-[var(--ecodoa-secondary)]/70 leading-relaxed mt-8"
+        >
+          Cada doaÃ§Ã£o Ã© uma semente plantada. Cada gesto, um elo na corrente do bem.
+          <strong className="text-[var(--ecodoa-primary)]"> EcoDoa </strong> Ã© mais do que um projeto, Ã© um convite para fazermos juntos o futuro florescer.
+        </motion.p>
+      </motion.section>
 
       <motion.section
         initial={{ opacity: 0, y: 60 }}
@@ -154,7 +154,7 @@ export default function Sobre() {
             </motion.a>
           </div>
         </div>
-     
+
       </motion.section>
       <Feedbacks />
       <ChamadaDoacao />
