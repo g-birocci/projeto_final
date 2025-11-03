@@ -13,7 +13,7 @@ export default function Sustentavel() {
         className="absolute inset-0 bg-[url('/img/leaves-bg.svg')] bg-cover bg-center"
       ></motion.div>
 
-      <div className="relative max-w-full mx-auto z-10">
+      <div className="relative max-w-3xl mx-auto z-10 px-4">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

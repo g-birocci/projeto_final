@@ -16,8 +16,9 @@ export default function Landing() {
               'url("https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1400&auto=format&fit=crop")',
           }}
         >
-          <div className="max-w-6xl mx-auto px-8">
-            <h1 className="text-5xl font-extrabold text-white drop-shadow-md">EcoDoa</h1>
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="relative z-10 max-w-screen-lg mx-auto px-8">
+            <h1 className="text-5xl font-extrabold text-ecodoa-accent drop-shadow-md">EcoDoa</h1>
             <p className="mt-4 text-xl text-white/95 max-w-2xl drop-shadow">
               Conectamos quem quer doar com quem mais precisa — com simplicidade,
               transparência e impacto real.
@@ -37,7 +38,7 @@ export default function Landing() {
       </section>
 
       {/* Destaques */}
-      <section className="max-w-6xl mx-auto px-8 py-16 grid grid-cols-3 gap-8">
+      <section className="max-w-screen-lg mx-auto px-8 py-16 grid grid-cols-3 gap-8">
         <div className="bg-white rounded-lg border border-[var(--ecodoa-accent)]/40 p-6 shadow-sm">
           <h3 className="text-lg font-semibold text-[var(--ecodoa-primary)]">Doe com facilidade</h3>
           <p className="text-sm opacity-80 mt-2">
@@ -59,7 +60,7 @@ export default function Landing() {
       </section>
 
       {/* Institucional */}
-      <section className="max-w-6xl mx-auto px-8 pb-20">
+      <section className="max-w-screen-lg mx-auto px-8 pb-20">
         <div className="bg-[var(--ecodoa-soft)]/60 rounded-lg p-8 border border-[var(--ecodoa-accent)]/30">
           <h2 className="text-2xl font-bold text-[var(--ecodoa-primary)]">Nossa cultura</h2>
           <p className="mt-2 opacity-80 max-w-3xl">

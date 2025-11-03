@@ -51,10 +51,10 @@ export default function MapaEcoDoa({ places = [] }) {
     );
 
   return (
-    <div className="relative w-full h-[380px] sm:h-[420px] rounded-xl overflow-hidden shadow-md bg-white border border-[var(--ecodoa-soft)]">
+    <div className="relative w-full h-[320px] sm:h-[400px] rounded-xl overflow-hidden shadow-md bg-white border border-[var(--ecodoa-soft)]">
       <MapContainer
         center={[41.15, -8.61]} // Porto
-        zoom={11}
+        zoom={10}
         scrollWheelZoom={false}
         className="w-full h-full"
       >

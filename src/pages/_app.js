@@ -6,6 +6,8 @@ import AuthProvider from '@/context/authContext';
 import Navbar from '@/components/layout/Navbar';
 import HamburgerMenu from '@/components/HamburgerMenu';
 import Footer from '@/components/Footer';
+import Navmobile from '@/components/Navmobile';
+import Footer from '@/components/layout/Footer';
 import ToastContainer from '@/components/ui/Toast';
 
 export default function App({ Component, pageProps }) {
