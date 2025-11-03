@@ -40,7 +40,7 @@ export default function ProductsPage() {
       <div className="flex justify-between mt-12 items-center mb-6">
         {user && (
           <Button
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/app")}
             variant="default"
             className="right-0 bg-ecodoa-accent text-ecodoa-secondary font-medium">
             Publicar Doações

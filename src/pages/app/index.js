@@ -95,7 +95,7 @@ export default function Index() {
       setTimeout(() => {
         setModalAberto(false);
         resetForm();
-        router.push("/");
+        router.push("/app");
       }, 2000);
     } catch (err) {
       console.error(err);
