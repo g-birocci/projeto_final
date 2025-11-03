@@ -83,7 +83,7 @@ export default function ProfilePage() {
       return;
     }
     if (!form.firstName || !form.lastName || !form.city || !form.district) {
-      setError("Todos os campos sÃ£o obrigatÃ³rios.");
+      setError("Todos os campos são obrigatórios.");
       return;
     }
     try {
@@ -114,8 +114,8 @@ export default function ProfilePage() {
       }
     } catch (err) {
       console.error("Erro ao salvar perfil:", err);
-      setError(err.message || "Erro ao salvar alteraÃ§Ãµes");
-      toast({ type: "error", message: err.message || "Erro ao salvar alteraÃ§Ãµes" });
+      setError(err.message || "Erro ao salvar alterações");
+      toast({ type: "error", message: err.message || "Erro ao salvar alterações" });
     } finally {
       setLoading(false);
     }
@@ -200,14 +200,14 @@ export default function ProfilePage() {
                 className="w-full mb-4 justify-start gap-2 text-ecodoa-primary border-ecodoa-accent hover:bg-ecodoa-soft"
               >
                 <HeartHandshake className="w-4 h-4" />
-                HistÃ³rico de DoaÃ§Ãµes
+                Histórico de Doações
               </Button>
             </Link>
 
             {myProducts.length > 0 ? (
               <div className="mb-6">
                 <h2 className="text-sm font-semibold text-ecodoa-primary mb-2">
-                  Ãšltimos produtos
+                  Últimos produtos
                 </h2>
                 <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                   {myProducts.map((produto) => (
@@ -221,7 +221,7 @@ export default function ProfilePage() {
               </div>
             ) : (
               <div className="text-xs text-muted-foreground text-center mb-4">
-                VocÃª ainda nÃ£o publicou nenhum produto.
+                Você ainda não publicou nenhum produto.
               </div>
             )}
             <Button
