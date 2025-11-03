@@ -5,6 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const connectDB = require("./backend/config/mongodb");
+const Conversation = require("./backend/model/Conversation");
 
 const dev = process.env.NODE_ENV !== "production";
 const nextApp = Next({ dev, turbo: false });
@@ -81,6 +82,21 @@ const PORT = process.env.PORT || 3000;
 const iniciarServidor = async () => {
   try {
     await connectDB();
+    // Corrige índice único inválido em conversas criado em versões anteriores
+    try {
+      const indexes = await Conversation.collection.indexes();
+      const hasUnique = indexes.find(
+        (i) => i.name === "itemId_1_participants_1" && i.unique === true
+      );
+      if (hasUnique) {
+        await Conversation.collection.dropIndex("itemId_1_participants_1");
+        console.log("[init] Removido índice único de Conversation (itemId_1_participants_1)");
+      }
+      // Garante índice não-único para performance
+      await Conversation.collection.createIndex({ itemId: 1, participants: 1 });
+    } catch (e) {
+      console.warn("[init] Aviso ao ajustar índices de Conversation:", e?.message || e);
+    }
     await nextApp.prepare();
     // ⚠️ importante: escutar o HTTP SERVER, não o app
     server.listen(PORT, () => {

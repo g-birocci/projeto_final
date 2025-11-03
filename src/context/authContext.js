@@ -37,7 +37,6 @@ export default function AuthProvider({ children }) {
         setUser(result.data);
       }
     } catch (error) {
-      console.error("Erro ao fazer login:", error);
       throw error;
     }
   };

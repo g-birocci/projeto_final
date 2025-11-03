@@ -1,4 +1,4 @@
-Ôªø"use client";
+"use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Input } from "@/components/ui/Pesquisa";
@@ -36,7 +36,7 @@ export default function ChatPage() {
     }
   }, [router.query.conversa]);
 
-  // Carrega lista de conversas quando autentica√ß√£o estiver pronta
+  // Carrega lista de conversas quando autenticaÁ„o estiver pronta
   useEffect(() => {
     async function carregarConversas() {
       if (authLoading) return;
@@ -120,7 +120,7 @@ export default function ChatPage() {
     carregarMensagens();
   }, [conversaAtiva]);
 
-  // Auto-scroll para a √∫ltima mensagem quando a lista muda
+  // Auto-scroll para a ˙ltima mensagem quando a lista muda
   useEffect(() => {
     if (fimDasMensagensRef.current) {
       fimDasMensagensRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -167,7 +167,7 @@ export default function ChatPage() {
     return conversas.filter((c) => {
       const body = c?.lastMessage?.body?.toLowerCase?.() || "";
       const idStr = String(c?._id || "").toLowerCase();
-      const titulo = c?.itemId?.title?.toLowerCase?.() || "";
+      const titulo = c?.item?.title?.toLowerCase?.() || "";
       return body.includes(q) || idStr.includes(q) || titulo.includes(q);
     });
   }, [busca, conversas]);
@@ -180,7 +180,7 @@ export default function ChatPage() {
   if (!user && !authLoading) {
     return (
       <div className="flex flex-col min-h-screen bg-[var(--ecodoa-soft)] items-center justify-center p-4">
-        <p className="text-ecodoa-primary mb-4">Voc√™ precisa estar logado para acessar o chat.</p>
+        <p className="text-ecodoa-primary mb-4">VocÍ precisa estar logado para acessar o chat.</p>
         <Button variant="default" onClick={() => router.push("/app/auth/login")}>
           Fazer Login
         </Button>
@@ -212,7 +212,7 @@ export default function ChatPage() {
               <ul className="space-y-2">
                 {listaFiltrada.map((c) => {
                   const last = c?.lastMessage;
-                  const titulo = c?.itemId?.title || "Conversa";
+                  const titulo = c?.item?.title || "Conversa";
                   const preview = last?.body || "";
                   const quando = new Date(c?.lastMessageAt || last?.createdAt || Date.now())
                     .toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -249,10 +249,10 @@ export default function ChatPage() {
                 onClick={() => setConversaAtiva(null)}
                 className="text-ecodoa-primary"
               >
-                ‚Üê
+                ?
               </Button>
               <h2 className="text-lg font-semibold text-ecodoa-primary flex-1">
-                {conversaSelecionada?.itemId?.title || "Conversa"}
+                {conversaSelecionada?.item?.title || "Conversa"}
               </h2>
             </div>
 
@@ -311,5 +311,4 @@ export default function ChatPage() {
     </div>
   );
 }
-
 

@@ -1,10 +1,11 @@
-'use client'
+﻿'use client'
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { fetchProductById, reserveProduct, unreserveProduct, donateProduct, createConversation } from "@/services/api";
 import { useAuth } from "@/context/authContext";
 import { Button } from "@/components/ui/Button";
 import toast from "@/lib/toast";
+import BackButton from "@/components/ui/BackButton";
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -41,7 +42,7 @@ export default function ProductDetailPage() {
 
   async function handleReserve() {
     if (!user) {
-      toast({ type: "info", message: "VocÃª precisa estar logado para reservar um produto" });
+      toast({ type: "info", message: "Você precisa estar logado para reservar um produto" });
       return;
     }
 
@@ -82,7 +83,7 @@ export default function ProductDetailPage() {
 
   async function handleDonate() {
     if (!user) {
-      toast({ type: "info", message: "VocÃª precisa estar logado para doar um produto" });
+      toast({ type: "info", message: "Você precisa estar logado para doar um produto" });
       return;
     }
 
@@ -111,7 +112,7 @@ export default function ProductDetailPage() {
   async function handleChat() {
     if (!user) {
       toast({ type: "info", message: "Você precisa estar logado para conversar com o doador" });
-      router.push("/auth/login");
+      router.push("/app/auth/login");
       return;
     }
     try {
@@ -125,7 +126,8 @@ export default function ProductDetailPage() {
       router.push(`/app/chat?conversa=${convId}`);
     } catch (err) {
       console.error(err);
-      toast({ type: "info", message: err.message || "Erro ao iniciar conversa" });
+      const msg = err?.status === 409 ? 'Produto indisponível para conversa' : (err?.message || 'Erro ao iniciar conversa');
+      toast({ type: "info", message: msg });
     } finally {
       setActionLoading(false);
     }
@@ -133,11 +135,11 @@ export default function ProductDetailPage() {
 
   const isOwner = user && product && product.ownerId?.toString() === user.id?.toString();
   const isReservedByMe = user && product && product.reservedBy?.toString() === user.id?.toString();
-  const canReserve = user && product && !isOwner && product.status === "DISPONÃVEL";
+  const canReserve = user && product && !isOwner && product.status === "DISPONÃƒÂVEL";
   const canCancelReserve = user && product && (isReservedByMe || isOwner) && product.status === "RESERVADO";
-  const canDonate = user && product && isOwner && (product.status === "DISPONÃVEL" || product.status === "RESERVADO");
+  const canDonate = user && product && isOwner && (product.status === "DISPONÃƒÂVEL" || product.status === "RESERVADO");
 
-  const canChat = user && product && !isOwner;
+  const canChat = user && product && !isOwner && product.status !== "DOADO";
 
   if (loading) {
     return (
@@ -151,13 +153,8 @@ export default function ProductDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <p className="text-[var(--ecodoa-alert)] mb-4">{error || "Produto nÃ£o encontrado"}</p>
-          <Button
-            onClick={() => router.push("/products")}
-            variant="default"
-          >
-            Voltar para lista
-          </Button>
+          <p className="text-[var(--ecodoa-alert)] mb-4">{error || "Produto não encontrado"}</p>
+          <BackButton className="mb-4" />
         </div>
       </div>
     );
@@ -165,13 +162,7 @@ export default function ProductDetailPage() {
 
   return (
     <div className="container mx-auto px-4 pt-18 max-w-4xl">
-      <Button
-        onClick={() => router.back()}
-        variant="ghost"
-        className="mb-4 text-[var(--ecodoa-primary)] hover:text-[var(--ecodoa-secondary)]"
-      >
-        Voltar
-      </Button>
+      <BackButton className="mb-4" />
 
       <div className="bg-white rounded-sm overflow-hidden">
         {/* Imagens */}
@@ -189,7 +180,7 @@ export default function ProductDetailPage() {
         )}
 
         <div className="px-6">
-          {/* TÃ­tulo e Status */}
+          {/* TÃƒÂ­tulo e Status */}
           <div className="flex justify-between items-start mb-2">
             <h1 className="text-2xl font-bold">{product.title}</h1>
             </div>
@@ -210,11 +201,11 @@ export default function ProductDetailPage() {
             </span>
           </div>
 
-          {/* Descrição */}
+          {/* DescriÃ§Ã£o */}
           {product.description && (
             <p className="text-foreground mb-2">{product.description}</p>
           )}
-          {/* InformaÃ§Ãµes */}
+          {/* InformaÃƒÂ§ÃƒÂµes */}
           <div className="grid grid-cols-2 gap-4 mb-4 mt-6">
             <div>
               <p className="text-sm text-muted-foreground">{product.condition}</p>
@@ -228,7 +219,7 @@ export default function ProductDetailPage() {
             </div>
             {product.status === "RESERVADO" && product.reservedUntil && (
               <div>
-                <p className="text-sm text-muted-foreground">Reserva até©</p>
+                <p className="text-sm text-muted-foreground">Reserva atÃ©Â©</p>
                 <p className="font-semibold text-foreground">
                   {new Date(product.reservedUntil).toLocaleDateString("pt-PT")}
                 </p>
@@ -236,7 +227,7 @@ export default function ProductDetailPage() {
             )}
           </div>
 
-          {/* AÃ§Ãµes */}
+          {/* AÃƒÂ§ÃƒÂµes */}
           {user && (
             <div className="flex gap-4 flex-wrap justify-self-center">
               {canReserve && (
@@ -291,7 +282,7 @@ export default function ProductDetailPage() {
 
           {!user && (
             <p className="text-muted-foreground italic">
-              Faça o login para reservar ou doar produtos
+              FaÃ§a o login para reservar ou doar produtos
             </p>
           )}
         </div>
@@ -299,3 +290,7 @@ export default function ProductDetailPage() {
     </div>
   );
 }
+
+
+
+

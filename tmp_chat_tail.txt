@@ -1,0 +1,134 @@
+return (
+      <div className="flex flex-col min-h-screen bg-[var(--ecodoa-soft)] items-center justify-center p-4">
+        <p className="text-ecodoa-primary mb-4">Você precisa estar logado para acessar o chat.</p>
+        <Button variant="default" onClick={() => router.push("/app/auth/login")}>
+          Fazer Login
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col min-h-screen bg-[var(--ecodoa-soft)]">
+      <main className="grow pt-4 px-4 pb-20">
+        {erro && (
+          <div className="mb-4 text-sm text-red-600 bg-red-50 p-2 rounded">{erro}</div>
+        )}
+        {!conversaAtiva ? (
+          <div>
+            <h1 className="text-xl font-bold mb-4 text-[var(--ecodoa-primary)]">Conversas</h1>
+            <Input
+              placeholder="Pesquisar conversas..."
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              className="mb-4 bg-white text-ecodoa-primary placeholder-ecodoa-olive border border-ecodoa-accent rounded-md"
+            />
+
+            {carregando && !conversas.length ? (
+              <p className="text-sm text-muted-foreground text-center py-8">Carregando...</p>
+            ) : listaFiltrada.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-8">Nenhuma conversa encontrada.</p>
+            ) : (
+              <ul className="space-y-2">
+                {listaFiltrada.map((c) => {
+                  const last = c?.lastMessage;
+                  const titulo = c?.item?.title || "Conversa";
+                  const preview = last?.body || "";
+                  const quando = new Date(c?.lastMessageAt || last?.createdAt || Date.now())
+                    .toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+                  return (
+                    <li
+                      key={String(c._id)}
+                      onClick={() => setConversaAtiva(String(c._id))}
+                      className="cursor-pointer flex items-center justify-between bg-white rounded-lg shadow-sm p-3 hover:bg-ecodoa-soft transition"
+                    >
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <div className="w-12 h-12 rounded-full bg-ecodoa-accent flex-shrink-0 flex items-center justify-center">
+                          <span className="text-ecodoa-primary font-semibold text-sm">
+                            {titulo.charAt(0).toUpperCase()}
+                          </span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-ecodoa-primary text-sm truncate">{titulo}</p>
+                          <p className="text-xs text-muted-foreground truncate">{preview}</p>
+                        </div>
+                      </div>
+                      <span className="text-xs text-ecodoa-olive ml-2">{quando}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="mb-4 flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                onClick={() => setConversaAtiva(null)}
+                className="text-ecodoa-primary"
+              >
+                ?
+              </Button>
+              <h2 className="text-lg font-semibold text-ecodoa-primary flex-1">
+                {conversaSelecionada?.item?.title || "Conversa"}
+              </h2>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-sm p-4 border border-ecodoa-accent flex flex-col h-[calc(100vh-200px)]">
+              <div className="flex flex-col gap-3 mb-4 overflow-y-auto flex-1 pr-2">
+                {carregando && mensagens.length === 0 ? (
+                  <div className="text-sm text-muted-foreground text-center py-8">Carregando mensagens...</div>
+                ) : mensagens.length === 0 ? (
+                  <div className="text-sm text-muted-foreground text-center py-8">Nenhuma mensagem ainda. Diga oi!</div>
+                ) : (
+                  mensagens.map((msg) => {
+                    const souAutor = String(msg.senderId) === String(meuId);
+                    return (
+                      <div
+                        key={String(msg._id)}
+                        className={`max-w-[75%] p-2.5 rounded-lg ${
+                          souAutor
+                            ? "bg-ecodoa-accent text-ecodoa-secondary self-end ml-auto"
+                            : "bg-ecodoa-soft text-ecodoa-primary"
+                        }`}
+                      >
+                        <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.body}</p>
+                        <div className={`mt-1 text-[10px] ${souAutor ? "text-ecodoa-secondary/70" : "text-ecodoa-olive"}`}>
+                          {formatHora(msg.createdAt)}
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+                <div ref={fimDasMensagensRef} />
+              </div>
+
+              <div className="flex items-center gap-2 mt-auto pt-3 border-t border-ecodoa-accent/30">
+                <input
+                  type="text"
+                  placeholder="Escreva uma mensagem..."
+                  value={mensagem}
+                  onChange={(e) => setMensagem(e.target.value)}
+                  onKeyDown={onKeyDownInput}
+                  aria-label="Campo para escrever mensagem"
+                  className="flex-1 h-9 text-sm bg-white text-ecodoa-text placeholder-ecodoa-olive border border-ecodoa-accent rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-ecodoa-primary focus:border-ecodoa-primary"
+                />
+                <Button
+                  variant="default"
+                  size="sm"
+                  onClick={enviarMensagem}
+                  disabled={carregando || !mensagem.trim()}
+                >
+                  {carregando ? "..." : "Enviar"}
+                </Button>
+              </div>
+            </div>
+          </>
+        )}
+      </main>
+    </div>
+  );
+}
+
