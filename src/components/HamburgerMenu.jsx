@@ -65,27 +65,23 @@ export default function HamburgerMenu() {
       { href: "/app/products/history", icon: <History size={18} />, label: "Histórico" },
       { href: "/app/chat", icon: <MessageCircle size={18} />, label: "Chat" },
       { href: "/app/profile", icon: <User size={18} />, label: "Perfil" },
-
     ]
     : [
       { href: "/app", icon: <Home size={18} />, label: "Início" },
       { href: "/app/products", icon: <HeartHandshake size={18} />, label: "Doações" },
       { href: "/app/auth/login", icon: <LogIn size={18} />, label: "Entrar" },
-
     ];
 
   return (
     <>
-      {/* Botão Hamburger - dentro do container 375px */}
       <button
         onClick={() => setIsOpen(true)}
-        className="absolute top-8 left-3 z-50 w-10 h-10 text-[var(--ecodoa-primary)] rounded-md flex items-center justify-center hover:cursor-pointer transition-all md:hidden"
+        className="absolute top-8 right-3 z-50 w-10 h-10 text-[var(--ecodoa-primary)] rounded-md flex items-center justify-center hover:cursor-pointer transition-all md:hidden"
         aria-label="Abrir menu"
       >
         <Menu size={18} />
       </button>
 
-      {/* Overlay */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -98,20 +94,16 @@ export default function HamburgerMenu() {
               onClick={() => setIsOpen(false)}
             />
 
-
-            {/* Menu Lateral Direito */}
-            <div className="absolute top-0 left-0 h-dvh w-[260px] bg-ecodoa-secondary shadow-2xl z-50 flex flex-col">
-              {/* Header do Menu */}
+            <div className="absolute top-0 right-0 h-dvh w-[260px] bg-ecodoa-secondary shadow-2xl z-50 flex flex-col">
               <div className="flex items-center justify-between p-3 border-b border-ecodoa-accent">
-
                 <div className="px-3 py-2 text-sm text-ecodoa-primary">
-                    <p className="font-medium truncate">{user?.email}</p>
-                    {user?.firstName && (
-                      <p className="text-[10px] opacity-70 truncate">
-                        {user.firstName} {user?.lastName}
-                      </p>
-                    )}
-                  </div>
+                  <p className="font-medium truncate">{user?.email}</p>
+                  {user?.firstName && (
+                    <p className="text-[10px] opacity-70 truncate">
+                      {user.firstName} {user?.lastName}
+                    </p>
+                  )}
+                </div>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="w-7 h-7 flex items-center justify-center rounded-md hover:bg-ecodoa-accent/20 text-ecodoa-primary transition"
@@ -121,19 +113,6 @@ export default function HamburgerMenu() {
                 </button>
               </div>
 
-              {/* <div className="flex items-center justify-between p-3 border-b border-ecodoa-accent/30 bg-ecodoa-soft">
-                <h2 className="text-base font-semibold text-ecodoa-primary">Menu</h2>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="w-7 h-7 flex items-center justify-center rounded-md hover:bg-ecodoa-accent/20 text-ecodoa-primary transition"
-                  aria-label="Fechar menu"
-                >
-                  <X size={18} />
-                </button>
-              </div> */}
-
-
-              {/* Itens do Menu */}
               <nav className="flex-1 overflow-y-auto py-3">
                 <ul className="space-y-1 px-2">
                   {menuItems.map((item) => {
@@ -143,8 +122,8 @@ export default function HamburgerMenu() {
                         <Link
                           href={item.href}
                           className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg transition text-sm ${isActive
-                              ? "bg-ecodoa-accent text-ecodoa-primary font-medium"
-                              : "text-ecodoa-soft hover:bg-ecodoa-soft"
+                            ? "bg-ecodoa-accent text-ecodoa-primary font-medium"
+                            : "text-ecodoa-soft hover:bg-ecodoa-soft"
                             }`}
                         >
                           <span className={isActive ? "text-ecodoa-primary" : "text-ecodoa-soft"}>
@@ -158,7 +137,6 @@ export default function HamburgerMenu() {
                 </ul>
               </nav>
 
-              {/* Footer do Menu */}
               {user && (
                 <div className="p-3 py-8">
                   <button
@@ -177,4 +155,3 @@ export default function HamburgerMenu() {
     </>
   );
 }
-

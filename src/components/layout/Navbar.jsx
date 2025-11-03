@@ -35,13 +35,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState(navItems[0].key);
   const [mounted, setMounted] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false); // >= md
+  const [isDesktop, setIsDesktop] = useState(false);
   const panelId = useId();
 
-  // Evita piscadas de SSR
   useEffect(() => setMounted(true), []);
 
-  // Media query para alternar entre desktop / mobile
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
     const onChange = () => setIsDesktop(mq.matches);
@@ -52,7 +50,6 @@ export default function Navbar() {
     };
   }, []);
 
-  // Trava o scroll quando o painel está aberto
   useEffect(() => {
     const root = document.documentElement;
     if (open) root.classList.add("overflow-hidden");
@@ -60,7 +57,6 @@ export default function Navbar() {
     return () => root.classList.remove("overflow-hidden");
   }, [open]);
 
-  // Removida tipagem no parâmetro
   const handleNavigate = (href) => {
     setOpen(false);
     window.location.href = href;
@@ -70,16 +66,12 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Header fixo com container central (max 1024px) */}
       <div className="fixed top-0 left-0 right-0 z-50">
         <div className="max-w-screen-lg mx-auto px-6 md:px-8 py-4 flex items-center justify-between">
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
             <Image src="/img/EcoDoa1.png" alt="EcoDoa" width={50} height={50} className="drop-shadow-md" />
             <span className="hidden sm:inline text-xl font-bold tracking-tight text-[var(--ecodoa-accent)]">EcoDoa</span>
           </Link>
-
-          {/* Botão/hamburger (abre o painel) */}
           <button
             onClick={() => setOpen(true)}
             aria-label="Abrir menu"
@@ -95,7 +87,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Overlay */}
       <div
         className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
           open ? "opacity-100 visible" : "opacity-0 invisible"
@@ -103,7 +94,6 @@ export default function Navbar() {
         onClick={() => setOpen(false)}
       />
 
-      {/* Painel (sidebar) */}
       <div
         id={panelId}
         role="dialog"
@@ -112,7 +102,6 @@ export default function Navbar() {
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Imagem dinâmica (esquerda / desktop) */}
         <div className="relative flex-1 hidden lg:block">
           {navItems.map((n) => {
             const v = previews[n.key];
@@ -130,9 +119,7 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Conteúdo (direita) */}
         <div className="w-full lg:w-[420px] shrink-0 bg-[var(--ecodoa-primary)] h-full p-8 relative flex flex-col">
-          {/* Fechar */}
           <button
             onClick={() => setOpen(false)}
             className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--ecodoa-secondary)]/50 hover:bg-[var(--ecodoa-olive)]/30 transition-all duration-300"
@@ -141,24 +128,8 @@ export default function Navbar() {
             <X size={24} className="text-[var(--ecodoa-accent)]" />
           </button>
 
-          {/* Perfil */}
-          <div className="flex items-center gap-4 mt-16 mb-10">
-            <Image
-              src="/img/profile.jpg"
-              alt="Perfil"
-              width={60}
-              height={60}
-              className="rounded-full border-2 border-[var(--ecodoa-accent)] shadow-md"
-            />
-            <div>
-              <h2 className="text-2xl font-bold text-[var(--ecodoa-accent)]">Olá, Gretta.</h2>
-              <p className="text-sm text-[var(--ecodoa-soft)]">Portugal</p>
-            </div>
-          </div>
-
-          {/* Links */}
           <nav className="flex-1">
-            <ul className="space-y-2">
+            <ul className="space-y-2 mt-20">
               {navItems.map((item) => (
                 <li key={item.key}>
                   <button
@@ -174,11 +145,8 @@ export default function Navbar() {
             </ul>
           </nav>
 
-          {/* CTA */}
-          <div className="mt-8">
-          </div>
+          <div className="mt-8"></div>
 
-          {/* Rodapé */}
           <div className="mt-8 pt-8 border-t border-[var(--ecodoa-light-olive)]/30">
             <p className="text-sm text-[var(--ecodoa-soft)]">
               <span className="block font-semibold text-[var(--ecodoa-accent)] mb-2">Junte-se a nós</span>
