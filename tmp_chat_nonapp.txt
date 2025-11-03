@@ -167,7 +167,7 @@ export default function ChatPage() {
     return conversas.filter((c) => {
       const body = c?.lastMessage?.body?.toLowerCase?.() || "";
       const idStr = String(c?._id || "").toLowerCase();
-      const titulo = c?.itemId?.title?.toLowerCase?.() || "";
+      const titulo = c?.item?.title?.toLowerCase?.() || "";
       return body.includes(q) || idStr.includes(q) || titulo.includes(q);
     });
   }, [busca, conversas]);
@@ -212,7 +212,7 @@ export default function ChatPage() {
               <ul className="space-y-2">
                 {listaFiltrada.map((c) => {
                   const last = c?.lastMessage;
-                  const titulo = c?.itemId?.title || "Conversa";
+                  const titulo = c?.item?.title || "Conversa";
                   const preview = last?.body || "";
                   const quando = new Date(c?.lastMessageAt || last?.createdAt || Date.now())
                     .toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -252,7 +252,7 @@ export default function ChatPage() {
                 ←
               </Button>
               <h2 className="text-lg font-semibold text-ecodoa-primary flex-1">
-                {conversaSelecionada?.itemId?.title || "Conversa"}
+                {conversaSelecionada?.item?.title || "Conversa"}
               </h2>
             </div>
 
@@ -311,5 +311,4 @@ export default function ChatPage() {
     </div>
   );
 }
-
 

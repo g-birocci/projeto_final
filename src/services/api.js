@@ -31,9 +31,19 @@ export async function loginService(email, password) {
     body: JSON.stringify({ email, password }),
   });
 
-  const data = await response.json();
+  let data = {};
+  try {
+    data = await response.json();
+  } catch {}
+
   if (!response.ok) {
-    throw new Error(data.message || "Erro no login");
+    const isCredentialError = [400, 401, 403, 404].includes(response.status);
+    const msg = isCredentialError
+      ? "Usuário ou senha incorretos"
+      : (data && data.message) || "Erro no login";
+    const err = new Error(msg);
+    err.status = response.status;
+    throw err;
   }
 
   return data;
@@ -274,8 +284,13 @@ export async function createConversation(itemId) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ itemId }),
   });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || "Erro ao criar conversa");
+  let data = {};
+  try { data = await res.json(); } catch {}
+  if (!res.ok) {
+    const err = new Error((data && data.message) || "Erro ao criar conversa");
+    err.status = res.status;
+    throw err;
+  }
   return data;
 }
 

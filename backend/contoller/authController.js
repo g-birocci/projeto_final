@@ -81,12 +81,20 @@ function getDonorId(productDoc) {
 const createConversation = async (req, res) => {
   try {
     const { itemId } = req.body;
+    if (!itemId || !mongoose.Types.ObjectId.isValid(String(itemId))) {
+      return res.status(400).json({ message: "ID do produto inválido" });
+    }
 
     if (!itemId) return res.status(400).json({ message: "Produto não informado" });
 
     // Buscar o produto
     const product = await Product.findById(itemId);
     if (!product) return res.status(404).json({ message: "Produto não encontrado" });
+
+    // Bloqueia conversa se produto não estiver disponível
+    if (product.status === 'DOADO' || product.status === 'ARQUIVADO') {
+      return res.status(409).json({ message: 'Produto indisponível para conversa' });
+    }
 
     // Donor real: ownerId do produto
     const donorId = product.ownerId;
@@ -97,6 +105,9 @@ const createConversation = async (req, res) => {
       donorId.toString(),
       req.user.id.toString()
     ];
+    if (donorId.toString() === req.user.id.toString()) {
+      return res.status(400).json({ message: "Não é possível iniciar conversa com seu próprio produto" });
+    }
 
     // Verificar se já existe conversa entre esses participantes para esse item
     let conversation = await Conversation.findOne({
@@ -106,12 +117,24 @@ const createConversation = async (req, res) => {
 
     if (conversation) return res.json(conversation);
 
-    // Criar nova conversa
-    conversation = await Conversation.create({
-      itemId: product._id,
-      participants,
-      lastMessageAt: new Date()
-    });
+    // Upsert conversa garantindo idempotência e ordem estável
+    conversation = await Conversation.findOneAndUpdate(
+      {
+        itemId: product._id,
+        $or: [
+          { participants: [donorId, req.user._id] },
+          { participants: [req.user._id, donorId] },
+        ],
+      },
+      {
+        $setOnInsert: {
+          itemId: product._id,
+          participants: [donorId, req.user._id],
+          lastMessageAt: new Date(),
+        },
+      },
+      { new: true, upsert: true }
+    );
 
     res.status(201).json(conversation);
 

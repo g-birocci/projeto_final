@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
+import BackButton from "@/components/ui/BackButton";
 import { createUser } from "@/services/api";
 import { useRouter } from "next/navigation";
 
@@ -29,7 +30,7 @@ export default function Register() {
 
     try {
       const res = await createUser(form);
-      console.log("Usuário criado:", res);
+      console.log("UsuÃ¡rio criado:", res);
       router.push("/app/auth/login");
     } catch (err) {
       console.error(err);
@@ -45,14 +46,14 @@ export default function Register() {
         <h2 className="text-3xl font-bold text-[#042940] text-center mb-6">Registrar</h2>
         {error && <p className="text-red-600 text-center mb-4">{error}</p>}
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <input
               type="text"
               name="firstName"
               placeholder="Nome"
               value={form.firstName}
               onChange={handleChange}
-              className="flex-1 p-3 rounded-md border border-[#cbe8e5] focus:outline-none focus:ring-2 focus:ring-[#9FC131]"
+              className="flex-1 min-w-0 p-3 rounded-md border border-[#cbe8e5] focus:outline-none focus:ring-2 focus:ring-[#9FC131]"
               required
             />
             <input
@@ -61,7 +62,7 @@ export default function Register() {
               placeholder="Sobrenome"
               value={form.lastName}
               onChange={handleChange}
-              className="flex-1 p-3 rounded-md border border-[#cbe8e5] focus:outline-none focus:ring-2 focus:ring-[#9FC131]"
+              className="flex-1 min-w-0 p-3 rounded-md border border-[#cbe8e5] focus:outline-none focus:ring-2 focus:ring-[#9FC131]"
               required
             />
           </div>
@@ -83,14 +84,14 @@ export default function Register() {
             className="p-3 rounded-md border border-[#cbe8e5] focus:outline-none focus:ring-2 focus:ring-[#9FC131]"
             required
           />
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <input
               type="text"
               name="city"
               placeholder="Cidade"
               value={form.city}
               onChange={handleChange}
-              className="flex-1 p-3 rounded-md border border-[#cbe8e5] focus:outline-none focus:ring-2 focus:ring-[#9FC131]"
+              className="flex-1 min-w-0 p-3 rounded-md border border-[#cbe8e5] focus:outline-none focus:ring-2 focus:ring-[#9FC131]"
               required
             />
             <input
@@ -99,7 +100,7 @@ export default function Register() {
               placeholder="Bairro"
               value={form.district}
               onChange={handleChange}
-              className="flex-1 p-3 rounded-md border border-[#cbe8e5] focus:outline-none focus:ring-2 focus:ring-[#9FC131]"
+              className="flex-1 min-w-0 p-3 rounded-md border border-[#cbe8e5] focus:outline-none focus:ring-2 focus:ring-[#9FC131]"
               required
             />
           </div>
@@ -112,7 +113,7 @@ export default function Register() {
           </button>
         </form>
         <p className="text-[#042940] text-center mt-4">
-          Já tem conta?{" "}
+          JÃ¡ tem conta?{" "}
           <Link href="/app/auth/login" className="text-[#042940] font-semibold hover:underline">
             Entrar
           </Link>
@@ -121,3 +122,4 @@ export default function Register() {
     </div>
   );
 }
+

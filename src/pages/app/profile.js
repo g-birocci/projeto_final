@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -37,7 +37,7 @@ export default function ProfilePage() {
         setMyProducts(result.data.slice(0, 5));
       }
     } catch (err) {
-      console.error("Erro ao carregar produtos do usuário:", err);
+      console.error("Erro ao carregar produtos do usuÃ¡rio:", err);
     }
   }
   async function loadUserProfile() {
@@ -79,11 +79,11 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     if (!validateEmail(form.email)) {
-      setError("Por favor, insere um e-mail válido.");
+      setError("Por favor, insere um e-mail vÃ¡lido.");
       return;
     }
     if (!form.firstName || !form.lastName || !form.city || !form.district) {
-      setError("Todos os campos são obrigatórios.");
+      setError("Todos os campos sÃ£o obrigatÃ³rios.");
       return;
     }
     try {
@@ -114,8 +114,8 @@ export default function ProfilePage() {
       }
     } catch (err) {
       console.error("Erro ao salvar perfil:", err);
-      setError(err.message || "Erro ao salvar alterações");
-      toast({ type: "error", message: err.message || "Erro ao salvar alterações" });
+      setError(err.message || "Erro ao salvar alteraÃ§Ãµes");
+      toast({ type: "error", message: err.message || "Erro ao salvar alteraÃ§Ãµes" });
     } finally {
       setLoading(false);
     }
@@ -125,7 +125,7 @@ export default function ProfilePage() {
     try {
       await logoutAuth();
       toast({ type: "success", message: "Logout realizado com sucesso!" });
-      router.push("/");
+      router.push("/app");
     } catch (err) {
       console.error("Erro ao fazer logout:", err);
       toast({ type: "error", message: "Erro ao fazer logout" });
@@ -200,14 +200,14 @@ export default function ProfilePage() {
                 className="w-full mb-4 justify-start gap-2 text-ecodoa-primary border-ecodoa-accent hover:bg-ecodoa-soft"
               >
                 <HeartHandshake className="w-4 h-4" />
-                Histórico de Doações
+                HistÃ³rico de DoaÃ§Ãµes
               </Button>
             </Link>
 
             {myProducts.length > 0 ? (
               <div className="mb-6">
                 <h2 className="text-sm font-semibold text-ecodoa-primary mb-2">
-                  Últimos produtos
+                  Ãšltimos produtos
                 </h2>
                 <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                   {myProducts.map((produto) => (
@@ -221,7 +221,7 @@ export default function ProfilePage() {
               </div>
             ) : (
               <div className="text-xs text-muted-foreground text-center mb-4">
-                Você ainda não publicou nenhum produto.
+                VocÃª ainda nÃ£o publicou nenhum produto.
               </div>
             )}
             <Button
@@ -251,3 +251,5 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+

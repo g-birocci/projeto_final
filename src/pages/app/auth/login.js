@@ -1,8 +1,10 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import Link from "next/link";
+import BackButton from "@/components/ui/BackButton";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/authContext";
+import toast from "@/lib/toast";
 
 export default function Login() {
   const router = useRouter()
@@ -21,7 +23,16 @@ export default function Login() {
       await login(email, password);
       router.push('/app');
     } catch (err) {
-      setError(err.message || "Erro ao fazer login");
+      const msg = err?.message || "Erro ao fazer login";
+      const status = err?.status;
+      setError(msg);
+      if (status === 404) {
+        setEmail("");
+        setPassword("");
+      } else if (status === 401 || status === 403) {
+        setPassword("");
+      }
+      toast({ type: "error", title: "Falha no login", message: msg });
     } finally {
       setLoading(false);
     }
@@ -69,4 +80,8 @@ export default function Login() {
     </div>
   );
 }
+
+
+
+
 
