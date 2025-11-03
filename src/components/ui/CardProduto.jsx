@@ -21,7 +21,7 @@ const CardProduto = ({ produto }) => {
                    
       <CardHeader>
         <CardTitle className={`text-sm font-bold`}>
-          <Link href={`products/${produto._id}`}>
+          <Link href={`app/products/${produto._id}`}>
           {produto.title}
           </Link>
           </CardTitle>

@@ -241,7 +241,6 @@ const userCreate = async (req, res) => {
 
 const userUpdate = async (req, res) => {
   try {
-    // const {_id} = req.params
     const { firstName, lastName, city, email, district } = req.body;
 
     const updateUser = await User.findOneAndUpdate(

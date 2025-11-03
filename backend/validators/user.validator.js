@@ -1,4 +1,4 @@
-const validateReq = (firstName, lastName, password, email, city, district) => {
+const validateReq = (firstName, lastName, password, city, email, district) => {
   const requied = (field, label) =>
   {
     return !field || (typeof field === "string" && field.trim() === "")
@@ -15,9 +15,15 @@ const validateReq = (firstName, lastName, password, email, city, district) => {
     requied(district, "O bairo"),
   ].filter(Boolean);
 
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim().toLowerCase())) {
-    errors.push("O email informado é inválido");
+  if (email) {
+    const normalizedEmail = String(email).trim().toLowerCase();
+    console.log("EMAIL RECEBIDO:", JSON.stringify(email));
+    console.log("EMAIL NORMALIZADO:", JSON.stringify(normalizedEmail));
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      errors.push("O email informado é inválido");
+    }
   }
+  
 
   if (password && password.length < 6) {
     errors.push("A senha tem que ter pelo menos 6 caracteres");

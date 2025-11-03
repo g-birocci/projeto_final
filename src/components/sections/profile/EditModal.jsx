@@ -13,34 +13,54 @@ export default function EditModal({ form, onChange, error, onSave, onCancel }) {
           Editar Perfil
         </h2>
 
-        <FormField label="Nome">
-          <input
-            name="name"
-            value={form.name}
-            onChange={onChange}
-            className="w-full px-3 py-2 rounded-lg border border-[var(--ecodoa-soft)] outline-none focus:border-[var(--ecodoa-accent)]"
-          />
-        </FormField>
+        <div className="grid grid-cols-2 gap-3">
+          <FormField label="Nome">
+            <input
+              name="firstName"
+              value={form.firstName || ""}
+              onChange={onChange}
+              className="w-full px-3 py-2 rounded-lg border border-[var(--ecodoa-soft)] outline-none focus:border-[var(--ecodoa-accent)]"
+            />
+          </FormField>
+          <FormField label="Sobrenome">
+            <input
+              name="lastName"
+              value={form.lastName || ""}
+              onChange={onChange}
+              className="w-full px-3 py-2 rounded-lg border border-[var(--ecodoa-soft)] outline-none focus:border-[var(--ecodoa-accent)]"
+            />
+          </FormField>
+        </div>
 
         <FormField label="E-mail">
           <input
             type="email"
             name="email"
-            value={form.email}
+            value={form.email || ""}
             onChange={onChange}
             className="w-full px-3 py-2 rounded-lg border border-[var(--ecodoa-soft)] outline-none focus:border-[var(--ecodoa-accent)]"
           />
           {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
         </FormField>
 
-        <FormField label="Cidade">
-          <input
-            name="city"
-            value={form.city}
-            onChange={onChange}
-            className="w-full px-3 py-2 rounded-lg border border-[var(--ecodoa-soft)] outline-none focus:border-[var(--ecodoa-accent)]"
-          />
-        </FormField>
+        <div className="grid grid-cols-2 gap-3">
+          <FormField label="Cidade">
+            <input
+              name="city"
+              value={form.city ? form.city.split(",")[0] : ""}
+              onChange={onChange}
+              className="w-full px-3 py-2 rounded-lg border border-[var(--ecodoa-soft)] outline-none focus:border-[var(--ecodoa-accent)]"
+            />
+          </FormField>
+          <FormField label="Bairro">
+            <input
+              name="district"
+              value={form.district || ""}
+              onChange={onChange}
+              className="w-full px-3 py-2 rounded-lg border border-[var(--ecodoa-soft)] outline-none focus:border-[var(--ecodoa-accent)]"
+            />
+          </FormField>
+        </div>
 
         <div className="flex justify-end gap-3 mt-5">
           <button

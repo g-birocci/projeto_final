@@ -147,7 +147,7 @@ export default function Index() {
         <header
           className="bg-cover bg-center flex flex-col items-center justify-center text-center px-4 py-8 mt-6"
           style={{
-            backgroundImage: 'url("https://via.placeholder.com/1200x400?text=Doe+o+que+n%C3%A3o+usa+mais")',
+            backgroundImage: 'url("")',
             textShadow: "0 2px 4px rgba(0,0,0,0.5)",
           }}
         >

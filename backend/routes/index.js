@@ -26,6 +26,8 @@ const {
   reserveProduct,
   unreserveProduct,
   donateProduct,
+  getUserDonations,
+  getUserReservations,
   uploadImages,
 } = require("../contoller/productsController");
 
@@ -126,6 +128,10 @@ route.post(
   requireObjectId("id"),
   donateProduct
 );
+
+// Histórico de doações e reservas do usuário
+route.get("/products/history/donations", requireAuth, getUserDonations);
+route.get("/products/history/reservations", requireAuth, getUserReservations);
 
 /**
  * ================ Rotas de Categorias ===============

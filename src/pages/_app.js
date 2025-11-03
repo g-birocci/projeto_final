@@ -4,6 +4,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import AuthProvider from '@/context/authContext';
 import Navbar from '@/components/layout/Navbar';
+import HamburgerMenu from '@/components/HamburgerMenu';
+import Footer from '@/components/Footer';
 import Navmobile from '@/components/Navmobile';
 import Footer from '@/components/layout/Footer';
 import ToastContainer from '@/components/ui/Toast';
@@ -21,16 +23,16 @@ export default function App({ Component, pageProps }) {
       )}
 
       {isApp ? (
-        <div className="min-h-screen flex flex-col bg-[var(--ecodoa-soft)]">
+        <div className="min-h-screen flex flex-col">
           <AuthProvider>
             <div className="flex-1 flex justify-center">
               {/* Frame do app: 100% no mobile; em desktop limita a 375px e centraliza */}
-              <div className="w-full md:max-w-[375px] md:my-4 md:rounded-xl md:border md:border-[var(--ecodoa-accent)]/30 md:bg-white md:shadow flex flex-col min-h-[calc(100vh-2rem)] md:min-h-[700px]">
+              <div className="w-full max-w-[375px] my-4 rounded-xl md:border md:border-[var(--ecodoa-accent)]/30 bg-white shadow flex flex-col min-h-[calc(100vh-2rem)] md:min-h-[700px] relative">
                 <div className="flex-1">
                   <Component {...pageProps} />
                 </div>
-                {/* Navegação mobile dentro do frame para respeitar a largura do app */}
-                <Navmobile />
+                {/* Menu Hamburger - visível em toda aplicação */}
+                <HamburgerMenu />
                 <ToastContainer />
               </div>
             </div>

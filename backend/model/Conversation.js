@@ -3,7 +3,7 @@ const { Schema, Types } = mongoose;
 
 const ConversationSchema = new Schema(
   {
-    itemId: { type: Types.ObjectId, ref: 'Products', required: true },
+    itemId: { type: Types.ObjectId, ref: 'Product', required: true },
     // guarde os participantes já em ordem estável no controller
     participants: [{ type: Types.ObjectId, ref: 'User', required: true }],
     lastMessageAt: { type: Date, default: Date.now },
