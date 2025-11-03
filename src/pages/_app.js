@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }) {
           <AuthProvider>
             <Navbar />
             <div className="flex-1 flex justify-center">
-              <div className="w-full max-w-[400px] h-full bg-white shadow-lg relative flex flex-col">
+              <div className="w-full max-w-[400px] h-full mt-8 bg-white shadow-lg relative flex flex-col">
                 <Component {...pageProps} />
                 <HamburgerMenu />
                 <ToastContainer />

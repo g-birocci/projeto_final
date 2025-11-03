@@ -62,7 +62,7 @@ export default function HamburgerMenu() {
       { href: "/app", icon: <Home size={18} />, label: "Início" },
       { href: "/app/products", icon: <HeartHandshake size={18} />, label: "Doações" },
       { href: "/app/products/my", icon: <Package size={18} />, label: "Meus Produtos" },
-      { href: "/app/products/history", icon: <History size={18} />, label: "HistÃ³rico" },
+      { href: "/app/products/history", icon: <History size={18} />, label: "Histórico" },
       { href: "/app/chat", icon: <MessageCircle size={18} />, label: "Chat" },
       { href: "/app/profile", icon: <User size={18} />, label: "Perfil" },
     ]

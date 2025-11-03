@@ -21,7 +21,7 @@ export default function ChamadaDoacao() {
       </p>
 
       <motion.a
-        href="/"
+        href="/app"
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         className="bg-[var(--ecodoa-primary)] text-white font-semibold px-10 py-4 rounded-2xl shadow-md hover:bg-[var(--ecodoa-secondary)] transition-all"
