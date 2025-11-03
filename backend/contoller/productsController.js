@@ -102,8 +102,12 @@ const listProducts = async (req, res) => {
     if (district) filter.district = district;
     if (city) filter.city = city;
     if (condition) filter.condition = condition;
-    if (ownerId && isObjectId(ownerId)) filter.ownerId = ownerId;
-
+    if (ownerId && isObjectId(ownerId)) {
+      filter.ownerId = ownerId;
+    } else if (req.user && req.user._id) {
+      filter.ownerId = { $ne: req.user._id };
+    }
+    
     if (reserved === "true") filter.reservedBy = { $ne: null };
     if (reserved === "false") filter.reservedBy = null;
 

@@ -63,8 +63,8 @@ export default function ModalDoacao({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 overflow-y-auto p-4">
-      <div className="bg-white rounded-sm shadow-xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto">
+    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-white rounded-sm shadow-xl max-w-lg w-82 p-6 relative max-h-[90vh] overflow-y-auto">
         {/* Botão X */}
         <button
           onClick={() => {
@@ -131,31 +131,46 @@ export default function ModalDoacao({
               </select>
             </div>
 
-            {/* Categoria */}
-            <select value={selectedCategory} onChange={(e) => {
-              setSelectedCategory(e.target.value)
-              setCategoryId && setCategoryId(e.target.value);
-            }
-            }>
-              <option value="">Selecione uma categoria</option>
-              {categories.map(cat => (
-                <option key={cat._id} value={cat._id}>{cat.name}</option>
-              ))}
-            </select>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Categoria *
+              </label>
 
-            {/* Subcategoria */}
-{selectedCategory && subcategories.length > 0 && (
-  <select value={selectedSubcategory} onChange={(e) => {
-    setSelectedSubcategory(e.target.value)
-    setSubcategoryId && setSubcategoryId(e.target.value)
+              {/* Categoria */}
+              <select value={selectedCategory} onChange={(e) => {
+                setSelectedCategory(e.target.value)
+                setCategoryId && setCategoryId(e.target.value);
+              }
+              } className="w-full px-4 py-2 border border-border rounded-md bg-background text-foreground"
+              >
+                <option value="">Selecione uma categoria</option>
+                {categories.map(cat => (
+                  <option key={cat._id} value={cat._id}>{cat.name}</option>
+                ))}
+              </select>
+            </div>
 
-  }}>
-    <option value="">Selecione uma subcategoria</option>
-    {subcategories.map(sub => (
-      <option key={sub._id} value={sub._id}>{sub.name}</option>
-    ))}
-  </select>
-)}
+
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Subcategoria *
+              </label>
+              {/* Subcategoria */}
+              {selectedCategory && subcategories.length > 0 && (
+                <select value={selectedSubcategory} onChange={(e) => {
+                  setSelectedSubcategory(e.target.value)
+                  setSubcategoryId && setSubcategoryId(e.target.value)
+
+                }} className="w-full px-4 py-2 border border-border rounded-md bg-background text-foreground"
+                >
+                  <option value="">Selecione uma subcategoria</option>
+                  {subcategories.map(sub => (
+                    <option key={sub._id} value={sub._id}>{sub.name}</option>
+                  ))}
+                </select>
+              )}
+            </div>
 
 
 

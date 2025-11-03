@@ -7,7 +7,7 @@ const sendEmail = require("../utils/sendEmail");
 
 const User = require("../model/User");
 const Conversation = require('../model/Conversation');
-const Products = require('../model/Products');
+const Product = require('../model/Products');
 const Message = require('../model/Message');
 
 
@@ -74,45 +74,59 @@ const resetPassword = async (req, res) => {
 
 // CHAT ==================================================
 
-function getDonorId(productDoc) { // serve pra saber quem é o doador do produto
-  return productDoc?.donorId || productDoc?.owner || productDoc?.userId;
+function getDonorId(productDoc) {
+  return productDoc
 }
 
 const createConversation = async (req, res) => {
   try {
     const { itemId } = req.body;
 
-    // ✅ converte itemId para ObjectId (se Conversation.itemId é ObjectId)
-    const itemObjectId = new mongoose.Types.ObjectId(itemId);
+    if (!itemId) return res.status(400).json({ message: "Produto não informado" });
 
-    const product = await Products.findById(itemObjectId).select('donorId owner userId');
-    if (!product) return res.status(404).json({ error: 'Produto não encontrado' });
+    // Buscar o produto
+    const product = await Product.findById(itemId);
+    if (!product) return res.status(404).json({ message: "Produto não encontrado" });
 
-    const donorId = getDonorId(product);
-    if (!donorId) return res.status(500).json({ error: 'Campo doador ausente no produto' });
+    // Donor real: ownerId do produto
+    const donorId = product.ownerId;
+    if (!donorId) return res.status(400).json({ message: "Produto sem dono válido" });
 
-    if (String(donorId) === req.user.id) {
-      return res.status(400).json({ error: 'Você não pode iniciar conversa consigo mesmo' });
-    }
+    // Participantes da conversa: dono do produto + usuário logado
+    const participants = [
+      donorId.toString(),
+      req.user.id.toString()
+    ];
 
-    // ✅ ordena como string e reconverte para ObjectId para salvar/buscar
-    const participantsStr = [donorId, req.user.id].map(String).sort();
-    const participants = participantsStr.map(id => new mongoose.Types.ObjectId(id));
+    // Verificar se já existe conversa entre esses participantes para esse item
+    let conversation = await Conversation.findOne({
+      itemId: product._id,
+      participants: { $all: participants }
+    });
 
-    let conv = await Conversation.findOne({ itemId: itemObjectId, participants });
-    if (!conv) conv = await Conversation.create({ itemId: itemObjectId, participants });
+    if (conversation) return res.json(conversation);
 
-    res.json(conv);
+    // Criar nova conversa
+    conversation = await Conversation.create({
+      itemId: product._id,
+      participants,
+      lastMessageAt: new Date()
+    });
+
+    res.status(201).json(conversation);
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Erro ao criar conversa' });
+    console.error("Erro detalhado em createConversation:", error);
+    res.status(500).json({ message: "Erro ao criar conversa" });
   }
 };
+
 
 const listConversations = async (req, res) => {
   try {
     const convs = await Conversation.find({ participants: req.user.id })
       .sort({ lastMessageAt: -1 })
+      .populate({ path: "itemId", select: "title images ownerId condition" })
       .lean();
 
     if (convs.length === 0) return res.json([]);
@@ -123,6 +137,8 @@ const listConversations = async (req, res) => {
       { $sort: { createdAt: -1 } },
       { $group: { _id: '$conversationId', last: { $first: '$$ROOT' } } },
     ]);
+
+    // console.log('getMessages id:', id, 'user:', req.user);
 
     const map = new Map(lastMsgs.map(m => [String(m._id), m.last]));
     res.json(convs.map(c => ({ ...c, lastMessage: map.get(String(c._id)) || null })));
@@ -162,6 +178,8 @@ const sendMessage = async (req, res) => {
     if (!conv || !conv.participants.some(p => String(p) === req.user.id)) {
       return res.status(404).json({ error: 'Conversa não encontrada' });
     }
+
+console.log('sendMessage id:', id, 'user:', req.user, 'body:', body);
 
     const text = String(body || '').trim();
     if (!text) {

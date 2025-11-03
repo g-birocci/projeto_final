@@ -1,8 +1,10 @@
-﻿import { useState, useEffect } from "react";
+'use client'
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { fetchProductById, reserveProduct, unreserveProduct, donateProduct, createConversation } from "@/services/api";
 import { useAuth } from "@/context/authContext";
-import { Button } from "@/components/ui/Button";`nimport toast from "@/lib/toast";
+import { Button } from "@/components/ui/Button";
+import toast from "@/lib/toast";
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -120,7 +122,7 @@ export default function ProductDetailPage() {
         toast({ type: "info", message: "Não foi possível abrir a conversa" });
         return;
       }
-      router.push(`/chat?conversa=${convId}`);
+      router.push(`/app/chat?conversa=${convId}`);
     } catch (err) {
       console.error(err);
       toast({ type: "info", message: err.message || "Erro ao iniciar conversa" });
@@ -162,19 +164,19 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 pt-18 max-w-4xl">
       <Button
         onClick={() => router.back()}
         variant="ghost"
         className="mb-4 text-[var(--ecodoa-primary)] hover:text-[var(--ecodoa-secondary)]"
       >
-        â† Voltar
+        Voltar
       </Button>
 
-      <div className="bg-white rounded-sm shadow-lg overflow-hidden">
+      <div className="bg-white rounded-sm overflow-hidden">
         {/* Imagens */}
         {product.images && product.images.length > 0 && (
-          <div className="grid grid-cols-2 gap-2 p-4">
+          <div className="grid p-4">
             {product.images.map((img, index) => (
               <img
                 key={index}
@@ -186,18 +188,21 @@ export default function ProductDetailPage() {
           </div>
         )}
 
-        <div className="p-6">
+        <div className="px-6">
           {/* TÃ­tulo e Status */}
-          <div className="flex justify-between items-start mb-4">
-            <h1 className="text-3xl font-bold">{product.title}</h1>
+          <div className="flex justify-between items-start mb-2">
+            <h1 className="text-2xl font-bold">{product.title}</h1>
+            </div>
+            <div className="flex justify-between pb-4">
+              <p className="font-light text-foreground">{product.district}, {product.city}</p>
             <span
-              className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                product.status === "DISPONÃVEL"
-                  ? "bg-[var(--ecodoa-green)] text-[var(--ecodoa-primary)]"
+              className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                product.status === "DISPONÍVEL"
+                  ? "bg-[var(--ecodoa-accent)] text-[var(--ecodoa-primary)]"
                   : product.status === "RESERVADO"
                   ? "bg-[var(--ecodoa-accent)] text-[var(--ecodoa-primary)]"
                   : product.status === "DOADO"
-                  ? "bg-[var(--ecodoa-soft)] text-[var(--ecodoa-secondary)]"
+                  ? "bg-[var(--ecodoa-accent)] text-[var(--ecodoa-secondary)]"
                   : "bg-muted text-muted-foreground"
               }`}
             >
@@ -205,24 +210,21 @@ export default function ProductDetailPage() {
             </span>
           </div>
 
-          {/* DescriÃ§Ã£o */}
+          {/* Descrição */}
           {product.description && (
-            <p className="text-foreground mb-4">{product.description}</p>
+            <p className="text-foreground mb-2">{product.description}</p>
           )}
-
           {/* InformaÃ§Ãµes */}
-          <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-2 gap-4 mb-4 mt-6">
             <div>
-              <p className="text-sm text-muted-foreground">CondiÃ§Ã£o</p>
-              <p className="font-semibold text-foreground">{product.condition}</p>
+              <p className="text-sm text-muted-foreground">{product.condition}</p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Distrito</p>
-              <p className="font-semibold text-foreground">{product.district}</p>
+              <p className="text-sm text-right text-muted-foreground">
+              {new Date(product.createdAt).toLocaleDateString("pt-PT")}
+            </p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Cidade</p>
-              <p className="font-semibold text-foreground">{product.city}</p>
             </div>
             {product.status === "RESERVADO" && product.reservedUntil && (
               <div>
@@ -236,7 +238,7 @@ export default function ProductDetailPage() {
 
           {/* AÃ§Ãµes */}
           {user && (
-            <div className="flex gap-4 flex-wrap">
+            <div className="flex gap-4 flex-wrap justify-self-center">
               {canReserve && (
                 <Button
                   onClick={handleReserve}
@@ -270,16 +272,16 @@ export default function ProductDetailPage() {
 
               {canChat && (
                 <Button
+                className={`bg-[var(--ecodoa-accent)] text-center text-[var(--ecodoa-primary)] rounded-3xl`}
                   onClick={handleChat}
                   disabled={actionLoading}
-                  variant="outline"
                 >
                   {actionLoading ? "Abrindo..." : "Conversar com doador"}
                 </Button>
               )}              {isOwner && (
                 <Button
-                  onClick={() => router.push(`/products/edit/${id}`)}
-                  variant="outline"
+                className={`bg-[var(--ecodoa-accent)] text-[var(--ecodoa-primary)]`}
+                  onClick={() => router.push(`/app/products/edit/${id}`)}
                 >
                   Editar Produto
                 </Button>
@@ -289,28 +291,11 @@ export default function ProductDetailPage() {
 
           {!user && (
             <p className="text-muted-foreground italic">
-              FaÃ§a login para reservar ou doar produtos
+              Faça o login para reservar ou doar produtos
             </p>
           )}
-
-          {/* Data de criaÃ§Ã£o */}
-          <div className="mt-6 pt-4 border-t border-border">
-            <p className="text-sm text-muted-foreground">
-              Publicado em {new Date(product.createdAt).toLocaleDateString("pt-PT")}
-            </p>
-          </div>
         </div>
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-

@@ -23,8 +23,6 @@ export async function createUser(payload) {
 }
 
 
-
-
 export async function loginService(email, password) {
   const response = await fetch(`${API_URL}/login`, {
     method: "POST",
@@ -83,14 +81,63 @@ export async function getUserById(id) {
   return data;
 }
 
+export async function updateUser(id, payload) {
+  const response = await fetch(`${API_URL}/user/${id}`, {
+    method: "PUT",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Erro ao atualizar usuário");
+  }
+
+  return data;
+}
+
 export async function fetchProducts(query = {}) {
   const params = new URLSearchParams(query).toString();
   const response = await fetch(`${API_URL}/products?${params}`, {
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
   });
 
   const data = await response.json();
-  console.log("Dados do back", data)
+  return data;
+}
+
+export async function fetchMyProducts() {
+  const response = await fetch(`${API_URL}/me`, {
+    credentials: "include",
+  });
+  const userData = await response.json();
+  if (!response.ok || !userData.data || !userData.data._id) {
+    throw new Error("Erro ao buscar dados do usuário");
+  }
+  return fetchProducts({ ownerId: userData.data._id });
+}
+
+export async function fetchDonationHistory() {
+  const response = await fetch(`${API_URL}/products/history/donations`, {
+    credentials: "include",
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Erro ao buscar histórico de doações");
+  }
+  return data;
+}
+
+export async function fetchReservations() {
+  const response = await fetch(`${API_URL}/products/history/reservations`, {
+    credentials: "include",
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Erro ao buscar reservas");
+  }
   return data;
 }
 
