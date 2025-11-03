@@ -229,7 +229,7 @@ export default function ProductDetailPage() {
 
           {/* AÃƒÂ§ÃƒÂµes */}
           {user && (
-            <div className="flex gap-4 flex-wrap justify-self-center">
+            <div className="flex gap-4 flex-wrap justify-self-center py-24">
               {canReserve && (
                 <Button
                   onClick={handleReserve}

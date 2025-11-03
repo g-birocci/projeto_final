@@ -179,7 +179,7 @@ export default function ChatPage() {
 
   if (!user && !authLoading) {
     return (
-      <div className="flex flex-col min-h-screen bg-[var(--ecodoa-soft)] items-center justify-center p-4">
+      <div className="flex flex-col min-h-screen bg-white items-center justify-center p-4">
         <p className="text-ecodoa-primary mb-4">Você precisa estar logado para acessar o chat.</p>
         <Button variant="default" onClick={() => router.push("/app/auth/login")}>
           Fazer Login
@@ -189,8 +189,8 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--ecodoa-soft)]">
-      <main className="grow pt-4 px-4 pb-20">
+    <div className="flex flex-col min-h-screen bg-white">
+      <main className="grow pt-16 px-4 pb-24">
         {erro && (
           <div className="mb-4 text-sm text-red-600 bg-red-50 p-2 rounded">{erro}</div>
         )}
@@ -311,5 +311,6 @@ export default function ChatPage() {
     </div>
   );
 }
+
 
 

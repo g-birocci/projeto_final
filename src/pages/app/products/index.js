@@ -48,7 +48,7 @@ export default function ProductsPage() {
         )}
       </div>
 
-      {/* Filtros bÃ¡sicos */}
+      {/* Filtros básicos */}
       <div className="mb-6 p-4 bg-muted rounded-sm">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
@@ -116,7 +116,7 @@ export default function ProductsPage() {
               <div
                 key={product._id}
                 onClick={() => handleProductClick(product._id)}
-                className="bg-white rounded-sm shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+                className="bg-white rounded-sm overflow-hidden hover:cursor-pointer"
               >
                 {/* Imagem */}
                 {product.images && product.images.length > 0 && (
