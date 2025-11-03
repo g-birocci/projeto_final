@@ -5,8 +5,6 @@ import { useRouter } from 'next/router';
 import AuthProvider from '@/context/authContext';
 import Navbar from '@/components/layout/Navbar';
 import HamburgerMenu from '@/components/HamburgerMenu';
-import Footer from '@/components/Footer';
-import Navmobile from '@/components/Navmobile';
 import Footer from '@/components/layout/Footer';
 import ToastContainer from '@/components/ui/Toast';
 
@@ -18,20 +16,21 @@ export default function App({ Component, pageProps }) {
     <>
       {isApp && (
         <Head>
-          <meta name="viewport" content="width=375, user-scalable=no, maximum-scale=1.0" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no"
+          />
         </Head>
       )}
 
       {isApp ? (
-        <div className="min-h-screen flex flex-col">
+        // ===== Layout APP (simula mobile) =====
+        <div className="min-h-dvh flex flex-col bg-white">
           <AuthProvider>
+            <Navbar />
             <div className="flex-1 flex justify-center">
-              {/* Frame do app: 100% no mobile; em desktop limita a 375px e centraliza */}
-              <div className="w-full max-w-[375px] my-4 rounded-xl md:border md:border-[var(--ecodoa-accent)]/30 bg-white shadow flex flex-col min-h-[calc(100vh-2rem)] md:min-h-[700px] relative">
-                <div className="flex-1">
-                  <Component {...pageProps} />
-                </div>
-                {/* Menu Hamburger - visível em toda aplicação */}
+              <div className="w-full max-w-[400px] h-full bg-white shadow-lg relative flex flex-col">
+                <Component {...pageProps} />
                 <HamburgerMenu />
                 <ToastContainer />
               </div>
@@ -39,15 +38,18 @@ export default function App({ Component, pageProps }) {
           </AuthProvider>
         </div>
       ) : (
-        <div className="min-h-screen flex flex-col">
-          <div className="hidden md:block">
-            <Navbar />
-          </div>
+        // ===== Layout WEB =====
+        <div className="min-h-dvh flex flex-col bg-white">
           <AuthProvider>
-            <Component {...pageProps} />
+            <div className="hidden md:block">
+              <Navbar />
+            </div>
+            <main className="flex-1">
+              <Component {...pageProps} />
+            </main>
             <ToastContainer />
+            <Footer />
           </AuthProvider>
-          <Footer />
         </div>
       )}
     </>

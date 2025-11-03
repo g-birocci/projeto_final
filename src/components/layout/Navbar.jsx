@@ -176,12 +176,6 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="mt-8">
-            <button
-              onClick={() => handleNavigate("/doacoes")}
-              className="w-full bg-[var(--ecodoa-accent)] text-white py-4 rounded-full font-semibold hover:bg-[var(--ecodoa-olive)] transition-all duration-300 hover:scale-105 shadow-lg"
-            >
-              Log in ou Log out
-            </button>
           </div>
 
           {/* Rodapé */}
