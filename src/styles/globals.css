@@ -146,10 +146,17 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html, body, #__next {
+    @apply h-full;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply m-0 bg-background text-foreground;
   }
 }
+
+
 @layer utilities {
   @keyframes fadeIn {
     0% {
@@ -208,6 +215,7 @@
 
 @import "tailwindcss";
 @import "tw-animate-css";
+
 
 
 @custom-variant dark (&:is(.dark *));
