@@ -94,7 +94,7 @@ const getSubcategoryById = async (req, res) => {
     res.status(200).json({
       error: false,
       message: "Subcategoria encontrada",
-      data: subcategory,
+      data: subcategory || {},
     });
   } catch (error) {
     console.error(error);
