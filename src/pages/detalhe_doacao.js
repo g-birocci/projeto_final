@@ -1,18 +1,15 @@
 ﻿"use client";
 
 import React from "react";
-<<<<<<< HEAD
-=======
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
->>>>>>> main
+import Navbar from "@/components/layout/Navbar";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button"; 
 import { ArrowLeft } from "lucide-react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation"; 
 
 export default function DetalheDoacao() {
   const router = useRouter();
+
   const fotos = [
     "https://images.unsplash.com/photo-1663144256992-6b69263cc521?auto=format&fit=crop&q=80&w=736",
     "https://images.unsplash.com/photo-1651888947765-2e0ec570bc9d?auto=format&fit=crop&q=80&w=736",
@@ -20,81 +17,89 @@ export default function DetalheDoacao() {
   ];
 
   return (
-<<<<<<< HEAD
-    <div>
-=======
-    <>
+    <div className="min-h-screen bg-white text-[#1E2D2F]">
       <Navbar />
 
->>>>>>> main
-      {/* BotÃ£o voltar */}
-      <div className="z-8 px-4 pt-20">
-        <a
-          href="#"
+      {/* Botão voltar */}
+      <div className="z-10 px-4 pt-20">
+        <button
+          onClick={() => router.back()}
           className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 backdrop-blur-md hover:bg-gray-100 transition-all shadow-md"
         >
           <ArrowLeft className="w-5 h-5 text-gray-800" />
-        </a>
+        </button>
       </div>
 
-      {/* Layout ajustado para coluna Ãºnica e com padding vertical para mobile */}
+      {/* Conteúdo principal */}
       <main className="max-w-4xl mx-auto px-4 pb-16 pt-8">
         {/* Galeria */}
-        <div className="flex flex-col gap-6 mb-8">
+        <div className="flex flex-col md:flex-row gap-6 mb-8">
           <div className="flex-1">
             <Image
               src={fotos[0]}
               alt="Foto principal"
-              width={375}
-              height={400}
+              width={800}
+              height={500}
               className="rounded-lg object-cover w-full h-auto shadow-md"
             />
           </div>
-          <div className="flex flex-col gap-4 w-40">
+
+          <div className="flex md:flex-col gap-4 justify-center">
             {fotos.slice(1).map((foto, index) => (
-              <Image key={index} src={foto} alt={`Foto ${index + 2}`} width={80} height={80} className="rounded-lg object-cover shadow-sm" />
+              <Image
+                key={index}
+                src={foto}
+                alt={`Foto ${index + 2}`}
+                width={120}
+                height={120}
+                className="rounded-lg object-cover shadow-sm hover:opacity-90 transition"
+              />
             ))}
           </div>
         </div>
 
-        {/* InformaÃ§Ãµes do item */}
+        {/* Informações do item */}
         <section className="mb-6">
-          <h2 className="text-2xl font-bold text-[#265c14ad]">
+          <h2 className="text-2xl font-bold text-[var(--ecodoa-primary)]">
             Mesa com 4 cadeiras
           </h2>
-          <p className="text-sm text-muted-foreground mt-1">
-            Categoria: MÃ³veis &nbsp;â€¢&nbsp; Estado: Usado, bom estado
-            &nbsp;â€¢&nbsp; Cor: Branca
+          <p className="text-sm text-gray-600 mt-1">
+            Categoria: Móveis &nbsp;•&nbsp; Estado: Usado, bom estado
+            &nbsp;•&nbsp; Cor: Branca
           </p>
-          <p className="text-lg text-[#090871ff] mt-4 leading-relaxed">
-            Mesa com 4 Cadeiras, bom estado de conservaÃ§Ã£o, estou doando pois
-            estou de mudanÃ§a. Retirar em Matosinhos, enviar mensagem para
+          <p className="text-lg text-[var(--ecodoa-text)] mt-4 leading-relaxed">
+            Mesa com 4 cadeiras, em bom estado de conservação. Estou doando pois
+            estou de mudança. Retirar em Matosinhos — enviar mensagem para
             combinar.
           </p>
         </section>
 
         {/* Perfil do doador */}
         <section className="mb-6">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-gray-600">
             Doado por{" "}
             <a
               href="/perfil/gabriela.silva"
-              className="text-green-800 hover:underline"
+              className="text-[#9FC131] hover:underline"
             >
               @gabriela.silva
             </a>
           </p>
         </section>
 
-        {/* BotÃ£o de mensagem */}
+        {/* Botão de mensagem */}
         <div className="mb-12">
-          <Button variant="default" size="sm" onClick={() => router.push('/chat?conversa=1')}>
+          <Button
+            variant="default"
+            size="sm"
+            onClick={() => router.push("/chat?conversa=1")}
+            className="bg-[#005C53] text-[#D6D58E] hover:bg-[#042940] transition-all"
+          >
             Enviar mensagem
           </Button>
         </div>
       </main>
-      <Footer />
-    </>
+
+    </div>
   );
 }
-

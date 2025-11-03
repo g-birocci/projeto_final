@@ -44,7 +44,7 @@ export default function DonateSection() {
             viewport={{ once: true }}
             className="text-3xl font-extrabold mb-4 tracking-tight"
           >
-            Ajuda-nos a manter o EcoDoa vivo
+            Ajuda-nos a manter o <strong className="text-3xl font-bold text-[var(--ecodoa-secundary)] mb-3">EcoDoa<strong/></strong> vivo
           </motion.h2>
 
           <motion.p

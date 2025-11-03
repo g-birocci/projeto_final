@@ -47,9 +47,9 @@ export default function DashboardSobre() {
           transition={{ type: "spring", stiffness: 200 }}
           className="flex flex-col items-center"
         >
-          <s.icon className="m-3  w-10 h-10 text-[var(--ecodoa-primary)]" />
-          <p className="text-4xl font-extrabold text-[var(--ecodoa-primary)]">{s.value}</p>
-          <p className="text-sm text-[#1E2D2F]/70">{s.label}</p>
+          <s.icon className="m-3  w-10 h-10 text-[var(--ecodoa-secundary)]" />
+          <p className="text-4xl font-extrabold text-[var(--ecodoa-secundary)]">{s.value}</p>
+          <p className="text-sm text-[var(--ecodoa-secundary)]">{s.label}</p>
         </motion.div>
       ))}
     </motion.div>

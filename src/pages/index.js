@@ -20,7 +20,7 @@ export default function Landing() {
           <div className="relative z-10 max-w-screen-lg mx-auto px-8">
             <h1 className="text-5xl font-extrabold text-ecodoa-accent drop-shadow-md">EcoDoa</h1>
             <p className="mt-4 text-xl text-white/95 max-w-2xl drop-shadow">
-              Conectamos quem quer doar com quem mais precisa — com simplicidade,
+              Conectamos quem quer doar com quem mais precisa: com simplicidade,
               transparência e impacto real.
             </p>
             <div className="mt-8 flex gap-4">

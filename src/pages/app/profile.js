@@ -230,7 +230,7 @@ export default function ProfilePage() {
               className="w-full justify-start gap-2 bg-red-700 text-ecodoa-bg font-bold"
             >
               <LogOut className="w-4 h-4" />
-              Apagar a conta
+              Sair da conta
             </Button>
           </div>
         </div>

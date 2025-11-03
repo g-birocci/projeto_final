@@ -15,7 +15,7 @@ export default function ChamadaDoacao() {
         Pronto para fazer parte dessa corrente do bem?
       </h2>
 
-      <p className="text-[var(--ecodoa-secondary)]/80 mb-10 max-w-xl">
+      <p className="text-[var(--ecodoa-text)] mb-10 max-w-xl">
         Cada doação transforma não só quem recebe, mas também quem doa.  
         Juntos, criamos um ciclo de empatia e sustentabilidade.
       </p>

@@ -60,7 +60,7 @@ export default function Login() {
         </form>
 
         <p className="text-[#042940] text-center mt-4">
-          NÃ£o tem conta?{" "}
+          Não tem conta?{" "}
           <Link href="/app/auth/register" className="text-[#042940] font-semibold hover:underline">
             Registrar
           </Link>

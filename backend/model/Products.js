@@ -19,7 +19,7 @@ const DISTRICTS_PT = [
 const ProductSchema = new mongoose.Schema({
   title:        { type: String, required: true, trim: true, maxlength: 50 },
   description:  { type: String, trim: true, maxlength: 800 },
-  condition:    { type: String, enum: ["NOVO","BOM","USADO","PECAS"], required: true },
+  condition:    { type: String, enum: ["NOVO","BOM","USADO"], required: true },
   status:       { type: String, enum: ["DISPONÍVEL", "RESERVADO", "DOADO", "ARQUIVADO"], default: "DISPONÍVEL", index: true },
   images: {
     type: [String],

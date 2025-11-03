@@ -5,17 +5,17 @@ import { motion } from "framer-motion";
 export default function Feedbacks() {
   const feedbacks = [
     {
-      nome: "Carla, 32 anos",
+      nome: "Beatrizote, 32 anos",
       texto:
         "Recebi roupas e brinquedos pelo EcoDoa. Foi mais do que uma doação, foi um gesto de esperança. A energia das pessoas envolvidas me fez sentir acolhida e vista.",
     },
     {
-      nome: "Rui, 47 anos",
+      nome: "Gretto, 47 anos",
       texto:
         "Doei ferramentas antigas que estavam guardadas há anos. Hoje, elas ajudam uma oficina comunitária. Saber que algo simples pôde gerar tanto impacto me transformou.",
     },
     {
-      nome: "Inês, 24 anos",
+      nome: "Leandrinho, 24 anos",
       texto:
         "Ver o impacto direto das doações me fez acreditar no poder das pequenas ações. O EcoDoa me mostrou que cuidar do outro também é cuidar do planeta.",
     },
@@ -33,7 +33,7 @@ export default function Feedbacks() {
         <h2 className="text-3xl font-extrabold text-[var(--ecodoa-primary)] mb-3">
           Vozes que Inspiram
         </h2>
-        <p className="text-base text-[var(--ecodoa-secondary)]/80 max-w-md mx-auto leading-relaxed">
+        <p className="text-base text-[var(--ecodoa-text)]/80 max-w-md mx-auto leading-relaxed">
           Histórias reais de quem viveu o impacto da solidariedade.
         </p>
       </div>
