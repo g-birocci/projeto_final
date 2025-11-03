@@ -1,40 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+## EcoDoa — Projeto Final
 
-## Getting Started
+Aplicação web para doação e reserva de produtos com chat em tempo real. O projeto combina Next.js (Pages Router) com um servidor Express integrado, banco MongoDB e Socket.IO para mensagens.
 
-First, run the development server:
+### Principais Funcionalidades
+- Autenticação com cookies httpOnly (JWT) e proteção de rotas no backend.
+- CRUD de produtos com upload de imagens (Multer + Cloudinary, até 4 fotos).
+- Filtros/listagem, histórico de doações e reservas do usuário.
+- Chat por produto entre doador e interessado (Socket.IO) com rooms e marcação de lidas.
+- Layout “mobile‑first” sob `/app`, com Navbar/Hamburger e toasts de feedback.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Stack
+- Frontend: Next.js 16 (Pages Router), React 19, Tailwind CSS 4, Leaflet.
+- Backend: Express 5 + Mongoose 8, Socket.IO 4, Multer, Cloudinary.
+- Banco: MongoDB Atlas (ou local), via `mongoose`.
+
+### Estrutura de Pastas (resumo)
+- `server.js` — integra Next + Express + Socket.IO e monta as rotas em `/api`.
+- `backend/routes/index.js` — todas as rotas REST (auth, usuários, produtos, categorias, subcategorias, chat).
+- `backend/contoller/*` — controladores (auth/user/products/chat).
+- `backend/model/*` — schemas Mongoose (User, Products, Conversation, Message...).
+- `src/pages/app/*` — páginas da aplicação (login/registro, produtos, chat, perfil etc.).
+- `src/services/api.js` — client HTTP centralizado (fetch com `credentials: include`).
+- `src/context/authContext.js` — contexto de autenticação no cliente.
+- `src/components/ui/Toast.jsx` e `src/lib/toast.js` — sistema simples de toasts.
+
+### Variáveis de Ambiente
+Crie um arquivo `.env` na raiz com:
+
+```
+MONGODB_URI=mongodb+srv://<usuario>:<senha>@<cluster>/<db>?retryWrites=true&w=majority
+JWT_SECRET=um-segredo-seguro
+CLIENT_URL=http://localhost:3000
+
+# Cloudinary (upload de imagens)
+CLOUDINARY_CLOUD_NAME=xxxxx
+CLOUDINARY_API_KEY=xxxxx
+CLOUDINARY_API_SECRET=xxxxx
+
+# Opcional no cliente (por padrão usamos "/api")
+NEXT_PUBLIC_API_URL=/api
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Observações:
+- O servidor usa `CLIENT_URL` no CORS e lê o cookie `auth` (httpOnly) para autenticar.
+- `NEXT_PUBLIC_API_URL` é opcional: em dev o frontend chama `"/api"` (proxy no mesmo host).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Executando em Desenvolvimento
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1) Instale dependências
+```
+npm install
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+2) Rode o servidor Next + Express com Nodemon
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3) Acesse
+```
+http://localhost:3000
+```
 
-## Learn More
+### Build e Produção
 
-To learn more about Next.js, take a look at the following resources:
+```
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+O comando `start` sobe `server.js` em modo produção (Next renderiza via build). Certifique‑se de que as variáveis de ambiente estejam configuradas no ambiente alvo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Endpoints Principais (prefixo `/api`)
+- Auth: `POST /login`, `POST /logout`, `GET /me`, `POST /forgot-password`, `PATCH /reset-password`.
+- Usuários: `POST /user`, `GET /user/:id`, `PUT /user/:id`, `DELETE /user/:id`.
+- Produtos: `GET /products`, `GET /products/:id`, `POST /products`, `PATCH /products/:id`, `DELETE /products/:id`.
+- Reserva/Doação: `POST /products/:id/reserve`, `POST /products/:id/unreserve`, `POST /products/:id/donate`.
+- Categorias/Subcategorias: `GET /categories`, `GET /categories/:id`, `GET /subcategories`, `GET /subcategories/:id`, `POST /categories`, `POST /subcategories`.
+- Chat: `POST /conversations`, `GET /conversations`, `GET /conversations/:id/messages`, `POST /conversations/:id/messages`, `PATCH /conversations/:id/read`.
 
-## Deploy on Vercel
+### Decisões Notáveis
+- Servidor único (Next + API + Socket.IO) para simplificar CORS/cookies em dev.
+- Cookies httpOnly com nome `auth` e verificação no middleware `backend/middlware/auth.js`.
+- Conversas indexadas por `itemId` + participantes; criação idempotente para evitar duplicidade.
+- Upload de imagens via `FormData` (campo `images`) com limite de 4 fotos.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Scripts
+- `npm run dev` — inicia Next + Express via Nodemon.
+- `npm run build` — build de produção do Next.
+- `npm run start` — inicia o servidor em produção.
+- `npm run server` — alias para rodar só `server.js` com Nodemon.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+### Licença
+Projeto acadêmico/demonstrativo. Ajuste conforme necessidade do seu curso/organização.
